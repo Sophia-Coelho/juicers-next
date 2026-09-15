@@ -12,6 +12,7 @@ dotenv.config();
 
 const app = express();
 
+// Configuração do CORS
 app.use(
   cors({
     origin: true,
@@ -20,23 +21,29 @@ app.use(
   })
 );
 
-app.options("*", cors());
+// Express 5: rota coringa com parâmetro nomeado
+app.options("/{*splat}", cors());
 
+// Permite receber JSON nas requisições
 app.use(express.json());
 
+// Conexão com o banco de dados
 connectDatabase();
 
+// Rota principal
 app.get("/", (req, res) => {
   res.json({
     message: "API Juicers funcionando",
   });
 });
 
+// Rotas da API
 app.use("/api/users", userRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/doctors", doctorRoutes);
 
+// Inicialização do servidor
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
