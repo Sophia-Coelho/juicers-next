@@ -79,7 +79,7 @@
     border:1px solid var(--j-hairline);
     border-radius:18px;
     overflow:hidden;
-    box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 40px 80px -36px rgba(0,0,0,.8);
+    box-shadow:0 1px 0 rgba(0, 0, 0, .04) inset,0 40px 80px -36px rgba(0,0,0,.8);
     display:grid;
     grid-template-columns:62px 1fr
 }
@@ -232,7 +232,7 @@
     border:1px solid var(--j-hairline);
     border-radius:14px;
     padding:14px;
-    box-shadow:0 24px 50px -24px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.05) inset
+    box-shadow:0 24px 50px -24px rgba(0,0,0,.9),0 1px 0 rgba(0, 0, 0, .05) inset
 }
 .juicer .float-gauge{
     right:-26px;
@@ -283,7 +283,7 @@
     background:rgba(245,176,65,.14);
     display:grid;
     place-items:center;
-    color:var(--j-amber);
+    color:#6d4c04;
     flex-shrink:0
 }
 .juicer .float-alert .fa-ico svg{

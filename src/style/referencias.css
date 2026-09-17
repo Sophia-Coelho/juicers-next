@@ -3,21 +3,21 @@
 ========================= */
 
 .referencias-page {
-  --ref-bg: #0f1218;
-  --ref-bg-soft: #151a22;
-  --ref-panel: #171c25;
-  --ref-panel-dark: #10141b;
+  --ref-bg: #e7eaf0;
+  --ref-bg-soft: #dde2ea;
+  --ref-panel: #dadfe8;
+  --ref-panel-dark: #e4e8ef;
 
   --ref-mint: #35d4c4;
   --ref-mint-soft: rgba(53, 212, 196, 0.12);
   --ref-mint-border: rgba(53, 212, 196, 0.35);
 
-  --ref-white: #f4f7fb;
-  --ref-text: #c3d3e6;
-  --ref-text-dim: #7f91a8;
+  --ref-white: #04070b;
+  --ref-text: #34567e;
+  --ref-text-dim: #576980;
 
-  --ref-line: rgba(255, 255, 255, 0.12);
-  --ref-line-soft: rgba(255, 255, 255, 0.08);
+  --ref-line: rgba(0, 0, 0, 0.12);
+  --ref-line-soft: rgba(0, 0, 0, 0.08);
 
   min-height: 100vh;
 

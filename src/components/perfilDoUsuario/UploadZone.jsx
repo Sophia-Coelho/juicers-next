@@ -55,8 +55,8 @@ export default function UploadZone({
         handleFile(file)
       }}
       style={{
-        border: `2px dashed ${drag ? accent : '#333'}`,
-        background: drag ? 'rgba(255,255,255,.025)' : '#141414',
+        border: `2px dashed ${drag ? accent : '#ccc'}`,
+        background: drag ? 'rgba(0, 0, 0, .025)' : '#ebebeb',
         borderRadius: 14,
         padding: '30px 24px',
         display: 'flex',
@@ -83,11 +83,11 @@ export default function UploadZone({
         <path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
       </svg>
 
-      <p style={{ margin: 0, fontSize: 14, fontWeight: 650, color: '#e8e8e8' }}>
+      <p style={{ margin: 0, fontSize: 14, fontWeight: 650, color: '#171717' }}>
         {label}
       </p>
 
-      <p style={{ margin: 0, fontSize: 12.5, color: '#7e7e7e' }}>
+      <p style={{ margin: 0, fontSize: 12.5, color: '#818181' }}>
         Arraste o arquivo PDF aqui, ou
       </p>
 
@@ -126,7 +126,7 @@ export default function UploadZone({
             alignItems: 'center',
             gap: 7,
             fontSize: 12,
-            color: '#cfcfcf',
+            color: '#303030',
           }}
         >
           <span>{fileName}</span>

@@ -5,14 +5,14 @@
 }
 
 body {
-  background: #0c0c0c;
+  background: #f3f3f3;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-  color: #e2e2e2;
+  color: #1d1d1d;
 }
 
 .shell {
   min-height: 100vh;
-  background: #0c0c0c;
+  background: #f3f3f3;
 }
 
 /* Layout */
@@ -30,19 +30,19 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
-  color: #fff;
+  color: #000;
   transition: all 0.15s;
   text-decoration: none;
 }
 
 .nav-item:hover {
-  background: #141414;
-  color: #888;
+  background: #ebebeb;
+  color: #646464;
 }
 
 .nav-item.active {
-  background: #161616;
-  color: #e2e2e2;
+  background: #e9e9e9;
+  color: #1d1d1d;
 }
 
 .nav-item svg {
@@ -67,13 +67,13 @@ body {
 .page-title {
   font-size: 25px;
   font-weight: 600;
-  color: #fff;
+  color: #000;
   letter-spacing: -0.3px;
 }
 
 .page-sub {
   font-size: 16px;
-  color: #fff;
+  color: #000;
   margin-top: 3px;
 }
 
@@ -102,14 +102,14 @@ body {
 
 /* Shared card base */
 .card {
-  background: #111;
-  border: 1px solid #161616;
+  background: #eee;
+  border: 1px solid #e9e9e9;
   border-radius: 10px;
 }
 
 .card-head {
   padding: 14px 16px;
-  border-bottom: 1px solid #141414;
+  border-bottom: 1px solid #ebebeb;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,7 +118,7 @@ body {
 .card-head-title {
   font-size: 12px;
   font-weight: 600;
-  color: #ccc;
+  color: #333;
 }
 
 /* Badges */
@@ -132,21 +132,21 @@ body {
 }
 
 .badge-red {
-  background: #1a0a0a;
-  color: #c0392b;
-  border: 1px solid #2a1010;
+  background: #f5e5e5;
+  color: #942c21;
+  border: 1px solid #efd5d5;
 }
 
 .badge-yellow {
-  background: #1a1500;
-  color: #d4a017;
-  border: 1px solid #2a2200;
+  background: #fffae5;
+  color: #73570c;
+  border: 1px solid #fff7d5;
 }
 
 .badge-green {
-  background: #0a1a0a;
-  color: #27ae60;
-  border: 1px solid #102a10;
+  background: #e5f5e5;
+  color: #166236;
+  border: 1px solid #d5efd5;
 }
 
 /* Tabs */
@@ -161,19 +161,19 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: #ded9d9;
+  color: #262121;
   border-bottom: 1.5px solid transparent;
   transition: all 0.15s;
   font-family: inherit;
 }
 
 .tab.active {
-  color: #e2e2e2;
+  color: #1d1d1d;
   border-bottom-color: #c0392b;
 }
 
 .tab:hover:not(.active) {
-  color: #666;
+  color: #646464;
 }
 
 /* Responsive */
@@ -224,12 +224,12 @@ body {
 .chart-header h3 {
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: #000;
   margin: 0;
 }
 
 .chart-header p {
-  color: #9ca3af;
+  color: #505763;
   margin-top: 4px;
   font-size: 14px;
 }
@@ -244,25 +244,25 @@ body {
 
 .badge-risco.normal {
   background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  color: #11632f;
 }
 
 .badge-risco.alerta {
   background: rgba(250, 204, 21, 0.15);
-  color: #facc15;
+  color: #6d5702;
 }
 
 .badge-risco.critico {
   background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
+  color: #a40e0e;
 }
 
 .tooltip-hepatico {
-  background: #181818;
-  border: 1px solid #2f2f2f;
+  background: #e7e7e7;
+  border: 1px solid #d0d0d0;
   border-radius: 14px;
   padding: 14px;
-  color: #fff;
+  color: #000;
   min-width: 230px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
@@ -270,13 +270,13 @@ body {
 .tooltip-hepatico p {
   margin: 5px 0;
   font-size: 13px;
-  color: #d1d5db;
+  color: #24282e;
 }
 
 .tooltip-data {
   display: block;
   margin-bottom: 8px;
-  color: #9ca3af;
+  color: #505763;
   font-size: 13px;
 }
 
@@ -290,22 +290,22 @@ body {
 
 .tooltip-status.normal {
   background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  color: #11632f;
 }
 
 .tooltip-status.alerta {
   background: rgba(250, 204, 21, 0.15);
-  color: #facc15;
+  color: #6d5702;
 }
 
 .tooltip-status.critico {
   background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
+  color: #a40e0e;
 }
 
 .tooltip-hepatico small {
   display: block;
-  color: #9ca3af;
+  color: #505763;
   line-height: 1.4;
 }
 
@@ -330,17 +330,17 @@ body {
 
 .chart-insight.normal {
   background: rgba(34, 197, 94, 0.08);
-  color: #bbf7d0;
+  color: #0c682c;
 }
 
 .chart-insight.alerta {
   background: rgba(250, 204, 21, 0.08);
-  color: #fef3c7;
+  color: #382d01;
 }
 
 .chart-insight.critico {
   background: rgba(239, 68, 68, 0.08);
-  color: #fecaca;
+  color: #350101;
 }
 
 .limites-hepaticos {
@@ -353,8 +353,8 @@ body {
 
 .limites-hepaticos span {
   font-size: 12px;
-  color: #9ca3af;
-  background: rgba(255, 255, 255, 0.04);
+  color: #505763;
+  background: rgba(0, 0, 0, 0.04);
   padding: 6px 10px;
   border-radius: 999px;
 }
@@ -378,8 +378,8 @@ body {
 
 .chart-tabs button {
   border: none;
-  background: rgba(255, 255, 255, 0.05);
-  color: #9ca3af;
+  background: rgba(0, 0, 0, 0.05);
+  color: #505763;
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
@@ -388,13 +388,13 @@ body {
 }
 
 .chart-tabs button:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.09);
+  color: #000;
 }
 
 .chart-tabs button.active {
   background: rgba(59, 130, 246, 0.18);
-  color: #3b82f6;
+  color: #0849b3;
 }
 
 .chart-tabs {
@@ -407,8 +407,8 @@ body {
 
 .sub-chart-tabs button {
   border: none;
-  background: rgba(255, 255, 255, 0.05);
-  color: #9ca3af;
+  background: rgba(0, 0, 0, 0.05);
+  color: #505763;
   padding: 7px 12px;
   border-radius: 999px;
   cursor: pointer;
@@ -418,22 +418,22 @@ body {
 }
 
 .sub-chart-tabs button:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.09);
+  color: #000;
 }
 
 .sub-chart-tabs button.active {
   background: rgba(59, 130, 246, 0.18);
-  color: #3b82f6;
+  color: #0849b3;
 }
 
 /* ── Collapse: Dados da conta ── */
 .perfil-collapse {
     margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(0, 0, 0, 0.07);
     border-radius: 10px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .perfil-collapse-btn {
@@ -445,7 +445,7 @@ body {
     background: transparent;
     border: none;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -453,13 +453,13 @@ body {
 }
 
 .perfil-collapse-btn:hover {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.03);
+    color: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .perfil-collapse-btn--open {
-    color: rgba(255, 255, 255, 0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .perfil-collapse-label {

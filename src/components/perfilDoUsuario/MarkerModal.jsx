@@ -35,7 +35,7 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
   const sx = (i) => L + (vals.length > 1 ? i / (vals.length - 1) : 0.5) * (W - L - R);
   const sy = (v) => T + (1 - (v - yMin) / ((yMax - yMin) || 1)) * (H - T - B);
 
-  const statusColor = { ok: '#3fb950', atencao: '#e0a82e', risco: '#f04747' }[m.status] || '#888';
+  const statusColor = { ok: '#3fb950', atencao: '#e0a82e', risco: '#f04747' }[m.status] || '#777';
   const statusBand = { ok: 'rgba(63,185,80,.12)', atencao: 'rgba(224,168,46,.12)', risco: 'rgba(240,71,71,.12)' }[m.status] || 'rgba(120,120,120,.1)';
 
   const points = vals.map((v, i) => ({
@@ -119,8 +119,8 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
         onClick={(e) => e.stopPropagation()}
         className="jc-modal-anim"
         style={{
-          background: '#161616',
-          border: '1px solid #2a2a2a',
+          background: '#e9e9e9',
+          border: '1px solid #d5d5d5',
           borderRadius: 18,
           width: 'min(700px,100%)',
           padding: '26px 28px',
@@ -133,9 +133,9 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
             <h2 style={{ margin: 0, fontSize: 21, fontWeight: 700, letterSpacing: '-.01em' }}>{m.name}</h2>
-            <p style={{ margin: 0, fontSize: 12.5, color: '#888' }}>
+            <p style={{ margin: 0, fontSize: 12.5, color: '#777' }}>
               Evolução nos últimos {vals.length} exames · Referência:{' '}
-              <span style={{ color: '#cfcfcf', fontWeight: 600 }}>
+              <span style={{ color: '#303030', fontWeight: 600 }}>
                 {m.ref} {m.unit}
               </span>
             </p>
@@ -148,9 +148,9 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
               width: 34,
               height: 34,
               borderRadius: 9,
-              background: '#1f1f1f',
-              border: '1px solid #2a2a2a',
-              color: '#aaa',
+              background: '#e0e0e0',
+              border: '1px solid #d5d5d5',
+              color: '#555',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -164,18 +164,18 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
           </button>
         </div>
 
-        <div style={{ background: '#0f0f0f', border: '1px solid #232323', borderRadius: 12, padding: '14px 10px 6px' }}>
+        <div style={{ background: '#f0f0f0', border: '1px solid #dcdcdc', borderRadius: 12, padding: '14px 10px 6px' }}>
           <svg viewBox="0 0 600 260" style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}>
             {bandShow && <rect x={L} y={+bandY.toFixed(1)} width={W - L - R} height={+bandH.toFixed(1)} fill={statusBand} />}
-            <line x1={L} y1={30} x2={L} y2={axisYBottom} stroke="#262626" strokeWidth="1" />
-            <line x1={L} y1={axisYBottom} x2={axisRight} y2={axisYBottom} stroke="#262626" strokeWidth="1" />
+            <line x1={L} y1={30} x2={L} y2={axisYBottom} stroke="#d9d9d9" strokeWidth="1" />
+            <line x1={L} y1={axisYBottom} x2={axisRight} y2={axisYBottom} stroke="#d9d9d9" strokeWidth="1" />
             {refLines.map((r, i) => (
               <g key={i}>
-                <line x1={L} y1={r.y} x2={axisRight} y2={r.y} stroke="#4a4a4a" strokeWidth="1" strokeDasharray="5 4" />
-                <text x={L - 8} y={r.y} dy="3.5" textAnchor="end" fill="#9a9a9a" fontSize="11" fontWeight="600" fontFamily="Manrope">
+                <line x1={L} y1={r.y} x2={axisRight} y2={r.y} stroke="#b5b5b5" strokeWidth="1" strokeDasharray="5 4" />
+                <text x={L - 8} y={r.y} dy="3.5" textAnchor="end" fill="#656565" fontSize="11" fontWeight="600" fontFamily="Manrope">
                   {r.value}
                 </text>
-                <text x={axisRight} y={r.textY} textAnchor="end" fill="#777" fontSize="10" fontWeight="600" fontFamily="Manrope">
+                <text x={axisRight} y={r.textY} textAnchor="end" fill="#888" fontSize="10" fontWeight="600" fontFamily="Manrope">
                   {r.tag}
                 </text>
               </g>
@@ -183,11 +183,11 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
             <path d={linePath} fill="none" stroke={statusColor} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
             {points.map((p, i) => (
               <g key={i}>
-                <circle cx={p.x} cy={p.y} r="4.5" fill="#161616" stroke={statusColor} strokeWidth="2.4" />
-                <text x={p.x} y={p.labelY} textAnchor="middle" fill="#f0f0f0" fontSize="13" fontWeight="700" fontFamily="Manrope">
+                <circle cx={p.x} cy={p.y} r="4.5" fill="#e9e9e9" stroke={statusColor} strokeWidth="2.4" />
+                <text x={p.x} y={p.labelY} textAnchor="middle" fill="#0f0f0f" fontSize="13" fontWeight="700" fontFamily="Manrope">
                   {p.val}
                 </text>
-                <text x={p.x} y={dateY} textAnchor="middle" fill="#888" fontSize="10.5" fontFamily="Manrope">
+                <text x={p.x} y={dateY} textAnchor="middle" fill="#777" fontSize="10.5" fontFamily="Manrope">
                   {p.date}
                 </text>
               </g>
@@ -207,13 +207,13 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
             ))}
             {hover && (
               <g>
-                <line x1={hover.px} y1={30} x2={hover.px} y2={axisYBottom} stroke="#3a3a3a" strokeWidth="1" strokeDasharray="3 3" />
+                <line x1={hover.px} y1={30} x2={hover.px} y2={axisYBottom} stroke="#c5c5c5" strokeWidth="1" strokeDasharray="3 3" />
                 <circle cx={hover.px} cy={hover.py} r="6.5" fill="none" stroke={statusColor} strokeWidth="2" />
-                <rect x={hover.bx} y={hover.by} width={hover.boxW} height={hover.boxH} rx="8" fill="#000000" fillOpacity="0.92" stroke="#3a3a3a" strokeWidth="1" />
-                <text x={hover.cx} y={hover.valY} textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="700" fontFamily="Manrope">
+                <rect x={hover.bx} y={hover.by} width={hover.boxW} height={hover.boxH} rx="8" fill="#ffffff" fillOpacity="0.92" stroke="#c5c5c5" strokeWidth="1" />
+                <text x={hover.cx} y={hover.valY} textAnchor="middle" fill="#000000" fontSize="14" fontWeight="700" fontFamily="Manrope">
                   {hover.valLabel}
                 </text>
-                <text x={hover.cx} y={hover.dateY} textAnchor="middle" fill="#aaaaaa" fontSize="11" fontFamily="Manrope">
+                <text x={hover.cx} y={hover.dateY} textAnchor="middle" fill="#555555" fontSize="11" fontFamily="Manrope">
                   {hover.date}
                 </text>
               </g>
@@ -221,16 +221,16 @@ export default function MarkerModal({ marker, examDates = [], onClose }) {
           </svg>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18, fontSize: 12, color: '#888' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18, fontSize: 12, color: '#777' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <span style={{ width: 22, height: 10, borderRadius: 3, background: statusBand, border: '1px solid #333' }} />
+            <span style={{ width: 22, height: 10, borderRadius: 3, background: statusBand, border: '1px solid #ccc' }} />
             Zona de referência
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
             <span style={{ width: 16, height: 3, borderRadius: 2, background: statusColor }} />
             Seu resultado
           </span>
-          <span style={{ color: '#666', fontSize: 11 }}>Passe o mouse sobre os pontos</span>
+          <span style={{ color: '#999', fontSize: 11 }}>Passe o mouse sobre os pontos</span>
         </div>
       </div>
     </div>

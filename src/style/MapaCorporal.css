@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #0a0a0a;
+    background-color: #f5f5f5;
     padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem);
 }
 
@@ -13,5 +13,5 @@
     height: calc(100vh - 160px); /* desconta o título */
 }
 
-.titulo_bloco--escuro .h2_titulo { color: #ffffff; }
-.titulo_bloco--escuro .p_subtitulo { color: #888888; }
+.titulo_bloco--escuro .h2_titulo { color: #000000; }
+.titulo_bloco--escuro .p_subtitulo { color: #646464; }

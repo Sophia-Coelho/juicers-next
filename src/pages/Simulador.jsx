@@ -326,7 +326,7 @@ export default function Simulador() {
   const profile = result !== null ? getRiskProfile(result) : null;
 
   return (
-    <section id="simulador" className="sim-wrapper sim-page-spacing" data-bs-theme="dark">
+    <section id="simulador" className="sim-wrapper sim-page-spacing">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">

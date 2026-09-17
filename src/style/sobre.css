@@ -1,10 +1,10 @@
 .sobre-pagina {
-  --bg-primary: #111;
-  --bg-surface: #000000;
+  --bg-primary: #eee;
+  --bg-surface: #ffffff;
   --color-primary: #2FD6BE;
   --color-danger: #732727;
-  --color-text: #FFFFFF;
-  --color-muted: #B3B3B3;
+  --color-text: #000000;
+  --color-muted: #4c4c4c;
 
   background: var(--bg-primary);
   color: var(--color-text);

@@ -1,5 +1,5 @@
 .sim-wrapper {
-  background-color: #0f0f0f;
+  background-color: #f0f0f0;
   min-height: 100vh;
 }
 
@@ -21,8 +21,8 @@
 
 /* ── Card principal ─ */
 .sim-card {
-  background-color: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background-color: #e5e5e5;
+  border: 1px solid #d5d5d5;
   border-radius: 16px;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .sim-ticks {
-  color: #444;
+  color: #bbb;
   font-size: 0.72rem;
   margin-top: 0.15rem;
 }
@@ -47,7 +47,7 @@
 
 .sim-progress {
   height: 6px;
-  background-color: #111;
+  background-color: #eee;
   border-radius: 3px;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .sim-msg-header {
-  color: #555;
+  color: #aaa;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -73,17 +73,17 @@
 
 .sim-msg--danger {
   border-color: #dc262555;
-  background-color: #1a000066;
+  background-color: #ffe5e566;
 }
 
 .sim-msg--warning {
   border-color: #eab30855;
-  background-color: #1c100066;
+  background-color: #fff3e366;
 }
 
 .sim-msg--info {
   border-color: #3b82f655;
-  background-color: #0c1a3066;
+  background-color: #cfddf366;
 }
 
 .sim-msg__dot {
@@ -120,12 +120,12 @@
 }
 
 .sim-msg__title--info {
-  color: #60a5fa;
+  color: #0551ad;
 }
 
 /* Texto descritivo */
 .sim-msg__text {
-  color: #888;
+  color: #646464;
   font-size: 0.78rem;
   line-height: 1.65;
 }

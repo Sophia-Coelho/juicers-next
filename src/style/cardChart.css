@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 4px 16px 0;
-    border-bottom: 1px solid #141414;
+    border-bottom: 1px solid #ebebeb;
 }
 
 .chart-wrap {
@@ -15,15 +15,15 @@
 }
 
 .chart-tooltip {
-    background: #1a1a1a;
-    border: 0.5px solid #ded9d9;
+    background: #e5e5e5;
+    border: 0.5px solid #262121;
     border-radius: 8px;
     padding: 10px 14px;
     font-size: 11px;
 }
 
 .chart-tooltip-label {
-    color: #555;
+    color: #aaa;
     margin-bottom: 6px;
     font-size: 10px;
 }
@@ -49,11 +49,11 @@
 
 .legend-dashed {
     background: transparent;
-    border-top: 1.5px dashed #333;
+    border-top: 1.5px dashed #ccc;
     border-radius: 0;
 }
 
 .legend-label {
     font-size: 10px;
-    color: #333;
+    color: #ccc;
 }

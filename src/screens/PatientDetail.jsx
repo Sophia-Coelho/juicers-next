@@ -181,8 +181,8 @@ export default function PatientDetail({
           alignItems: 'center',
           gap: 7,
           background: 'transparent',
-          border: '1px solid #2a2a2a',
-          color: '#cfcfcf',
+          border: '1px solid #d5d5d5',
+          color: '#303030',
           fontSize: 12.5,
           fontWeight: 600,
           fontFamily: 'inherit',
@@ -196,8 +196,8 @@ export default function PatientDetail({
 
       <section
         style={{
-          background: '#141414',
-          border: '1px solid #2a2a2a',
+          background: '#ebebeb',
+          border: '1px solid #d5d5d5',
           borderRadius: 14,
           padding: '18px 22px',
           display: 'flex',
@@ -224,11 +224,11 @@ export default function PatientDetail({
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flex: 1, minWidth: 0 }}>
-          <span style={{ fontSize: 19, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-.01em' }}>
+          <span style={{ fontSize: 19, fontWeight: 700, color: '#0f0f0f', letterSpacing: '-.01em' }}>
             {patient.name}
           </span>
 
-          <span style={{ fontSize: 12.5, color: '#888' }}>
+          <span style={{ fontSize: 12.5, color: '#777' }}>
             {meta}
           </span>
         </div>
@@ -249,7 +249,7 @@ export default function PatientDetail({
         </span>
       </section>
 
-      <div style={{ display: 'flex', gap: 2, borderBottom: '1px solid #232323', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 2, borderBottom: '1px solid #dcdcdc', flexWrap: 'wrap' }}>
         {TABS.map((t) => {
           const on = tab === t.key
 
@@ -261,7 +261,7 @@ export default function PatientDetail({
                 background: 'transparent',
                 border: 'none',
                 borderBottom: `2px solid ${on ? '#2fd6be' : 'transparent'}`,
-                color: on ? '#2fd6be' : '#9a9a9a',
+                color: on ? '#2fd6be' : '#656565',
                 fontSize: 13.5,
                 fontWeight: 600,
                 fontFamily: 'inherit',
@@ -294,8 +294,8 @@ export default function PatientDetail({
         <div className="jc-fade-fast" style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: 780 }}>
           <section
             style={{
-              background: '#141414',
-              border: '1px solid #2a2a2a',
+              background: '#ebebeb',
+              border: '1px solid #d5d5d5',
               borderRadius: 14,
               padding: '22px 24px',
               display: 'flex',
@@ -315,11 +315,11 @@ export default function PatientDetail({
               style={{
                 minHeight: 140,
                 resize: 'vertical',
-                background: '#0f0f0f',
-                border: '1px solid #2a2a2a',
+                background: '#f0f0f0',
+                border: '1px solid #d5d5d5',
                 borderRadius: 10,
                 padding: '13px 14px',
-                color: '#f0f0f0',
+                color: '#0f0f0f',
                 fontSize: 13.5,
                 lineHeight: 1.55,
                 fontFamily: 'inherit',
@@ -328,7 +328,7 @@ export default function PatientDetail({
             />
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: 12, color: '#777' }}>
+              <span style={{ fontSize: 12, color: '#888' }}>
                 Consulta de {today}
               </span>
 
@@ -367,8 +367,8 @@ export default function PatientDetail({
                   <div
                     key={note._id}
                     style={{
-                      background: '#141414',
-                      border: '1px solid #2a2a2a',
+                      background: '#ebebeb',
+                      border: '1px solid #d5d5d5',
                       borderRadius: 10,
                       padding: 16,
                       display: 'flex',
@@ -377,7 +377,7 @@ export default function PatientDetail({
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-                      <span style={{ fontSize: 12, color: '#777', fontWeight: 600 }}>
+                      <span style={{ fontSize: 12, color: '#888', fontWeight: 600 }}>
                         {formatDateBR(note.createdAt)}
                       </span>
 
@@ -431,11 +431,11 @@ export default function PatientDetail({
                           style={{
                             minHeight: 110,
                             resize: 'vertical',
-                            background: '#0f0f0f',
-                            border: '1px solid #2a2a2a',
+                            background: '#f0f0f0',
+                            border: '1px solid #d5d5d5',
                             borderRadius: 10,
                             padding: '12px 13px',
-                            color: '#f0f0f0',
+                            color: '#0f0f0f',
                             fontSize: 13,
                             lineHeight: 1.5,
                             fontFamily: 'inherit',
@@ -449,8 +449,8 @@ export default function PatientDetail({
                             disabled={isSaving}
                             style={{
                               background: 'transparent',
-                              border: '1px solid #333',
-                              color: '#aaa',
+                              border: '1px solid #ccc',
+                              color: '#555',
                               fontSize: 12,
                               fontWeight: 700,
                               fontFamily: 'inherit',
@@ -483,7 +483,7 @@ export default function PatientDetail({
                         </div>
                       </>
                     ) : (
-                      <p style={{ margin: 0, fontSize: 13, color: '#cfcfcf', lineHeight: 1.55 }}>
+                      <p style={{ margin: 0, fontSize: 13, color: '#303030', lineHeight: 1.55 }}>
                         {note.text}
                       </p>
                     )}
@@ -493,13 +493,13 @@ export default function PatientDetail({
             ) : (
               <div
                 style={{
-                  background: '#141414',
-                  border: '1px solid #2a2a2a',
+                  background: '#ebebeb',
+                  border: '1px solid #d5d5d5',
                   borderRadius: 10,
                   padding: 16,
                   textAlign: 'center',
                   fontSize: 12.5,
-                  color: '#777',
+                  color: '#888',
                 }}
               >
                 Nenhuma anotação registrada ainda.
@@ -513,8 +513,8 @@ export default function PatientDetail({
         <section
           className="jc-fade-fast"
           style={{
-            background: '#141414',
-            border: '1px solid #2a2a2a',
+            background: '#ebebeb',
+            border: '1px solid #d5d5d5',
             borderRadius: 14,
             padding: '22px 24px',
             display: 'flex',
@@ -542,7 +542,7 @@ export default function PatientDetail({
             </span>
           </div>
 
-          <p style={{ margin: 0, fontSize: 12.5, color: '#7e7e7e', lineHeight: 1.45 }}>
+          <p style={{ margin: 0, fontSize: 12.5, color: '#818181', lineHeight: 1.45 }}>
             Recomendados com base no ciclo e nos alertas ativos do paciente. Marque para solicitar.
           </p>
 
@@ -561,7 +561,7 @@ export default function PatientDetail({
                     gap: 11,
                     cursor: loading ? 'not-allowed' : 'pointer',
                     fontSize: 13,
-                    color: '#cfcfcf',
+                    color: '#303030',
                     padding: '8px 0',
                     lineHeight: 1.4,
                     opacity: loading ? 0.7 : 1,
@@ -572,7 +572,7 @@ export default function PatientDetail({
                       width: 19,
                       height: 19,
                       borderRadius: 5,
-                      border: `1.5px solid ${on ? '#2fd6be' : '#3a3a3a'}`,
+                      border: `1.5px solid ${on ? '#2fd6be' : '#c5c5c5'}`,
                       background: on ? '#2fd6be' : 'transparent',
                       display: 'flex',
                       alignItems: 'center',
@@ -593,7 +593,7 @@ export default function PatientDetail({
           <div
             style={{
               marginTop: 12,
-              borderTop: '1px solid #242424',
+              borderTop: '1px solid #dbdbdb',
               paddingTop: 16,
               display: 'flex',
               flexDirection: 'column',
@@ -604,7 +604,7 @@ export default function PatientDetail({
               style={{
                 fontSize: 11,
                 fontWeight: 700,
-                color: '#888',
+                color: '#777',
                 textTransform: 'uppercase',
                 letterSpacing: '.08em',
               }}
@@ -631,11 +631,11 @@ export default function PatientDetail({
                 style={{
                   flex: 1,
                   minWidth: 240,
-                  background: '#0f0f0f',
-                  border: '1px solid #2a2a2a',
+                  background: '#f0f0f0',
+                  border: '1px solid #d5d5d5',
                   borderRadius: 9,
                   padding: '10px 12px',
-                  color: '#f0f0f0',
+                  color: '#0f0f0f',
                   fontSize: 13,
                   fontFamily: 'inherit',
                   outline: 'none',
@@ -667,7 +667,7 @@ export default function PatientDetail({
                 <span
                   style={{
                     fontSize: 11,
-                    color: '#777',
+                    color: '#888',
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '.06em',
@@ -686,8 +686,8 @@ export default function PatientDetail({
                         display: 'flex',
                         alignItems: 'center',
                         gap: 10,
-                        background: '#101010',
-                        border: '1px solid #2a2a2a',
+                        background: '#efefef',
+                        border: '1px solid #d5d5d5',
                         borderRadius: 9,
                         padding: '10px 12px',
                       }}
@@ -709,7 +709,7 @@ export default function PatientDetail({
                         ✓
                       </span>
 
-                      <span style={{ flex: 1, color: '#e8e8e8', fontSize: 13 }}>
+                      <span style={{ flex: 1, color: '#171717', fontSize: 13 }}>
                         {exam.label}
                       </span>
 
@@ -744,8 +744,8 @@ export default function PatientDetail({
         <div className="jc-fade-fast" style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 880 }}>
           <section
             style={{
-              background: '#141414',
-              border: '1px solid #2a2a2a',
+              background: '#ebebeb',
+              border: '1px solid #d5d5d5',
               borderRadius: 14,
               padding: '22px 24px',
               display: 'flex',
@@ -774,13 +774,13 @@ export default function PatientDetail({
             {importedExams.length === 0 && (
               <div
                 style={{
-                  background: '#141414',
-                  border: '1px solid #2a2a2a',
+                  background: '#ebebeb',
+                  border: '1px solid #d5d5d5',
                   borderRadius: 10,
                   padding: 16,
                   textAlign: 'center',
                   fontSize: 12.5,
-                  color: '#777',
+                  color: '#888',
                 }}
               >
                 Nenhum exame importado ainda.
@@ -795,8 +795,8 @@ export default function PatientDetail({
                 <div
                   key={exam.id}
                   style={{
-                    background: '#141414',
-                    border: '1px solid #2a2a2a',
+                    background: '#ebebeb',
+                    border: '1px solid #d5d5d5',
                     borderLeft: `3px solid ${color}`,
                     borderRadius: 10,
                     padding: '14px 16px',
@@ -806,15 +806,15 @@ export default function PatientDetail({
                   }}
                 >
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <span style={{ fontSize: 13.5, fontWeight: 700, color: '#f0f0f0' }}>
+                    <span style={{ fontSize: 13.5, fontWeight: 700, color: '#0f0f0f' }}>
                       {exam.name}
                     </span>
 
-                    <span style={{ fontSize: 12, color: '#888' }}>
+                    <span style={{ fontSize: 12, color: '#777' }}>
                       Data do exame: {exam.date} · Fonte: {exam.source === 'pdf' ? 'PDF' : 'Manual'}
                     </span>
 
-                    <span style={{ fontSize: 11.5, color: '#777' }}>
+                    <span style={{ fontSize: 11.5, color: '#888' }}>
                       Marcadores extraídos: {Object.keys(exam.markers).length}
                     </span>
                   </div>

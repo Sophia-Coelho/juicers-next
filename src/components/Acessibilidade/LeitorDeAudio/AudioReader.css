@@ -5,11 +5,11 @@
   right: 130px;
   z-index: 9998;
   width: 210px;
-  background: #1a1f2e;
+  background: #d1d6e5;
   border-radius: 14px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255,255,255,0.07);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.07);
   font-family: "Segoe UI", system-ui, sans-serif;
-  color: #e8eaf0;
+  color: #0f1117;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   user-select: none;
@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 9px 12px;
-  background: linear-gradient(135deg, #2a3550 0%, #1e2a42 100%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(135deg, #2a3550 0%, #bdc9e1 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   cursor: default;
 }
 .ar-title {
@@ -68,9 +68,9 @@
 }
 
 .ar-minimize-btn {
-  background: rgba(255,255,255,0.07);
+  background: rgba(0, 0, 0, 0.07);
   border: none;
-  color: #8899bb;
+  color: #435475;
   cursor: pointer;
   font-size: 10px;
   width: 22px;
@@ -82,8 +82,8 @@
   transition: background 0.2s, color 0.2s;
 }
 .ar-minimize-btn:hover {
-  background: rgba(255,255,255,0.14);
-  color: #e0e8ff;
+  background: rgba(0, 0, 0, 0.14);
+  color: #00081f;
 }
 
 /* Corpo do widget */
@@ -98,7 +98,7 @@
 .ar-progress-bar {
   width: 100%;
   height: 3px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 99px;
   overflow: hidden;
 }
@@ -151,7 +151,7 @@
 }
 .ar-btn-pause {
   background: rgba(255, 200, 80, 0.12);
-  color: #ffd060;
+  color: #775400;
   border: 1px solid rgba(255, 200, 80, 0.2);
 }
 .ar-btn-pause:hover {
@@ -159,7 +159,7 @@
 }
 .ar-btn-stop {
   background: rgba(255, 90, 90, 0.12);
-  color: #ff7070;
+  color: #b20000;
   border: 1px solid rgba(255, 90, 90, 0.2);
 }
 .ar-btn-stop:hover {

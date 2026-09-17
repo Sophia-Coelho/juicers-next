@@ -143,7 +143,7 @@ export default function SecaoInicio() {
             <div className="fg-top"><span className="fg-name">{t.dashTestoName}</span><span className="chip ok"><span className="d" />{t.dashTestoStatus}</span></div>
             <div className="gauge-wrap">
             <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
-                <circle cx="26" cy="26" r="22" fill="none" stroke="#232A35" strokeWidth="5" />
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#cad1dc" strokeWidth="5" />
                 <circle cx="26" cy="26" r="22" fill="none" stroke="#2FD6BE" strokeWidth="5" strokeLinecap="round" strokeDasharray="138" strokeDashoffset="48" transform="rotate(-90 26 26)" />
             </svg>
             <div className="gauge-val"><b>612</b><span>ng/dL · {t.dashTestoRef}</span></div>

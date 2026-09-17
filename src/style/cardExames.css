@@ -7,7 +7,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    border-bottom: 1px solid #0e0e0e;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .exam-row:last-child {
@@ -23,13 +23,13 @@
 
 .exam-name {
     font-size: 11px;
-    color: #aaa;
+    color: #555;
     flex: 1;
 }
 
 .exam-date {
     font-size: 10px;
-    color: #ded9d9;
+    color: #262121;
 }
 
 .exam-badge {
@@ -41,9 +41,9 @@
 
 .btn-upload {
     font-size: 10px;
-    color: #ded9d9;
-    background: #161616;
-    border: 1px solid #1e1e1e;
+    color: #262121;
+    background: #e9e9e9;
+    border: 1px solid #e1e1e1;
     border-radius: 6px;
     padding: 4px 10px;
     cursor: pointer;
@@ -52,6 +52,6 @@
 }
 
 .btn-upload:hover {
-    color: #666;
-    border-color: #252525;
+    color: #646464;
+    border-color: #dadada;
 }

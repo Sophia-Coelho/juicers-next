@@ -6,20 +6,20 @@ export default function DoctorProfile({ medico, onUpd, onSave }) {
   const med = medico;
   const fullName = `${med.nome || ''} ${med.sobrenome || ''}`.trim();
   const initials = ((med.nome || ' ')[0] + (med.sobrenome || ' ')[0]).toUpperCase();
-  const sectionStyle = { background: '#141414', border: '1px solid #2a2a2a', borderRadius: 14, padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 18 };
+  const sectionStyle = { background: '#ebebeb', border: '1px solid #d5d5d5', borderRadius: 14, padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 18 };
 
   return (
     <div className="jc-fade" style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 780, paddingBottom: 80 }}>
       <PageHeader title="Dados do Médico" sub="Informações profissionais exibidas aos seus pacientes" />
 
-      <section style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 14, padding: 24, display: 'flex', alignItems: 'center', gap: 18 }}>
+      <section style={{ background: '#ebebeb', border: '1px solid #d5d5d5', borderRadius: 14, padding: 24, display: 'flex', alignItems: 'center', gap: 18 }}>
         <div style={{ width: 60, height: 60, borderRadius: '50%', background: 'rgba(47,214,190,.14)', color: '#2fd6be', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 19, fontWeight: 700, flex: 'none' }}>
           {initials}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-          <span style={{ fontSize: 18, fontWeight: 700, color: '#f0f0f0' }}>{fullName}</span>
+          <span style={{ fontSize: 18, fontWeight: 700, color: '#0f0f0f' }}>{fullName}</span>
           <span style={{ fontSize: 13, color: '#2fd6be', fontWeight: 600 }}>{med.especialidade}</span>
-          <span style={{ fontSize: 12, color: '#888' }}>{med.crm} · {med.instituicao}</span>
+          <span style={{ fontSize: 12, color: '#777' }}>{med.crm} · {med.instituicao}</span>
         </div>
       </section>
 
@@ -42,7 +42,7 @@ export default function DoctorProfile({ medico, onUpd, onSave }) {
         </div>
       </section>
 
-      <div style={{ position: 'sticky', bottom: 0, display: 'flex', justifyContent: 'flex-end', padding: '14px 0 4px', background: 'linear-gradient(to top,#0d0d0d 60%,transparent)' }}>
+      <div style={{ position: 'sticky', bottom: 0, display: 'flex', justifyContent: 'flex-end', padding: '14px 0 4px', background: 'linear-gradient(to top,#f2f2f2 60%,transparent)' }}>
         <button
           onClick={onSave}
           className="jc-btn-teal"

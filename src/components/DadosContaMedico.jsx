@@ -200,7 +200,7 @@ export default function DadosContaMedico() {
         return (
             <div className="dcm-wrap">
                 <div className="dcm-page">
-                    <div style={{ color: '#aaa', padding: 24 }}>
+                    <div style={{ color: '#555', padding: 24 }}>
                         Carregando dados da conta...
                     </div>
                 </div>

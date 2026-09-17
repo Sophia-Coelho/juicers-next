@@ -52,7 +52,7 @@ export default function PatientsList({
             height="16"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#06201d"
+            stroke="#dff9f6"
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -76,7 +76,7 @@ export default function PatientsList({
           height="16"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#777"
+          stroke="#888"
           strokeWidth="1.8"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -104,7 +104,7 @@ export default function PatientsList({
           const safeStatus = p.status || 'ok'
           const alertColor =
             p.alerts === 0
-              ? '#5a5a5a'
+              ? '#a5a5a5'
               : safeStatus === 'risco'
                 ? '#f04747'
                 : '#e0a82e'

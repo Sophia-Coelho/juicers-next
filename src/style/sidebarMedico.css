@@ -9,8 +9,8 @@
 .sm-sidebar {
     width: 220px;
     min-height: 100vh;
-    background: #0f0f0f;
-    border-right: 1px solid #1e1e1e;
+    background: #f0f0f0;
+    border-right: 1px solid #e1e1e1;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -23,7 +23,7 @@
 
 .sm-logo {
     padding: 20px 22px 24px;
-    border-bottom: 1px solid #1e1e1e;
+    border-bottom: 1px solid #e1e1e1;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -38,7 +38,7 @@
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: #ded9d9;
+    color: #262121;
 }
 
 .sm-nav {
@@ -56,20 +56,20 @@
     padding: 10px 12px;
     border-radius: 9px;
     text-decoration: none;
-    color: #6b6b6b;
+    color: #646464;
     font-size: 0.875rem;
     font-weight: 500;
     transition: background 0.15s, color 0.15s;
 }
 
 .sm-link:hover {
-    background: #1a1a1a;
-    color: #ded9d9;
+    background: #e5e5e5;
+    color: #262121;
 }
 
 .sm-link--active {
     background: var(--sm-accent-dim);
-    color: var(--sm-accent);
+    color: #146458;
 }
 
 .sm-link-icon {
@@ -80,7 +80,7 @@
 
 .sm-footer {
     padding: 16px 12px;
-    border-top: 1px solid #1e1e1e;
+    border-top: 1px solid #e1e1e1;
 }
 
 .sm-sair {
@@ -92,7 +92,7 @@
     border-radius: 9px;
     border: none;
     background: transparent;
-    color: #6b6b6b;
+    color: #646464;
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
@@ -100,8 +100,8 @@
 }
 
 .sm-sair:hover {
-    background: #1a1a1a;
-    color: #E5484D;
+    background: #e5e5e5;
+    color: #a40e0e;
 }
 
 .sm-hamburger {
@@ -113,9 +113,9 @@
     width: 38px;
     height: 38px;
     border-radius: 8px;
-    border: 1px solid #1e1e1e;
-    background: #0f0f0f;
-    color: #ded9d9;
+    border: 1px solid #e1e1e1;
+    background: #f0f0f0;
+    color: #262121;
     cursor: pointer;
     align-items: center;
     justify-content: center;

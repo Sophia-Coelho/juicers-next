@@ -17,8 +17,8 @@ function Card({ accent, title, desc, icon, onClick, variant }) {
       className={`jc-select-card ${variant}`}
       style={{
         width: 308,
-        background: '#141414',
-        border: '1px solid #2a2a2a',
+        background: '#ebebeb',
+        border: '1px solid #d5d5d5',
         borderRadius: 18,
         padding: 30,
         cursor: 'pointer',
@@ -31,8 +31,8 @@ function Card({ accent, title, desc, icon, onClick, variant }) {
         {icon}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-        <h3 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-.01em' }}>{title}</h3>
-        <p style={{ margin: 0, fontSize: 13, color: '#888', lineHeight: 1.5 }}>{desc}</p>
+        <h3 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: '#0f0f0f', letterSpacing: '-.01em' }}>{title}</h3>
+        <p style={{ margin: 0, fontSize: 13, color: '#777', lineHeight: 1.5 }}>{desc}</p>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 13, fontWeight: 650, color: accent }}>
         Entrar <span style={{ fontSize: 15 }}>→</span>
@@ -48,9 +48,9 @@ export default function ProfileSelection({ onChoose }) {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
           <LogoMark />
-          <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 36, fontWeight: 700, letterSpacing: '-.025em', color: '#f4f4f4' }}>Juicers</span>
+          <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 36, fontWeight: 700, letterSpacing: '-.025em', color: '#0b0b0b' }}>Juicers</span>
         </div>
-        <p style={{ margin: 0, fontSize: 14.5, color: '#8a8a8a', letterSpacing: '.01em' }}>
+        <p style={{ margin: 0, fontSize: 14.5, color: '#757575', letterSpacing: '.01em' }}>
           Monitoramento de saúde para atletas, com acompanhamento médico
         </p>
       </div>
@@ -83,7 +83,7 @@ export default function ProfileSelection({ onChoose }) {
         />
       </div>
 
-      <p style={{ margin: 0, fontSize: 12, color: '#555' }}>Demonstração · nenhum dado real é coletado ou armazenado</p>
+      <p style={{ margin: 0, fontSize: 12, color: '#aaa' }}>Demonstração · nenhum dado real é coletado ou armazenado</p>
     </div>
   );
 }

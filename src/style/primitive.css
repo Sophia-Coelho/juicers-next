@@ -9,17 +9,17 @@
 .jc-field-label {
   font-size: 11px;
   font-weight: 600;
-  color: #9a9a9a;
+  color: #656565;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .jc-input {
-  background: #0f0f0f;
-  border: 1px solid #2a2a2a;
+  background: #f0f0f0;
+  border: 1px solid #d5d5d5;
   border-radius: 9px;
   padding: 10px 12px;
-  color: #f0f0f0;
+  color: #0f0f0f;
   font-size: 14px;
   font-family: inherit;
   outline: none;
@@ -38,8 +38,8 @@
 
 /* ---------- SectionCard ---------- */
 .jc-section-card {
-  background: #141414;
-  border: 1px solid #2a2a2a;
+  background: #ebebeb;
+  border: 1px solid #d5d5d5;
   border-radius: 14px;
   padding: 22px 24px;
   display: flex;
@@ -64,13 +64,13 @@
 .jc-section-card-desc {
     margin: 0;
     font-size: 12px;
-    color: #7e7e7e;
+    color: #646464;
 }
 
 /* ---------- ExamRow ---------- */
 .jc-exam-row {
-  background: #141414;
-  border: 1px solid #2a2a2a;
+  background: #ebebeb;
+  border: 1px solid #d5d5d5;
   border-radius: 12px;
   padding: 15px 20px;
   display: flex;
@@ -90,17 +90,17 @@
 .jc-exam-row-date {
   font-size: 14.5px;
   font-weight: 650;
-  color: #f0f0f0;
+  color: #0f0f0f;
 }
 
 .jc-exam-row-lab {
   font-size: 11.5px;
-  color: #888;
+  color: #646464;
 }
 
 .jc-exam-row-markers {
   font-size: 13px;
-  color: #9a9a9a;
+  color: #656565;
   flex: 1;
 }
 
@@ -115,8 +115,8 @@
 
 .jc-btn-ghost {
   background: transparent;
-  border: 1px solid #2f2f2f;
-  color: #d0d0d0;
+  border: 1px solid #d0d0d0;
+  color: #2f2f2f;
   font-size: 12.5px;
   font-weight: 600;
   font-family: inherit;
@@ -139,8 +139,8 @@
 
 /* ---------- NoteCard ---------- */
 .jc-note-card {
-  background: #141414;
-  border: 1px solid #2a2a2a;
+  background: #ebebeb;
+  border: 1px solid #d5d5d5;
   border-left: 3px solid #2fd6be;
   border-radius: 10px;
   padding: 14px 16px;
@@ -162,7 +162,7 @@
 .jc-note-card-text {
   margin: 0;
   font-size: 13px;
-  color: #cfcfcf;
+  color: #303030;
   line-height: 1.55;
 }
 
@@ -183,7 +183,7 @@
 .jc-page-header-sub {
     margin: 0;
     font-size: 13px;
-    color: #888;
+    color: #646464;
 }
 
 /* ---------- SectionLabel ---------- */
@@ -193,7 +193,7 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-  color: #bdbdbd;
+  color: #424242;
 }
 
 @media (max-width: 720px) {

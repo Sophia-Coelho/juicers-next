@@ -43,8 +43,8 @@ export default function Dashboard({
 
   const chipStyle = (on) => ({
     background: on ? activeBg : 'transparent',
-    color: on ? accent : '#9a9a9a',
-    border: `1px solid ${on ? accent : '#2a2a2a'}`,
+    color: on ? accent : '#656565',
+    border: `1px solid ${on ? accent : '#d5d5d5'}`,
   });
 
   const periodOpts = [
@@ -58,24 +58,24 @@ export default function Dashboard({
     <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
       {!hideHeader && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <h1 style={{ margin: 0, fontSize: 26, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-.02em' }}>{heading}</h1>
-          <p style={{ margin: 0, fontSize: 13, color: '#888', lineHeight: 1.4 }}>{sub}</p>
+          <h1 style={{ margin: 0, fontSize: 26, fontWeight: 700, color: '#0f0f0f', letterSpacing: '-.02em' }}>{heading}</h1>
+          <p style={{ margin: 0, fontSize: 13, color: '#777', lineHeight: 1.4 }}>{sub}</p>
         </div>
       )}
 
       {/* Faixa de resumo */}
       <div className="jc-summary" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14 }}>
         {summary.map((s, i) => {
-          const color = STATUS.color[s.status] || '#888';
+          const color = STATUS.color[s.status] || '#777';
           return (
-            <div key={i} style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 12, padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div key={i} style={{ background: '#ebebeb', border: '1px solid #d5d5d5', borderRadius: 12, padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-                <span style={{ fontSize: 12, color: '#9a9a9a', fontWeight: 500 }}>{s.name}</span>
+                <span style={{ fontSize: 12, color: '#656565', fontWeight: 500 }}>{s.name}</span>
                 <span style={{ width: 9, height: 9, borderRadius: '50%', background: color, flex: 'none' }} />
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-                <span style={{ fontSize: 28, fontWeight: 700, color: '#f0f0f0', letterSpacing: '-.02em' }}>{s.value}</span>
-                <span style={{ fontSize: 12, color: '#777' }}>{s.unit}</span>
+                <span style={{ fontSize: 28, fontWeight: 700, color: '#0f0f0f', letterSpacing: '-.02em' }}>{s.value}</span>
+                <span style={{ fontSize: 12, color: '#888' }}>{s.unit}</span>
               </div>
               <span style={{ fontSize: 11, fontWeight: 600, color }}>{STATUS.summaryLabel[s.status] || ''}</span>
             </div>
@@ -91,13 +91,13 @@ export default function Dashboard({
           alignItems: 'center',
           gap: 14,
           justifyContent: 'space-between',
-          borderTop: '1px solid #1f1f1f',
-          borderBottom: '1px solid #1f1f1f',
+          borderTop: '1px solid #e0e0e0',
+          borderBottom: '1px solid #e0e0e0',
           padding: '14px 0',
         }}
       >
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#777', textTransform: 'uppercase', letterSpacing: '.05em', marginRight: 2 }}>Exames</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '.05em', marginRight: 2 }}>Exames</span>
           {['Todos', ...categories.map((c) => c.name)].map((name) => (
             <button
               key={name}
@@ -110,7 +110,7 @@ export default function Dashboard({
           ))}
         </div>
         <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#777', textTransform: 'uppercase', letterSpacing: '.05em', marginRight: 2 }}>Período</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#888', textTransform: 'uppercase', letterSpacing: '.05em', marginRight: 2 }}>Período</span>
           {periodOpts.map((o) => (
             <button
               key={o.label}
@@ -133,8 +133,8 @@ export default function Dashboard({
                 <svg width="9" height="9" viewBox="0 0 9 9" style={{ flex: 'none' }}>
                   <circle cx="4.5" cy="4.5" r="4.5" fill={accent} />
                 </svg>
-                <h2 style={{ margin: 0, fontSize: 12, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#bdbdbd' }}>{c.name}</h2>
-                <div style={{ flex: 1, height: 1, background: '#222' }} />
+                <h2 style={{ margin: 0, fontSize: 12, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#424242' }}>{c.name}</h2>
+                <div style={{ flex: 1, height: 1, background: '#ddd' }} />
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(188px,1fr))', gap: 14 }}>
                 {c.markers.map((m) => (

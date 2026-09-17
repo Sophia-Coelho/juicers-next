@@ -13,12 +13,12 @@
 /* breadcrumb */
 .pam-breadcrumb {
     display: flex; align-items: center; gap: 8px;
-    font-size: 0.82rem; color: #6b6b6b;
+    font-size: 0.82rem; color: #646464;
 }
 .pam-breadcrumb-link { cursor: pointer; transition: color 0.15s; }
 .pam-breadcrumb-link:hover { color: #2FD6BE; }
-.pam-breadcrumb-sep { color: #3a3a3a; }
-.pam-breadcrumb-current { color: #ded9d9; }
+.pam-breadcrumb-sep { color: #c5c5c5; }
+.pam-breadcrumb-current { color: #262121; }
 
 /* head */
 .pam-head {
@@ -28,38 +28,38 @@
 .pam-head-left { display: flex; align-items: center; gap: 14px; }
 .pam-avatar {
     width: 46px; height: 46px; border-radius: 999px;
-    background: linear-gradient(135deg,#1e1e1e,#0f0f0f);
-    border: 1px solid #2a2a2a;
+    background: linear-gradient(135deg,#e1e1e1,#f0f0f0);
+    border: 1px solid #d5d5d5;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem; font-weight: 600; color: #6b6b6b;
+    font-size: 0.9rem; font-weight: 600; color: #515151;
     flex-shrink: 0;
 }
-.pam-nome { margin: 0 0 3px; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; color: #ded9d9; }
-.pam-info { margin: 0; font-size: 0.8rem; color: #6b6b6b; }
+.pam-nome { margin: 0 0 3px; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; color: #262121; }
+.pam-info { margin: 0; font-size: 0.8rem; color: #646464; }
 
 .pam-readonly-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.75rem; color: #6b6b6b;
-    border: 1px solid #1e1e1e; border-radius: 999px; padding: 5px 12px;
+    font-size: 0.75rem; color: #646464;
+    border: 1px solid #e1e1e1; border-radius: 999px; padding: 5px 12px;
 }
 
 /* tabs */
 .pam-tabs {
     display: flex; gap: 6px;
-    border-bottom: 1px solid #1e1e1e;
+    border-bottom: 1px solid #e1e1e1;
 }
 .pam-tab {
     padding: 0 4px 12px;
     border: none; background: transparent;
     font-size: 0.875rem; font-weight: 500;
-    color: #6b6b6b; cursor: pointer;
+    color: #646464; cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color 0.15s, border-color 0.15s;
     margin-right: 10px;
 }
-.pam-tab:hover { color: #ded9d9; }
-.pam-tab--active { color: #ded9d9; border-bottom-color: #2FD6BE; }
+.pam-tab:hover { color: #262121; }
+.pam-tab--active { color: #262121; border-bottom-color: #2FD6BE; }
 
 /* tab content */
 .pam-tab-content { display: flex; flex-direction: column; gap: 18px; }
@@ -71,33 +71,33 @@
     gap: 16px;
 }
 .pam-metrica {
-    background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 14px;
+    background: #f0f0f0; border: 1px solid #e1e1e1; border-radius: 14px;
     padding: 18px; display: flex; flex-direction: column; gap: 14px;
 }
 .pam-metrica-top { display: flex; align-items: center; justify-content: space-between; }
-.pam-metrica-label { font-size: 0.8rem; color: #6b6b6b; }
+.pam-metrica-label { font-size: 0.8rem; color: #646464; }
 .pam-metrica-dot { width: 7px; height: 7px; border-radius: 999px; }
 .pam-metrica-valor { display: flex; align-items: baseline; gap: 6px; }
-.pam-metrica-num { font-size: 1.75rem; font-weight: 500; color: #ded9d9; font-variant-numeric: tabular-nums; }
-.pam-metrica-unit { font-size: 0.8rem; color: #6b6b6b; }
-.pam-metrica-ref { font-size: 0.75rem; color: #6b6b6b; }
+.pam-metrica-num { font-size: 1.75rem; font-weight: 500; color: #262121; font-variant-numeric: tabular-nums; }
+.pam-metrica-unit { font-size: 0.8rem; color: #646464; }
+.pam-metrica-ref { font-size: 0.75rem; color: #646464; }
 .pam-metrica-ref--warn { color: #E6A817; }
 
 /* chart */
 .pam-chart {
-    background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 14px;
+    background: #f0f0f0; border: 1px solid #e1e1e1; border-radius: 14px;
     padding: 22px; display: flex; flex-direction: column; gap: 16px;
 }
 .pam-chart-header { display: flex; align-items: center; justify-content: space-between; }
-.pam-chart-title { display: block; font-size: 0.95rem; font-weight: 600; color: #ded9d9; margin-bottom: 3px; }
-.pam-chart-sub { font-size: 0.75rem; color: #6b6b6b; }
+.pam-chart-title { display: block; font-size: 0.95rem; font-weight: 600; color: #262121; margin-bottom: 3px; }
+.pam-chart-sub { font-size: 0.75rem; color: #646464; }
 
 /* upload */
 .pam-upload {
-    border: 1.5px dashed #2a2a2a; border-radius: 14px;
+    border: 1.5px dashed #d5d5d5; border-radius: 14px;
     padding: 28px; display: flex; flex-direction: column;
     align-items: center; gap: 8px; text-align: center;
-    background: rgba(255,255,255,0.012); cursor: pointer;
+    background: rgba(0, 0, 0, 0.012); cursor: pointer;
     transition: border-color 0.15s;
 }
 .pam-upload:hover, .pam-upload--dragging { border-color: #2FD6BE; }
@@ -107,27 +107,27 @@
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 4px;
 }
-.pam-upload-text { font-size: 0.875rem; color: #ded9d9; font-weight: 500; }
-.pam-upload-sub { font-size: 0.75rem; color: #6b6b6b; }
+.pam-upload-text { font-size: 0.875rem; color: #262121; font-weight: 500; }
+.pam-upload-sub { font-size: 0.75rem; color: #646464; }
 
 /* lista exames */
 .pam-exames-lista {
-    background: #0f0f0f; border: 1px solid #1e1e1e; border-radius: 14px; overflow: hidden;
+    background: #f0f0f0; border: 1px solid #e1e1e1; border-radius: 14px; overflow: hidden;
 }
 .pam-exame-item {
     display: flex; align-items: center; gap: 16px;
-    padding: 16px 20px; border-bottom: 1px solid #1e1e1e;
+    padding: 16px 20px; border-bottom: 1px solid #e1e1e1;
 }
 .pam-exame-item:last-child { border-bottom: none; }
 .pam-exame-pdf {
     width: 42px; height: 42px; border-radius: 9px; flex-shrink: 0;
     background: rgba(47,214,190,0.1); border: 1px solid rgba(47,214,190,0.25);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.65rem; font-weight: 600; color: #2FD6BE;
+    font-size: 0.65rem; font-weight: 600; color: #146559;
 }
 .pam-exame-info { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-.pam-exame-nome { font-size: 0.875rem; color: #ded9d9; }
-.pam-exame-meta { font-size: 0.75rem; color: #6b6b6b; }
+.pam-exame-nome { font-size: 0.875rem; color: #262121; }
+.pam-exame-meta { font-size: 0.75rem; color: #646464; }
 
 .pam-badge {
     display: inline-flex; align-items: center; gap: 6px;

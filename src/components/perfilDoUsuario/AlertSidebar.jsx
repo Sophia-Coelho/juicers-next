@@ -8,7 +8,7 @@ export default function AlertSidebar({ alerts = [] }) {
   return (
     <aside className="jc-alerts" style={{ flex: 'none', width: 266, position: 'sticky', top: 0, display: 'flex', flexDirection: 'column', gap: 13 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h2 style={{ margin: 0, fontSize: 12, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#bdbdbd' }}>
+        <h2 style={{ margin: 0, fontSize: 12, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#424242' }}>
           Alertas ativos
         </h2>
         <span
@@ -33,8 +33,8 @@ export default function AlertSidebar({ alerts = [] }) {
           <div
             key={i}
             style={{
-              background: '#141414',
-              border: '1px solid #2a2a2a',
+              background: '#ebebeb',
+              border: '1px solid #d5d5d5',
               borderLeft: `3px solid ${color}`,
               borderRadius: 10,
               padding: '13px 14px',
@@ -45,9 +45,9 @@ export default function AlertSidebar({ alerts = [] }) {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, flex: 'none' }} />
-              <span style={{ fontSize: 13, fontWeight: 650, color: '#f0f0f0' }}>{a.title}</span>
+              <span style={{ fontSize: 13, fontWeight: 650, color: '#0f0f0f' }}>{a.title}</span>
             </div>
-            <p style={{ margin: 0, fontSize: 12, color: '#8c8c8c', lineHeight: 1.45, paddingLeft: 16 }}>{a.desc}</p>
+            <p style={{ margin: 0, fontSize: 12, color: '#737373', lineHeight: 1.45, paddingLeft: 16 }}>{a.desc}</p>
           </div>
         );
       })}
@@ -55,8 +55,8 @@ export default function AlertSidebar({ alerts = [] }) {
       {alerts.length === 0 && (
         <div
           style={{
-            background: '#141414',
-            border: '1px solid #2a2a2a',
+            background: '#ebebeb',
+            border: '1px solid #d5d5d5',
             borderRadius: 10,
             padding: 16,
             textAlign: 'center',

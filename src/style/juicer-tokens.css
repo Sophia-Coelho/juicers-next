@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root{
-  --j-ink:#0E1116; --j-surface:#161A22; --j-raised:#1C222C; --j-hairline:#232A35;
+  --j-ink:#e9ecf1; --j-surface:#dde1e9; --j-raised:#d3d9e3; --j-hairline:#cad1dc;
   --j-teal:#2FD6BE; --j-teal-dim:#1b6f64; --j-red:#F0524A; --j-amber:#F5B041;
-  --j-txt:#ECEFF4; --j-mid:#9AA4B2; --j-faint:#5b6675; --j-radius:16px; --j-maxw:1180px;
+  --j-txt:#0b0e13; --j-mid:#4d5765; --j-faint:#8a95a4; --j-radius:16px; --j-maxw:1180px;
 }
 
 .juicer{
@@ -82,7 +82,7 @@
 
 .juicer .btn-primary-j{
   background:var(--j-teal);
-  color:#06231f
+  color:#dcf9f5
 }
 
 .juicer .btn-primary-j:hover{
