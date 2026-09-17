@@ -51,11 +51,11 @@ function calculateRiskScore({ age, sex, frequency, months, route, stacking }) {
 }
 
 function getRiskProfile(score) {
-  if (score <= 20) return { key: "low", hex: "#22c55e" };
-  if (score <= 40) return { key: "moderate", hex: "#eab308" };
-  if (score <= 60) return { key: "high", hex: "#f97316" };
-  if (score <= 80) return { key: "veryHigh", hex: "#ef4444" };
-  return { key: "critical", hex: "#dc2626" };
+  if (score <= 20) return { key: "low", hex: "#15793a" };
+  if (score <= 40) return { key: "moderate", hex: "#836504" };
+  if (score <= 60) return { key: "high", hex: "#af4a05" };
+  if (score <= 80) return { key: "veryHigh", hex: "#d11212" };
+  return { key: "critical", hex: "#cc2121" };
 }
 
 function getContextualMessages({ age, sex, frequency, months, route, stacking, score }) {
@@ -267,7 +267,7 @@ function ToggleGroup({ options, value, onChange }) {
           key={String(opt.key)}
           type="button"
           className={`btn flex-fill fw-medium ${
-            value === opt ? "option-btn" : "btn-outline-secondary"
+            value === opt.key ? "option-btn" : "sim-toggle-btn"
           }`}
           onClick={() => onChange(opt.key)}
         >
@@ -331,10 +331,10 @@ export default function Simulador() {
         <div className="row justify-content-center">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             {/* Cabeçalho */}
-            <h2 className="text-center text-white fw-bold mb-2">
+            <h2 className="text-center sim-title fw-bold mb-2">
               {t.title}
             </h2>
-            <p className="text-center text-secondary small mb-4">
+            <p className="text-center sim-subtitle small mb-4">
               {t.subtitle}
             </p>
 
@@ -343,7 +343,7 @@ export default function Simulador() {
               {/* Idade */}
               <div className="mb-4">
                 <label className="form-label text-secondary small mb-1">
-                  {t.ageLabel} <strong className="text-white">{age}</strong>
+                  {t.ageLabel} <strong className="sim-value">{age}</strong>
                 </label>
                 <input
                   type="range"
@@ -380,7 +380,7 @@ export default function Simulador() {
               <div className="mb-4">
                 <label className="form-label text-secondary small mb-1">
                   {t.durationLabel}{" "}
-                  <strong className="text-white">
+                  <strong className="sim-value">
                     {formatDuration(duration)}
                   </strong>
                 </label>
