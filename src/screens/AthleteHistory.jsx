@@ -9,9 +9,9 @@ export default function AthleteHistory({ examHistory, alertsCount, onUpload, onD
   const last = exams.length ? exams[0].date : '—';
 
   const summaryCard = (label, value, color) => (
-    <div style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 12, padding: 18, display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <span style={{ fontSize: 12, color: '#9a9a9a', fontWeight: 500 }}>{label}</span>
-      <span style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-.02em', color: color || '#f0f0f0' }}>{value}</span>
+    <div style={{ background: '#ebebeb', border: '1px solid #d5d5d5', borderRadius: 12, padding: 18, display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <span style={{ fontSize: 12, color: '#656565', fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-.02em', color: color || '#0f0f0f' }}>{value}</span>
     </div>
   );
 
@@ -21,8 +21,8 @@ export default function AthleteHistory({ examHistory, alertsCount, onUpload, onD
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
         {summaryCard('Total de exames', exams.length)}
-        <div style={{ background: '#141414', border: '1px solid #2a2a2a', borderRadius: 12, padding: 18, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <span style={{ fontSize: 12, color: '#9a9a9a', fontWeight: 500 }}>Último exame</span>
+        <div style={{ background: '#ebebeb', border: '1px solid #d5d5d5', borderRadius: 12, padding: 18, display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <span style={{ fontSize: 12, color: '#656565', fontWeight: 500 }}>Último exame</span>
           <span style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-.01em', marginTop: 4 }}>{last}</span>
         </div>
         {summaryCard('Alertas ativos', alertsCount, '#f04747')}

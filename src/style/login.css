@@ -6,7 +6,7 @@
 }
 
 .login_left {
-    background: #0a0a0a;
+    background: #f5f5f5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -14,7 +14,7 @@
 }
 
 .logo-icon {
-    width: 150px;
+    width: 250px;
     display: flex;
     align-items: center;
 }
@@ -22,7 +22,7 @@
 .login_left_headline {
     font-size: clamp(22px, 3vw, 34px);
     font-weight: 600;
-    color: #fff;
+    color: #000;
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
@@ -35,7 +35,7 @@
 
 .login_left_sub {
     font-size: 14px;
-    color: #777;
+    color: #646464;
     line-height: 1.65;
     max-width: 320px;
 }
@@ -67,7 +67,7 @@
 
 .login_card_sub {
     font-size: 14px;
-    color: #888;
+    color: #646464;
     margin-bottom: 2rem;
 }
 
@@ -122,7 +122,7 @@
     display: block;
     text-align: right;
     font-size: 12px;
-    color: #888;
+    color: #646464;
     text-decoration: none;
     margin-top: -0.75rem;
     margin-bottom: 1.5rem;
@@ -249,59 +249,59 @@
 
     .login_right {
         min-height: 100vh;
-        background: #0a0a0a;
+        background: #f5f5f5;
     }
 
     .login_card {
-        background: #111;
-        border-color: #1f1f1f;
+        background: #eee;
+        border-color: #e0e0e0;
         box-shadow: none;
     }
 
     .login_card_title {
-        color: #fff;
+        color: #000;
     }
 
     .login_card_sub {
-        color: #888;
+        color: #646464;
     }
 
     .field label {
-        color: #bbb;
+        color: #444;
     }
 
     .field input,
     .field select {
-        background-color: #1a1a1a;
-        border-color: #333;
-        color: #fff;
+        background-color: #e5e5e5;
+        border-color: #ccc;
+        color: #000;
     }
 
     .field input:focus,
     .field select:focus {
         border-color: #2FD6BE;
-        background-color: #1a1a1a;
+        background-color: #e5e5e5;
     }
 
     .field select {
         background-image:
-            linear-gradient(45deg, transparent 50%, #aaa 50%),
-            linear-gradient(135deg, #aaa 50%, transparent 50%);
+            linear-gradient(45deg, transparent 50%, #555 50%),
+            linear-gradient(135deg, #555 50%, transparent 50%);
     }
 
     .btn_voltar {
-        color: #aaa;
-        border-color: #333;
+        color: #555;
+        border-color: #ccc;
     }
 
     .btn_voltar:hover {
-        background: #1a1a1a;
-        color: #fff;
+        background: #e5e5e5;
+        color: #000;
     }
 
     .divider::before,
     .divider::after {
-        background: #333;
+        background: #ccc;
     }
 }
 
@@ -329,8 +329,8 @@ button.btn_voltar {
 .login_role_toggle {
     display: flex;
     gap: 6px;
-    /* background: #0a0a0a; */
-    /* border: 1px solid #1e1e1e; */
+    /* background: #f5f5f5; */
+    /* border: 1px solid #e1e1e1; */
     border-radius: 10px;
     padding: 4px;
     margin-bottom: 4px;
@@ -355,12 +355,12 @@ button.btn_voltar {
 
 .login_role_btn--active.login_role_btn--atleta {
     background: rgba(230, 168, 23, 0.12);
-    color: #E6A817;
+    color: #72530b;
 }
 
 .login_role_btn--active.login_role_btn--medico {
     background: rgba(47, 214, 190, 0.12);
-    color: #2FD6BE;
+    color: #146458;
 }
 
 /* Botão entrar herda a cor do perfil selecionado */
@@ -384,7 +384,7 @@ button.btn_voltar {
     border: 1px solid rgba(229, 72, 77, 0.25);
     border-radius: 10px;
     font-size: 0.8rem;
-    color: #E5484D;
+    color: #b02030;
     line-height: 1.4;
 }
 

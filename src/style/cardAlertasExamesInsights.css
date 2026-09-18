@@ -7,7 +7,7 @@
     gap: 10px;
     align-items: flex-start;
     padding: 12px 16px;
-    border-bottom: 1px solid #0e0e0e;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .alert-item:last-child {
@@ -25,12 +25,12 @@
 .alert-title {
     font-size: 14px;
     font-weight: 600;
-    color: #fff;
+    color: #000;
     margin-bottom: 2px;
 }
 
 .alert-sub {
     font-size: 12px;
-    color: #ded9d9;
+    color: #262121;
     line-height: 1.5;
 }

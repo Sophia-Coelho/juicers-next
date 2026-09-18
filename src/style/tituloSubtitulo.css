@@ -28,15 +28,15 @@
 }
 
 /* Fundo escuro (preto/marrom) — texto claro */
-.titulo_bloco--escuro .h2_titulo { color: #ffffff; }
-.titulo_bloco--escuro .p_subtitulo { color: #888888; }
+.titulo_bloco--escuro .h2_titulo { color: #000000; }
+.titulo_bloco--escuro .p_subtitulo { color: #646464; }
 
 /* Fundo claro (branco) — texto escuro */
-.titulo_bloco--claro .h2_titulo { color: #111111; }
-.titulo_bloco--claro .p_subtitulo { color: #555555; }
+.titulo_bloco--claro .h2_titulo { color: #eeeeee; }
+.titulo_bloco--claro .p_subtitulo { color: #aaaaaa; }
 
 /* Fundo vermelho — texto branco */
-.titulo_bloco--vermelho .h2_titulo { color: #ffffff; }
-.titulo_bloco--vermelho .p_subtitulo { color: rgba(255,255,255,0.75); }
-.titulo_bloco--vermelho .titulo_linha { background: #ffffff; }
+.titulo_bloco--vermelho .h2_titulo { color: #000000; }
+.titulo_bloco--vermelho .p_subtitulo { color: rgba(0, 0, 0, 0.75); }
+.titulo_bloco--vermelho .titulo_linha { background: #000000; }
 

@@ -39,7 +39,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--j-teal, #2fd6be);
+  color: #125b51;
   background: rgba(47, 214, 190, 0.07);
   border: 1px solid var(--j-teal-dim, rgba(47, 214, 190, 0.2));
   padding: 5px 16px;
@@ -51,7 +51,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(30px, 4.5vw, 50px);
   font-weight: 700;
-  color: var(--j-txt, #F1F5F9);
+  color: var(--j-txt, #060a0e);
   line-height: 1.13;
   letter-spacing: -0.025em;
   margin: 0 0 18px;
@@ -63,7 +63,7 @@
 
 .planos-subtitulo {
   font-size: 16px;
-  color: var(--j-mid, #64748B);
+  color: var(--j-mid, #74849b);
   max-width: 500px;
   margin: 0 auto;
   line-height: 1.65;
@@ -74,8 +74,8 @@
   display: flex;
   justify-content: center;
   gap: 3px;
-  background: rgba(255,255,255,0.028);
-  border: 1px solid var(--j-hairline, rgba(255,255,255,0.07));
+  background: rgba(0, 0, 0, 0.028);
+  border: 1px solid var(--j-hairline, rgba(0, 0, 0, 0.07));
   border-radius: 14px;
   padding: 4px;
   width: fit-content;
@@ -88,7 +88,7 @@
   border-radius: 10px;
   border: none;
   background: transparent;
-  color: var(--j-faint, #4B5563);
+  color: var(--j-faint, #9ca6b4);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -97,12 +97,12 @@
   white-space: nowrap;
 }
 
-.planos-aba:hover         { color: var(--j-mid, #94A3B8); }
+.planos-aba:hover         { color: var(--j-mid, #47566b); }
 .planos-aba:focus-visible { outline: 2px solid var(--j-teal); outline-offset: 2px; }
 
 .planos-aba--ativa {
-  background: var(--j-raised, #0D1528);
-  color: var(--j-txt, #E2E8F0);
+  background: var(--j-raised, #d7dff2);
+  color: var(--j-txt, #0f151d);
   box-shadow: 0 1px 5px rgba(0,0,0,0.5), 0 0 0 1px var(--j-hairline);
 }
 
@@ -129,8 +129,8 @@
 
 /* Card base ----------------------------------------------------------------- */
 .planos-card {
-  background: var(--j-surface, #0D1528);
-  border: 1px solid var(--j-hairline, rgba(255,255,255,0.07));
+  background: var(--j-surface, #d7dff2);
+  border: 1px solid var(--j-hairline, rgba(0, 0, 0, 0.07));
   border-radius: 20px;
   padding: 28px;
   display: flex;
@@ -147,7 +147,7 @@
 
 /* Card em destaque — Holofote estático translúcido que sobe da base */
 .planos-card--destaque {
-  background: linear-gradient(180deg, var(--j-raised, #0A1E44), var(--j-surface, #060F28));
+  background: linear-gradient(180deg, var(--j-raised, #bbcff5), var(--j-surface, #d7e0f9));
   border-color: var(--j-teal-dim, rgba(47, 214, 190, 0.3));
   box-shadow: 0 40px 80px -36px rgba(0,0,0,0.8);
 }
@@ -175,7 +175,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--j-ink, #060B17);
+  color: var(--j-txt);
   background: var(--j-teal, #2fd6be);
   padding: 5px 14px;
   border-radius: 100px;
@@ -188,7 +188,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 22px;
   font-weight: 600;
-  color: var(--j-txt, #F1F5F9);
+  color: var(--j-txt, #060a0e);
   margin-bottom: 6px;
   position: relative;
   z-index: 1;
@@ -196,7 +196,7 @@
 
 .planos-descricao {
   font-size: 13.5px;
-  color: var(--j-mid, #64748B);
+  color: var(--j-mid, #74849b);
   margin-bottom: 24px;
   line-height: 1.5;
   position: relative;
@@ -221,7 +221,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  color: var(--j-mid, #64748B);
+  color: var(--j-mid, #74849b);
   margin-top: 8px;
 }
 
@@ -229,7 +229,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 48px;
   font-weight: 700;
-  color: var(--j-txt, #E2E8F0);
+  color: var(--j-txt, #0f151d);
   letter-spacing: -0.03em;
 }
 
@@ -239,21 +239,21 @@
 
 .planos-periodo {
   font-size: 13px;
-  color: var(--j-faint, #475569);
+  color: var(--j-faint, #96a4b8);
   margin-top: 18px;
   margin-left: 3px;
 }
 
 .planos-preco-nota {
   font-size: 12px;
-  color: var(--j-faint, #475569);
+  color: var(--j-faint, #96a4b8);
   margin-top: 5px;
 }
 
 /* Divisor */
 .planos-divisor {
   height: 1px;
-  background: var(--j-hairline, rgba(255,255,255,0.06));
+  background: var(--j-hairline, rgba(0, 0, 0, 0.06));
   margin: 0 0 20px;
   position: relative;
   z-index: 1;
@@ -277,7 +277,7 @@
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  color: var(--j-mid, #94A3B8);
+  color: var(--j-mid, #47566b);
   line-height: 1.4;
 }
 
@@ -301,19 +301,19 @@
 }
 
 .planos-cta--fantasma {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0, 0, 0, 0.04);
   border: 1px solid var(--j-hairline);
   color: var(--j-txt);
 }
 
 .planos-cta--fantasma:hover {
   background: var(--j-hairline);
-  color: #F1F5F9;
+  color: #060a0e;
 }
 
 .planos-cta--primario {
   background: var(--j-teal, #2fd6be);
-  color: var(--j-ink, #060B17);
+  color: var(--j-txt);
 }
 
 .planos-cta--primario:hover {
@@ -332,7 +332,7 @@
   gap: 14px;
   margin-top: 44px;
   font-size: 13px;
-  color: var(--j-faint, #374151);
+  color: var(--j-faint, #aeb8c8);
   flex-wrap: wrap;
 }
 

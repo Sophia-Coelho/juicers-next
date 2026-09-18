@@ -1,6 +1,6 @@
 .dcm-wrap {
     min-height: 100vh;
-    background: #0a0a0a;
+    background: #f5f5f5;
 }
 
 .dcm-page {
@@ -13,8 +13,8 @@
 
 /* header */
 .dcm-page-header { display: flex; flex-direction: column; gap: 4px; }
-.dcm-page-title  { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: #ded9d9; }
-.dcm-page-sub    { margin: 0; font-size: 0.85rem; color: #6b6b6b; }
+.dcm-page-title  { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; color: #262121; }
+.dcm-page-sub    { margin: 0; font-size: 0.85rem; color: #646464; }
 
 /* grid */
 .dcm-grid {
@@ -27,8 +27,8 @@
 
 /* section */
 .dcm-section {
-    background: #0f0f0f;
-    border: 1px solid #1e1e1e;
+    background: #f0f0f0;
+    border: 1px solid #e1e1e1;
     border-radius: 14px;
     padding: 22px;
     display: flex;
@@ -68,17 +68,17 @@
 
 .dcm-field label {
     font-size: 0.75rem;
-    color: #6b6b6b;
+    color: #646464;
     font-weight: 500;
 }
 
 .dcm-field input {
     height: 42px;
-    background: #0a0a0a;
-    border: 1px solid #1e1e1e;
+    background: #f5f5f5;
+    border: 1px solid #e1e1e1;
     border-radius: 8px;
     padding: 0 12px;
-    color: #ded9d9;
+    color: #262121;
     font-size: 0.875rem;
     outline: none;
     transition: border-color 0.15s;
@@ -93,7 +93,7 @@
     background: rgba(47, 214, 190, 0.1);
     border: 1px solid rgba(47, 214, 190, 0.3);
     border-radius: 8px;
-    color: #2FD6BE;
+    color: #197e70;
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
@@ -109,8 +109,8 @@
 
 /* save bar */
 .dcm-save-bar {
-    background: #0f0f0f;
-    border: 1px solid #1e1e1e;
+    background: #f0f0f0;
+    border: 1px solid #e1e1e1;
     border-radius: 14px;
     padding: 18px 22px;
     display: flex;
@@ -120,29 +120,29 @@
     flex-wrap: wrap;
 }
 
-.dcm-save-info { font-size: 0.8rem; color: #6b6b6b; }
-.dcm-save-info span { color: #ded9d9; }
+.dcm-save-info { font-size: 0.8rem; color: #646464; }
+.dcm-save-info span { color: #262121; }
 
 .dcm-save-actions { display: flex; gap: 10px; align-items: center; }
 
 .dcm-btn-discard {
     padding: 9px 18px;
-    border: 1px solid #1e1e1e;
+    border: 1px solid #e1e1e1;
     border-radius: 8px;
     background: transparent;
-    color: #6b6b6b;
+    color: #646464;
     font-size: 0.875rem;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
 }
-.dcm-btn-discard:hover { background: #1a1a1a; color: #ded9d9; }
+.dcm-btn-discard:hover { background: #e5e5e5; color: #262121; }
 
 .dcm-btn-save {
     padding: 9px 20px;
     border-radius: 8px;
     border: none;
-    background: #1e1e1e;
-    color: #6b6b6b;
+    background: #e1e1e1;
+    color: #646464;
     font-size: 0.875rem;
     font-weight: 600;
     cursor: not-allowed;
@@ -167,11 +167,11 @@
     align-items: center;
     gap: 10px;
     padding: 12px 18px;
-    background: #0f0f0f;
-    border: 1px solid #1e1e1e;
+    background: #f0f0f0;
+    border: 1px solid #e1e1e1;
     border-radius: 10px;
     font-size: 0.85rem;
-    color: #ded9d9;
+    color: #262121;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     opacity: 0;
     transform: translateY(8px);

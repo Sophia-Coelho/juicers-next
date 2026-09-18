@@ -7,7 +7,7 @@
     overflow:hidden;
     border-radius:24px;
     padding:64px 56px;
-    background:linear-gradient(135deg,#0f3b35,#11202b 60%);
+    background:linear-gradient(135deg,#c4f0ea,#d4e3ee 60%);
     border:1px solid var(--j-teal-dim)
 }
 
@@ -26,7 +26,7 @@
 }
 
 .juicer .cta-card p{
-    color:#A9C7C0;
+    color:#38564f;
     margin-top:14px;
     max-width:42ch
 }
@@ -44,7 +44,7 @@
 }
 .juicer .cta-actions .note{
     font-size:.74rem;
-    color:#80a59d;
+    color:#5a7f77;
     font-family:'IBM Plex Mono';
     text-align:center;
     margin-top:4px

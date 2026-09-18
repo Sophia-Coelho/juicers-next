@@ -6,15 +6,15 @@ export const ACCENT = {
 };
 
 export const COLORS = {
-  bg: '#0d0d0d',
-  card: '#141414',
-  cardAlt: '#1a1a1a',
-  field: '#0f0f0f',
-  border: '#2a2a2a',
-  borderSoft: '#1f1f1f',
-  textPrimary: '#f0f0f0',
-  textSecondary: '#888',
-  textMuted: '#777',
+  bg: '#f2f2f2',
+  card: '#ebebeb',
+  cardAlt: '#e5e5e5',
+  field: '#f0f0f0',
+  border: '#d5d5d5',
+  borderSoft: '#e0e0e0',
+  textPrimary: '#0f0f0f',
+  textSecondary: '#777',
+  textMuted: '#888',
 };
 
 // Status: 'ok' | 'atencao' | 'risco' | 'estavel'

@@ -4,8 +4,8 @@ import "../../style/EntendaProjeto.css";
 const T = {
   pt: {
     eyebrow: "Conheça o projeto",
-    h2: "Entenda mais sobre nosso projeto.",
-    p: "Um vídeo rápido explicando por que a Juicers existe e como ela ajuda no seu acompanhamento de saúde.",
+    h2: "Entenda mais sobre o Juicers",
+    p: "Um vídeo rápido explicando por que a Juicers existe e como ele ajuda no seu acompanhamento de saúde.",
   },
   en: {
     eyebrow: "Get to know the project",

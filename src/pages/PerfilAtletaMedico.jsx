@@ -299,7 +299,7 @@ export default function PerfilAtletaMedico() {
 
   if (carregando) {
     return (
-      <div style={{ color: '#aaa', padding: 24, fontFamily: "'Manrope', sans-serif" }}>
+      <div style={{ color: '#555', padding: 24, fontFamily: "'Manrope', sans-serif" }}>
         Carregando dashboard do paciente...
       </div>
     )
@@ -307,7 +307,7 @@ export default function PerfilAtletaMedico() {
 
   if (erro || !patient) {
     return (
-      <div style={{ color: '#888', padding: 24, fontFamily: "'Manrope', sans-serif" }}>
+      <div style={{ color: '#777', padding: 24, fontFamily: "'Manrope', sans-serif" }}>
         {erro || 'Paciente não encontrado.'}{' '}
         <button
           onClick={() => navigate('/medico')}

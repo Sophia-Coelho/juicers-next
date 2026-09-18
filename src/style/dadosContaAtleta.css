@@ -1,10 +1,10 @@
 /* ─── DadosDaConta.css ─── */
 
 .dc-wrap {
-    background: #080808;
+    background: #f7f7f7;
     min-height: 100vh;
     font-family: 'DM Sans', system-ui, sans-serif;
-    color: #e9e9e9;
+    color: #161616;
 }
 
 .dc-page {
@@ -24,7 +24,7 @@
 .dc-header-info h1 {
     font-size: 32px;
     font-weight: 700;
-    color: #fff;
+    color: #000;
     letter-spacing: -.5px;
     margin-bottom: 6px;
     display: flex;
@@ -35,7 +35,7 @@
 
 .dc-header-info p {
     font-size: 14px;
-    color: #909090;
+    color: #646464;
     letter-spacing: .01em;
 }
 
@@ -46,9 +46,9 @@
     gap: 6px;
     padding: 5px 12px;
     border-radius: 20px;
-    background: #1e1304;
-    border: 1px solid #432a06;
-    color: #f0a350;
+    background: #fbf0e1;
+    border: 1px solid #f9e0bc;
+    color: #81480b;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .01em;
@@ -89,8 +89,8 @@
 
 /* SECTION */
 .dc-section {
-    background: linear-gradient(180deg, #121212 0%, #0e0e0e 100%);
-    border: 1px solid #1d1d1d;
+    background: linear-gradient(180deg, #ededed 0%, #f1f1f1 100%);
+    border: 1px solid #e2e2e2;
     border-radius: 18px;
     padding: 24px 26px;
     height: 100%;
@@ -99,7 +99,7 @@
 }
 
 .dc-section:hover {
-    border-color: #292929;
+    border-color: #d6d6d6;
 }
 
 .dc-section-title {
@@ -108,7 +108,7 @@
     gap: 11px;
     margin-bottom: 20px;
     font-size: 13.5px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     text-transform: uppercase;
     letter-spacing: .07em;
     font-weight: 700;
@@ -136,7 +136,7 @@
 .dc-field label {
     display: block;
     font-size: 12.5px;
-    color: #828282;
+    color: #646464;
     text-transform: uppercase;
     letter-spacing: .06em;
     font-weight: 600;
@@ -146,12 +146,12 @@
 .dc-field input,
 .dc-field select {
     width: 100%;
-    background: #131313;
-    border: 1.5px solid #232323;
+    background: #ececec;
+    border: 1.5px solid #dcdcdc;
     border-radius: 10px;
     padding: 12px 14px;
     font-size: 15px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     outline: none;
     font-family: inherit;
     appearance: none;
@@ -162,11 +162,11 @@
 .dc-field input:focus,
 .dc-field select:focus {
     border-color: #e67e22;
-    background: #161310;
+    background: #efece9;
 }
 
 .dc-field input::placeholder {
-    color: #3c3c3c;
+    color: #c3c3c3;
 }
 
 .dc-row2 {
@@ -187,26 +187,26 @@
     align-items: center;
     gap: 12px;
     padding: 12px 14px;
-    border: 1.5px solid #212121;
+    border: 1.5px solid #dedede;
     border-radius: 11px;
     cursor: pointer;
     transition: all .15s;
 }
 
 .dc-radio-opt:hover {
-    border-color: #3a3a3a;
+    border-color: #c5c5c5;
 }
 
 .dc-radio-opt--sel {
     border-color: #e67e22;
-    background: #1c0f06;
+    background: #f9ece3;
 }
 
 .dc-radio-dot {
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    border: 2px solid #3a3a3a;
+    border: 2px solid #c5c5c5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,11 +227,11 @@
 
 .dc-radio-text {
     font-size: 14.5px;
-    color: #707070;
+    color: #646464;
 }
 
 .dc-radio-opt--sel .dc-radio-text {
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /* TAGS */
@@ -244,9 +244,9 @@
 .dc-tag {
     padding: 8px 14px;
     border-radius: 9px;
-    border: 1.5px solid #212121;
-    background: #131313;
-    color: #828282;
+    border: 1.5px solid #dedede;
+    background: #ececec;
+    color: #646464;
     font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
@@ -254,19 +254,19 @@
 }
 
 .dc-tag:hover {
-    border-color: #3a3a3a;
-    color: #c4c4c4;
+    border-color: #c5c5c5;
+    color: #3b3b3b;
 }
 
 .dc-tag--sel {
-    background: #1c0f06;
+    background: #f9ece3;
     border-color: #e67e22;
-    color: #f0a350;
+    color: #7e470b;
 }
 
 .dc-tag-count {
     font-size: 12.5px;
-    color: #555;
+    color: #aaa;
     margin-top: 12px;
 }
 
@@ -288,12 +288,12 @@
 
 .dc-compost-custom input {
     flex: 1;
-    background: #131313;
-    border: 1.5px solid #232323;
+    background: #ececec;
+    border: 1.5px solid #dcdcdc;
     border-radius: 10px;
     padding: 12px 14px;
     font-size: 15px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     outline: none;
     font-family: inherit;
     transition: border-color .15s, background .15s;
@@ -302,18 +302,18 @@
 
 .dc-compost-custom input:focus {
     border-color: #e67e22;
-    background: #161310;
+    background: #efece9;
 }
 
 .dc-compost-custom input::placeholder {
-    color: #3c3c3c;
+    color: #c3c3c3;
 }
 
 .dc-compost-custom-btn {
     flex-shrink: 0;
-    background: #1a1a1a;
-    border: 1.5px solid #2a2a2a;
-    color: #d4d4d4;
+    background: #e5e5e5;
+    border: 1.5px solid #d5d5d5;
+    color: #2b2b2b;
     border-radius: 10px;
     padding: 0 20px;
     font-size: 14px;
@@ -325,7 +325,7 @@
 
 .dc-compost-custom-btn:hover {
     border-color: #e67e22;
-    color: #f0a350;
+    color: #7e470b;
 }
 
 .dc-compost-list {
@@ -341,14 +341,14 @@
     gap: 12px;
     padding: 12px 14px;
     border: 1.5px solid #e67e22;
-    background: #1c0f06;
+    background: #f9ece3;
     border-radius: 11px;
 }
 
 .dc-compost-name {
     font-size: 14.5px;
     font-weight: 600;
-    color: #f0f0f0;
+    color: #0f0f0f;
     overflow-wrap: anywhere;
 }
 
@@ -360,12 +360,12 @@
 
 .dc-compost-mg input {
     width: 100%;
-    background: #131313;
-    border: 1.5px solid #2a2a2a;
+    background: #ececec;
+    border: 1.5px solid #d5d5d5;
     border-radius: 8px;
     padding: 8px 10px;
     font-size: 14px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     outline: none;
     font-family: inherit;
     box-sizing: border-box;
@@ -378,7 +378,7 @@
 
 .dc-compost-mg span {
     font-size: 12px;
-    color: #888;
+    color: #646464;
     flex-shrink: 0;
 }
 
@@ -386,9 +386,9 @@
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    border: 1.5px solid #2a2a2a;
-    background: #131313;
-    color: #8a8a8a;
+    border: 1.5px solid #d5d5d5;
+    background: #ececec;
+    color: #646464;
     font-size: 15px;
     line-height: 1;
     cursor: pointer;
@@ -406,7 +406,7 @@
 
 .dc-compost-empty {
     font-size: 13px;
-    color: #555;
+    color: #aaa;
     padding: 4px 2px;
 }
 
@@ -422,26 +422,26 @@
     align-items: center;
     gap: 12px;
     padding: 12px 14px;
-    border: 1.5px solid #212121;
+    border: 1.5px solid #dedede;
     border-radius: 11px;
     cursor: pointer;
     transition: all .15s;
 }
 
 .dc-check-opt:hover {
-    border-color: #3a3a3a;
+    border-color: #c5c5c5;
 }
 
 .dc-check-opt--sel {
     border-color: #c0392b;
-    background: #1a0a0a;
+    background: #f5e5e5;
 }
 
 .dc-check-box {
     width: 17px;
     height: 17px;
     border-radius: 5px;
-    border: 2px solid #3a3a3a;
+    border: 2px solid #c5c5c5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -458,18 +458,18 @@
 
 .dc-check-text {
     font-size: 14.5px;
-    color: #707070;
+    color: #646464;
 }
 
 .dc-check-opt--sel .dc-check-text {
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /* SAVE BAR */
 .dc-save-bar {
     padding: 18px 24px;
-    background: linear-gradient(180deg, #121212 0%, #0e0e0e 100%);
-    border: 1px solid #1d1d1d;
+    background: linear-gradient(180deg, #ededed 0%, #f1f1f1 100%);
+    border: 1px solid #e2e2e2;
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -479,11 +479,11 @@
 
 .dc-save-info {
     font-size: 13px;
-    color: #5c5c5c;
+    color: #a3a3a3;
 }
 
 .dc-save-info span {
-    color: #989898;
+    color: #676767;
     font-weight: 600;
 }
 
@@ -496,8 +496,8 @@
 
 .dc-btn-discard {
     background: none;
-    border: 1.5px solid #232323;
-    color: #6b6b6b;
+    border: 1.5px solid #dcdcdc;
+    color: #646464;
     border-radius: 10px;
     padding: 11px 18px;
     font-size: 13.5px;
@@ -508,13 +508,13 @@
 }
 
 .dc-btn-discard:hover {
-    border-color: #3a3a3a;
-    color: #a0a0a0;
+    border-color: #c5c5c5;
+    color: #5f5f5f;
 }
 
 .dc-btn-save {
-    background: #1c1c1c;
-    color: #5c5c5c;
+    background: #e3e3e3;
+    color: #a3a3a3;
     border: none;
     border-radius: 10px;
     padding: 11px 26px;
@@ -548,8 +548,8 @@
     bottom: 28px;
     right: 28px;
     z-index: 999;
-    background: #181818;
-    border: 1px solid #262626;
+    background: #e7e7e7;
+    border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 13px 20px;
     display: flex;
@@ -557,7 +557,7 @@
     gap: 11px;
     font-size: 13.5px;
     font-weight: 500;
-    color: #d4d4d4;
+    color: #2b2b2b;
     transform: translateY(80px);
     opacity: 0;
     transition: all .3s ease;

@@ -22,7 +22,7 @@ export default function MarkerCard({ marker, onSelect }) {
 
   const st = m.status || 'ok';
   const pill = STATUS_PILL[st] || STATUS_PILL.ok;
-  const changeColor = Math.abs(change) < 0.05 ? '#7b7b7b' : change >= 0 ? '#d98a8a' : '#8ab98f';
+  const changeColor = Math.abs(change) < 0.05 ? '#848484' : change >= 0 ? '#d98a8a' : '#8ab98f';
   const changeText = (change >= 0 ? '▲ ' : '▼ ') + Math.abs(change).toFixed(1) + '%';
 
   return (
@@ -35,8 +35,8 @@ export default function MarkerCard({ marker, onSelect }) {
       }}
       className="jc-marker-card"
       style={{
-        background: '#1a1a1a',
-        border: '1px solid #2a2a2a',
+        background: '#e5e5e5',
+        border: '1px solid #d5d5d5',
         borderRadius: 12,
         padding: 14,
         cursor: 'pointer',
@@ -46,7 +46,7 @@ export default function MarkerCard({ marker, onSelect }) {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-        <span style={{ fontSize: 12, color: '#9a9a9a', lineHeight: 1.3, fontWeight: 500 }}>{m.name}</span>
+        <span style={{ fontSize: 12, color: '#656565', lineHeight: 1.3, fontWeight: 500 }}>{m.name}</span>
         <span
           style={{
             flex: 'none',
@@ -66,13 +66,13 @@ export default function MarkerCard({ marker, onSelect }) {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 5 }}>
-        <span style={{ fontSize: 23, fontWeight: 650, color: '#f0f0f0', letterSpacing: '-.01em' }}>{valueDisplay}</span>
-        <span style={{ fontSize: 11, color: '#777' }}>{m.unit}</span>
+        <span style={{ fontSize: 23, fontWeight: 650, color: '#0f0f0f', letterSpacing: '-.01em' }}>{valueDisplay}</span>
+        <span style={{ fontSize: 11, color: '#888' }}>{m.unit}</span>
       </div>
 
       <SparklineChart values={vals} reference={m.ref} status={st} />
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10.5, color: '#7b7b7b' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 10.5, color: '#848484' }}>
         <span style={{ color: changeColor, fontWeight: 600 }}>{changeText}</span>
         <span>vs anterior</span>
       </div>

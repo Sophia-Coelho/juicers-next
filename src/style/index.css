@@ -13,12 +13,12 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #0d0d0d;
+  background: #f2f2f2;
 }
 
 body {
   font-family: 'Manrope', system-ui, -apple-system, sans-serif;
-  color: #f0f0f0;
+  color: #0f0f0f;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -31,11 +31,11 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: #d5d5d5;
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #383838;
+  background: #c7c7c7;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -43,7 +43,7 @@ body {
 
 input::placeholder,
 textarea::placeholder {
-  color: #5a5a5a;
+  color: #a5a5a5;
 }
 
 /* ---------- Animações ---------- */
@@ -92,8 +92,8 @@ textarea::placeholder {
   transition: background 0.15s ease;
 }
 .jc-logout:hover {
-  background: rgba(255, 255, 255, 0.03);
-  color: #d0d0d0 !important;
+  background: rgba(0, 0, 0, 0.03);
+  color: #2f2f2f !important;
 }
 
 /* Cartão de marcador */
@@ -101,7 +101,7 @@ textarea::placeholder {
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
 .jc-marker-card:hover {
-  border-color: #3a3a3a !important;
+  border-color: #c5c5c5 !important;
   transform: translateY(-2px);
 }
 
@@ -135,8 +135,8 @@ textarea::placeholder {
   transition: background 0.15s ease;
 }
 .jc-close:hover {
-  background: #2a2a2a;
-  color: #f0f0f0 !important;
+  background: #d5d5d5;
+  color: #0f0f0f !important;
 }
 
 /* Linha de paciente */

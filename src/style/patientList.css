@@ -51,8 +51,8 @@
 }
 
 .jc-stat-card {
-    background: #141414;
-    border: 1px solid #2a2a2a;
+    background: #ebebeb;
+    border: 1px solid #d5d5d5;
     border-radius: 12px;
     padding: 18px;
     display: flex;
@@ -64,7 +64,7 @@
 
 .jc-stat-label {
     font-size: 12px;
-    color: #9a9a9a;
+    color: #656565;
     font-weight: 500;
 }
 
@@ -72,7 +72,7 @@
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -.02em;
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /* SEARCH */
@@ -80,8 +80,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #141414;
-    border: 1px solid #2a2a2a;
+    background: #ebebeb;
+    border: 1px solid #d5d5d5;
     border-radius: 10px;
     padding: 0 14px;
     max-width: 360px;
@@ -93,7 +93,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #f0f0f0;
+    color: #0f0f0f;
     font-size: 13.5px;
     font-family: inherit;
     padding: 11px 0;
@@ -108,17 +108,17 @@
 }
 
 .jc-patient-empty {
-    background: #141414;
-    border: 1px solid #2a2a2a;
+    background: #ebebeb;
+    border: 1px solid #d5d5d5;
     border-radius: 12px;
     padding: 18px;
-    color: #888;
+    color: #646464;
     font-size: 13px;
 }
 
 .jc-patient-row {
-    background: #141414;
-    border: 1px solid #2a2a2a;
+    background: #ebebeb;
+    border: 1px solid #d5d5d5;
     border-radius: 12px;
     padding: 15px 20px;
     display: flex;
@@ -129,7 +129,7 @@
 }
 
 .jc-patient-row:hover {
-    border-color: #3a3a3a;
+    border-color: #c5c5c5;
 }
 
 .jc-patient-avatar {
@@ -137,7 +137,7 @@
     height: 44px;
     border-radius: 50%;
     background: rgba(47, 214, 190, .14);
-    color: #2fd6be;
+    color: #136357;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,17 +163,17 @@
 .jc-patient-name {
     font-size: 14.5px;
     font-weight: 650;
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 .jc-patient-age {
     font-size: 12px;
-    color: #888;
+    color: #646464;
 }
 
 .jc-patient-compounds {
     font-size: 11.5px;
-    color: #7e7e7e;
+    color: #646464;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -189,14 +189,14 @@
 
 .jc-patient-exam-label {
     font-size: 10px;
-    color: #777;
+    color: #646464;
     text-transform: uppercase;
     letter-spacing: .04em;
 }
 
 .jc-patient-exam-value {
     font-size: 12.5px;
-    color: #cfcfcf;
+    color: #303030;
     font-weight: 600;
 }
 
@@ -226,7 +226,7 @@
 .jc-btn-soft-teal {
     background: rgba(47, 214, 190, .12);
     border: 1px solid rgba(47, 214, 190, .3);
-    color: #2fd6be;
+    color: #146458;
     font-size: 12.5px;
     font-weight: 650;
     font-family: inherit;

@@ -21,10 +21,6 @@ app.use(
   })
 );
 
-// Express 5: rota coringa com parâmetro nomeado
-app.options("/{*splat}", cors());
-
-// Permite receber JSON nas requisições
 app.use(express.json());
 
 // Conexão com o banco de dados

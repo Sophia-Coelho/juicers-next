@@ -2,12 +2,12 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 300px 1fr;
-    background: #080808;
+    background: #f7f7f7;
 }
 
 .ob-left {
-    background: #0a0a0a;
-    border-right: 1px solid #161616;
+    background: #f5f5f5;
+    border-right: 1px solid #e9e9e9;
     padding: 36px 28px;
     display: flex;
     flex-direction: column;
@@ -42,13 +42,13 @@
 }
 
 .ob-step.active {
-    background: #171717;
+    background: #e8e8e8;
 }
 
 .ob-connector {
     width: 1px;
     height: 18px;
-    background: #1c1c1c;
+    background: #e3e3e3;
     margin-left: 24px;
 }
 
@@ -72,41 +72,41 @@
 }
 
 .ob-step-num.current {
-    background: #1e1408;
-    color: #f0a350;
+    background: #f7ede1;
+    color: #7e470b;
     border: 1.5px solid #e67e22;
 }
 
 .ob-step-num.pending {
-    background: #141414;
-    color: #6b6b6b;
-    border: 1.5px solid #222;
+    background: #ebebeb;
+    color: #646464;
+    border: 1.5px solid #ddd;
 }
 
 .ob-step-label {
     font-size: 15px;
     font-weight: 600;
-    color: #4f4f4f;
+    color: #b0b0b0;
 }
 
 .ob-step-label.active {
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 .ob-step-label.done {
-    color: #888;
+    color: #646464;
 }
 
 .ob-step-desc {
     font-size: 12.5px;
-    color: #6b6b6b;
+    color: #646464;
     margin-top: 3px;
 }
 
 .ob-footer {
     margin-top: auto;
     font-size: 11px;
-    color: #353535;
+    color: #cacaca;
     line-height: 1.7;
 }
 
@@ -124,7 +124,7 @@
 
 .ob-progress {
     height: 3px;
-    background: #161616;
+    background: #e9e9e9;
     margin-bottom: 52px;
     border-radius: 2px;
     overflow: hidden;
@@ -139,7 +139,7 @@
 
 .ob-tag {
     font-size: 11.5px;
-    color: #f0a350;
+    color: #7e470b;
     text-transform: uppercase;
     letter-spacing: .1em;
     margin-bottom: 12px;
@@ -149,22 +149,22 @@
 .ob-title {
     font-size: 28px;
     font-weight: 700;
-    color: #fff;
+    color: #000;
     letter-spacing: -.5px;
     margin-bottom: 8px;
 }
 
 .ob-sub {
     font-size: 14.5px;
-    color: #9a9a9a;
+    color: #656565;
     margin-bottom: 36px;
     line-height: 1.6;
 }
 
 .ob-error {
-    background: #1a0a0a;
-    border: 1px solid #3a1414;
-    color: #ff8a7a;
+    background: #f5e5e5;
+    border: 1px solid #ebc5c5;
+    color: #a31400;
     font-size: 13.5px;
     font-weight: 500;
     padding: 12px 16px;
@@ -179,7 +179,7 @@
 .ob-field label {
     display: block;
     font-size: 12.5px;
-    color: #909090;
+    color: #646464;
     text-transform: uppercase;
     letter-spacing: .06em;
     margin-bottom: 9px;
@@ -189,12 +189,12 @@
 .ob-field input,
 .ob-field select {
     width: 100%;
-    background: #121212;
-    border: 1.5px solid #232323;
+    background: #ededed;
+    border: 1.5px solid #dcdcdc;
     border-radius: 10px;
     padding: 12px 14px;
     font-size: 15px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     outline: none;
     transition: border-color .15s, background .15s;
     font-family: inherit;
@@ -205,11 +205,11 @@
 .ob-field input:focus,
 .ob-field select:focus {
     border-color: #e67e22;
-    background: #15120d;
+    background: #f2efea;
 }
 
 .ob-field input::placeholder {
-    color: #444;
+    color: #bbb;
 }
 
 .ob-row {
@@ -229,26 +229,26 @@
     align-items: center;
     gap: 12px;
     padding: 13px 16px;
-    border: 1.5px solid #212121;
+    border: 1.5px solid #dedede;
     border-radius: 12px;
     cursor: pointer;
     transition: all .15s;
 }
 
 .ob-radio-opt:hover {
-    border-color: #3a3a3a;
+    border-color: #c5c5c5;
 }
 
 .ob-radio-opt.selected {
     border-color: #e67e22;
-    background: #1c0f06;
+    background: #f9ece3;
 }
 
 .ob-radio-dot {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #3a3a3a;
+    border: 2px solid #c5c5c5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -268,11 +268,11 @@
 
 .ob-radio-text {
     font-size: 14.5px;
-    color: #888;
+    color: #646464;
 }
 
 .ob-radio-opt.selected .ob-radio-text {
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 /* ── Chips de sugestão de composto (reutilizado p/ tags simples) ── */
@@ -286,9 +286,9 @@
 .ob-tag-item {
     padding: 8px 14px;
     border-radius: 9px;
-    border: 1.5px solid #212121;
-    background: #121212;
-    color: #8a8a8a;
+    border: 1.5px solid #dedede;
+    background: #ededed;
+    color: #646464;
     font-size: 13.5px;
     font-weight: 500;
     cursor: pointer;
@@ -296,14 +296,14 @@
 }
 
 .ob-tag-item:hover {
-    border-color: #3a3a3a;
-    color: #c4c4c4;
+    border-color: #c5c5c5;
+    color: #3b3b3b;
 }
 
 .ob-tag-item.selected {
-    background: #1c0f06;
+    background: #f9ece3;
     border-color: #e67e22;
-    color: #f0a350;
+    color: #7e470b;
 }
 
 .ob-check-group {
@@ -317,7 +317,7 @@
     align-items: center;
     gap: 12px;
     padding: 13px 16px;
-    border: 1.5px solid #212121;
+    border: 1.5px solid #dedede;
     border-radius: 12px;
     cursor: pointer;
     transition: all .15s;
@@ -325,14 +325,14 @@
 
 .ob-check-opt.selected {
     border-color: #e67e22;
-    background: #1c0f06;
+    background: #f9ece3;
 }
 
 .ob-check-box {
     width: 18px;
     height: 18px;
     border-radius: 5px;
-    border: 2px solid #3a3a3a;
+    border: 2px solid #c5c5c5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -349,11 +349,11 @@
 
 .ob-check-text {
     font-size: 14.5px;
-    color: #888;
+    color: #646464;
 }
 
 .ob-check-opt.selected .ob-check-text {
-    color: #f0f0f0;
+    color: #0f0f0f;
 }
 
 .ob-btn-row {
@@ -390,7 +390,7 @@
 .ob-btn-back {
     background: none;
     border: none;
-    color: #8a8a8a;
+    color: #646464;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -399,7 +399,7 @@
 }
 
 .ob-btn-back:hover {
-    color: #c4c4c4;
+    color: #3b3b3b;
 }
 
 .ob-field-error input,
@@ -409,13 +409,13 @@
 }
 
 .ob-field-error label {
-    color: #ff8a7a;
+    color: #a31400;
 }
 
 .ob-error-text {
     display: block;
     margin-top: 8px;
-    color: #ff8a7a;
+    color: #a31400;
     font-size: 12.5px;
     font-weight: 600;
 }
@@ -452,9 +452,9 @@
 
 .ob-compost-custom-btn {
     flex-shrink: 0;
-    background: #1a1a1a;
-    border: 1.5px solid #2a2a2a;
-    color: #d4d4d4;
+    background: #e5e5e5;
+    border: 1.5px solid #d5d5d5;
+    color: #2b2b2b;
     border-radius: 10px;
     padding: 0 18px;
     font-size: 14px;
@@ -466,7 +466,7 @@
 
 .ob-compost-custom-btn:hover {
     border-color: #e67e22;
-    color: #f0a350;
+    color: #7e470b;
 }
 
 /* lista de compostos já adicionados, com input de mg/semana */
@@ -483,14 +483,14 @@
     gap: 12px;
     padding: 12px 14px;
     border: 1.5px solid #e67e22;
-    background: #1c0f06;
+    background: #f9ece3;
     border-radius: 12px;
 }
 
 .ob-compost-name {
     font-size: 14.5px;
     font-weight: 600;
-    color: #f0f0f0;
+    color: #0f0f0f;
     overflow-wrap: anywhere;
 }
 
@@ -502,12 +502,12 @@
 
 .ob-compost-mg input {
     width: 100%;
-    background: #121212;
-    border: 1.5px solid #2a2a2a;
+    background: #ededed;
+    border: 1.5px solid #d5d5d5;
     border-radius: 8px;
     padding: 8px 10px;
     font-size: 14px;
-    color: #f0f0f0;
+    color: #0f0f0f;
     outline: none;
     font-family: inherit;
     box-sizing: border-box;
@@ -520,7 +520,7 @@
 
 .ob-compost-mg span {
     font-size: 12px;
-    color: #888;
+    color: #646464;
     flex-shrink: 0;
 }
 
@@ -528,9 +528,9 @@
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    border: 1.5px solid #2a2a2a;
-    background: #141414;
-    color: #8a8a8a;
+    border: 1.5px solid #d5d5d5;
+    background: #ebebeb;
+    color: #646464;
     font-size: 15px;
     line-height: 1;
     cursor: pointer;
@@ -548,7 +548,7 @@
 
 .ob-compost-empty {
     font-size: 13px;
-    color: #555;
+    color: #aaa;
     padding: 4px 2px;
 }
 

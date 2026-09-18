@@ -301,11 +301,11 @@ export default function PerfilAtleta() {
                     <div
                         style={{
                             marginTop: 18,
-                            background: '#141414',
-                            border: '1px solid #2a2a2a',
+                            background: '#ebebeb',
+                            border: '1px solid #d5d5d5',
                             borderRadius: 12,
                             padding: 18,
-                            color: '#888',
+                            color: '#777',
                             fontSize: 13,
                         }}
                     >

@@ -68,11 +68,11 @@ export default function InviteModal({ onClose, onToast }) {
   }
 
   const inputStyle = {
-    background: '#0f0f0f',
-    border: '1px solid #2a2a2a',
+    background: '#f0f0f0',
+    border: '1px solid #d5d5d5',
     borderRadius: 9,
     padding: '11px 13px',
-    color: '#f0f0f0',
+    color: '#0f0f0f',
     fontSize: 14,
     fontFamily: 'inherit',
     outline: 'none',
@@ -81,7 +81,7 @@ export default function InviteModal({ onClose, onToast }) {
   const labelStyle = {
     fontSize: 11,
     fontWeight: 600,
-    color: '#9a9a9a',
+    color: '#656565',
     textTransform: 'uppercase',
     letterSpacing: '.04em',
   }
@@ -104,8 +104,8 @@ export default function InviteModal({ onClose, onToast }) {
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#161616',
-          border: '1px solid #2a2a2a',
+          background: '#e9e9e9',
+          border: '1px solid #d5d5d5',
           borderRadius: 18,
           width: 'min(460px,100%)',
           padding: '26px 28px',
@@ -128,7 +128,7 @@ export default function InviteModal({ onClose, onToast }) {
               Adicionar paciente
             </h2>
 
-            <p style={{ margin: '5px 0 0', fontSize: 12.5, color: '#888' }}>
+            <p style={{ margin: '5px 0 0', fontSize: 12.5, color: '#777' }}>
               Gere um convite para o paciente criar a conta.
             </p>
           </div>
@@ -139,9 +139,9 @@ export default function InviteModal({ onClose, onToast }) {
               width: 34,
               height: 34,
               borderRadius: 9,
-              background: '#1f1f1f',
-              border: '1px solid #2a2a2a',
-              color: '#aaa',
+              background: '#e0e0e0',
+              border: '1px solid #d5d5d5',
+              color: '#555',
               cursor: 'pointer',
             }}
           >
@@ -193,12 +193,12 @@ export default function InviteModal({ onClose, onToast }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ flex: 1, height: 1, background: '#272727' }} />
+          <div style={{ flex: 1, height: 1, background: '#d8d8d8' }} />
 
           <span
             style={{
               fontSize: 11,
-              color: '#666',
+              color: '#999',
               textTransform: 'uppercase',
               letterSpacing: '.06em',
             }}
@@ -206,7 +206,7 @@ export default function InviteModal({ onClose, onToast }) {
             link gerado
           </span>
 
-          <div style={{ flex: 1, height: 1, background: '#272727' }} />
+          <div style={{ flex: 1, height: 1, background: '#d8d8d8' }} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -215,8 +215,8 @@ export default function InviteModal({ onClose, onToast }) {
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              background: '#0f0f0f',
-              border: '1px solid #2a2a2a',
+              background: '#f0f0f0',
+              border: '1px solid #d5d5d5',
               borderRadius: 10,
               padding: '4px 4px 4px 13px',
             }}
@@ -227,7 +227,7 @@ export default function InviteModal({ onClose, onToast }) {
                 flex: 1,
                 minWidth: 0,
                 fontSize: 12.5,
-                color: '#bdbdbd',
+                color: '#424242',
                 fontFamily: "'Space Grotesk', monospace",
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -258,7 +258,7 @@ export default function InviteModal({ onClose, onToast }) {
             style={{
               margin: 0,
               fontSize: 11.5,
-              color: '#777',
+              color: '#888',
               lineHeight: 1.45,
             }}
           >

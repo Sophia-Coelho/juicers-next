@@ -1,16 +1,42 @@
 .sim-wrapper {
-  background-color: #0f0f0f;
+  background-color: #f5f5f5;
   min-height: 100vh;
 }
 
+.sim-title {
+  color: #111;
+}
+
+.sim-subtitle {
+  color: #646464;
+}
+
+.sim-value {
+  color: #111;
+}
+
 .option-btn{
-  background-color: #227364;
+  background-color: #2FD6BE;
+  border-color: #2FD6BE !important;
   color: #fff;
 }
 
 .option-btn:hover {
-  background-color: #2DA690;
+  background-color: #29bfaa;
+  border-color: #29bfaa !important;
   color: #fff;
+}
+
+.sim-toggle-btn {
+  background-color: transparent;
+  border: 1px solid #d7d7d7 !important;
+  color: #555;
+}
+
+.sim-toggle-btn:hover {
+  background-color: #f0f0f0;
+  border-color: #d7d7d7 !important;
+  color: #111;
 }
 
 .sim-page-spacing {
@@ -21,18 +47,18 @@
 
 /* ── Card principal ─ */
 .sim-card {
-  background-color: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 16px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
 }
 
 .sim-range {
-  accent-color: #dc3545;
-  /* variável semântica do Bootstrap: --bs-danger */
+  accent-color: #2FD6BE;
 }
 
 .sim-ticks {
-  color: #444;
+  color: #646464;
   font-size: 0.72rem;
   margin-top: 0.15rem;
 }
@@ -47,7 +73,7 @@
 
 .sim-progress {
   height: 6px;
-  background-color: #111;
+  background-color: #ececec;
   border-radius: 3px;
 }
 
@@ -57,7 +83,7 @@
 }
 
 .sim-msg-header {
-  color: #555;
+  color: #646464;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -73,17 +99,17 @@
 
 .sim-msg--danger {
   border-color: #dc262555;
-  background-color: #1a000066;
+  background-color: #ffe5e566;
 }
 
 .sim-msg--warning {
   border-color: #eab30855;
-  background-color: #1c100066;
+  background-color: #fff3e366;
 }
 
 .sim-msg--info {
   border-color: #3b82f655;
-  background-color: #0c1a3066;
+  background-color: #cfddf366;
 }
 
 .sim-msg__dot {
@@ -112,20 +138,20 @@
 }
 
 .sim-msg__title--danger {
-  color: #ef4444;
+  color: #d11212;
 }
 
 .sim-msg__title--warning {
-  color: #eab308;
+  color: #836504;
 }
 
 .sim-msg__title--info {
-  color: #60a5fa;
+  color: #0551ad;
 }
 
 /* Texto descritivo */
 .sim-msg__text {
-  color: #888;
+  color: #646464;
   font-size: 0.78rem;
   line-height: 1.65;
 }

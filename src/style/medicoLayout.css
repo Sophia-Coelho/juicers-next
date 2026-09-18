@@ -1,7 +1,7 @@
 .medico-layout {
     display: flex;
     min-height: 100vh;
-    background: #0a0a0a;
+    background: #f5f5f5;
 }
 .medico-layout-main {
     flex: 1;

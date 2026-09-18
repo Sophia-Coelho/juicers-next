@@ -24,13 +24,13 @@ export default function AthleteFollowup({
   const empty = (text) => (
     <div
       style={{
-        background: '#141414',
-        border: '1px solid #2a2a2a',
+        background: '#ebebeb',
+        border: '1px solid #d5d5d5',
         borderRadius: 11,
         padding: 16,
         textAlign: 'center',
         fontSize: 12.5,
-        color: '#777',
+        color: '#888',
       }}
     >
       {text}
@@ -56,8 +56,8 @@ export default function AthleteFollowup({
 
       <section
         style={{
-          background: '#141414',
-          border: '1px solid #2a2a2a',
+          background: '#ebebeb',
+          border: '1px solid #d5d5d5',
           borderRadius: 14,
           padding: '20px 22px',
           display: 'flex',
@@ -66,7 +66,7 @@ export default function AthleteFollowup({
         }}
       >
         {loadingDoctor ? (
-          <div style={{ fontSize: 13, color: '#888' }}>
+          <div style={{ fontSize: 13, color: '#777' }}>
             Carregando médico responsável...
           </div>
         ) : doctor ? (
@@ -100,7 +100,7 @@ export default function AthleteFollowup({
                 style={{
                   fontSize: 15,
                   fontWeight: 700,
-                  color: '#f0f0f0',
+                  color: '#0f0f0f',
                 }}
               >
                 {doctor.name}
@@ -109,7 +109,7 @@ export default function AthleteFollowup({
               <span
                 style={{
                   fontSize: 12,
-                  color: '#888',
+                  color: '#777',
                 }}
               >
                 {doctor.specialty || 'Especialidade não informada'}
@@ -118,7 +118,7 @@ export default function AthleteFollowup({
             </div>
           </>
         ) : (
-          <div style={{ fontSize: 13, color: '#888' }}>
+          <div style={{ fontSize: 13, color: '#777' }}>
             Nenhum médico vinculado ainda.
           </div>
         )}
@@ -140,8 +140,8 @@ export default function AthleteFollowup({
               <div
                 key={i}
                 style={{
-                  background: '#141414',
-                  border: '1px solid #2a2a2a',
+                  background: '#ebebeb',
+                  border: '1px solid #d5d5d5',
                   borderRadius: 11,
                   padding: '13px 16px',
                   display: 'flex',
@@ -166,7 +166,7 @@ export default function AthleteFollowup({
                     height="13"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#06201d"
+                    stroke="#dff9f6"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -179,7 +179,7 @@ export default function AthleteFollowup({
                   style={{
                     flex: 1,
                     fontSize: 13.5,
-                    color: '#e8e8e8',
+                    color: '#171717',
                   }}
                 >
                   {r.label}
@@ -188,7 +188,7 @@ export default function AthleteFollowup({
                 <span
                   style={{
                     fontSize: 11,
-                    color: '#777',
+                    color: '#888',
                   }}
                 >
                   Solicitado em {r.date}
