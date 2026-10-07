@@ -360,7 +360,7 @@ export default function Login() {
                             <div className="divider"><span>ou</span></div>
 
                             <Link to="/" className="btn_voltar">
-                                ← Voltar para o site
+                                ← Voltar para
                             </Link>
 
                             <p className="login_card_footer">
