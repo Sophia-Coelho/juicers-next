@@ -209,17 +209,48 @@ export const reverifyDoctor = async (req, res) => {
 export const updateUserProfile = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { name } = req.body;
+    const { name, email } = req.body;
+    const updates = {};
 
-    if (!name) {
+    if (name !== undefined) {
+      if (typeof name !== "string" || !name.trim()) {
+        return res.status(400).json({
+          message: "Nome é obrigatório",
+        });
+      }
+
+      updates.name = name.trim();
+    }
+
+    if (email !== undefined) {
+      if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+        return res.status(400).json({
+          message: "Informe um e-mail válido",
+        });
+      }
+
+      updates.email = email.trim().toLowerCase();
+      const existingUser = await User.findOne({
+        email: updates.email,
+        _id: { $ne: userId },
+      });
+
+      if (existingUser) {
+        return res.status(409).json({
+          message: "Este e-mail já está cadastrado",
+        });
+      }
+    }
+
+    if (Object.keys(updates).length === 0) {
       return res.status(400).json({
-        message: "Nome é obrigatório",
+        message: "Informe os dados que deseja atualizar",
       });
     }
 
     const user = await User.findByIdAndUpdate(
       userId,
-      { name },
+      updates,
       {
         returnDocument: "after",
         runValidators: true,
@@ -237,6 +268,12 @@ export const updateUserProfile = async (req, res) => {
       user,
     });
   } catch (error) {
+    if (error.code === 11000 && error.keyPattern?.email) {
+      return res.status(409).json({
+        message: "Este e-mail já está cadastrado",
+      });
+    }
+
     return res.status(500).json({
       message: error.message,
     });

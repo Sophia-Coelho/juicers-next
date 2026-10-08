@@ -607,46 +607,6 @@ export const getMyDoctorProfile = async (req, res) => {
   }
 };
 
-export const updateMyDoctorProfile = async (req, res) => {
-  try {
-    const userId = req.user.id;
-
-    if (req.user.role !== "doctor") {
-      return res.status(403).json({
-        message: "Apenas médicos podem atualizar este perfil",
-      });
-    }
-
-    const { crm, specialty } = req.body;
-
-    const doctor = await Doctor.findOneAndUpdate(
-      { userId },
-      {
-        crm,
-        specialty,
-      },
-      {
-        returnDocument: "after",
-        runValidators: true,
-      }
-    ).populate("userId", "name email role");
-
-    if (!doctor) {
-      return res.status(404).json({
-        message: "Perfil de médico não encontrado",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Dados do médico atualizados com sucesso",
-      doctor,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-};
 export const updateClinicalNote = async (req, res) => {
   try {
     const userId = req.user.id

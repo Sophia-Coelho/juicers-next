@@ -235,16 +235,6 @@ export async function getMyDoctorProfile() {
     return handleResponse(response, 'Erro ao buscar perfil médico.')
 }
 
-export async function updateMyDoctorProfile({ crm, specialty }) {
-    const response = await fetch(`${API_URL}/doctors/me`, {
-        method: 'PUT',
-        headers: jsonAuthHeaders(),
-        body: JSON.stringify({ crm, specialty }),
-    })
-
-    return handleResponse(response, 'Erro ao atualizar perfil médico.')
-}
-
 export async function updateDoctorPatientNote(noteId, text) {
     const response = await fetch(`${API_URL}/doctors/notes/${noteId}`, {
         method: 'PUT',

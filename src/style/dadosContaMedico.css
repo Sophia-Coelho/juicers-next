@@ -84,7 +84,44 @@
     transition: border-color 0.15s;
 }
 
-.dcm-field input:focus { border-color: #2FD6BE; }
+.dcm-field input:not([readonly]):focus {
+    border-color: #2FD6BE;
+    box-shadow: 0 0 0 3px rgba(47, 214, 190, 0.12);
+}
+
+.dcm-field input[readonly]:focus {
+    border-color: #e1e1e1;
+    box-shadow: none;
+}
+
+.dcm-field-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.dcm-editable-badge {
+    color: #197e70;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+.dcm-field--editable input {
+    border-color: #b8c9c6;
+    background: #fff;
+}
+
+.dcm-field--editable input:hover {
+    border-color: #2FD6BE;
+}
+
+.dcm-profile-note {
+    margin: 0;
+    color: #646464;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
 
 /* botão senha */
 .dcm-btn-senha {

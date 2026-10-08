@@ -12,7 +12,6 @@ import {
   deleteClinicalNote,
   toggleRequestedExam,
   getMyDoctorProfile,
-  updateMyDoctorProfile,
   getInviteByToken,
   acceptInvite,
 } from "../controllers/doctorController.js";
@@ -23,7 +22,6 @@ import { uploadPdf } from "../middlewares/uploadMiddleware.js";
 const router = Router();
 
 router.get("/me", authMiddleware, verifiedDoctorMiddleware, getMyDoctorProfile);
-router.put("/me", authMiddleware, verifiedDoctorMiddleware, updateMyDoctorProfile);
 
 router.post("/invites", authMiddleware, verifiedDoctorMiddleware, createDoctorInvite);
 
