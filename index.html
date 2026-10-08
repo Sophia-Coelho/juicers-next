@@ -20,9 +20,13 @@
     pointer-events: auto !important;
   }
 
-  /* Esconde o botão padrão do VLibras */
-  [vw-access-button] {
+  /* Mantém o botão flutuante do VLibras oculto; ele é aberto pelo menu próprio. */
+  html body [vw] [vw-access-button],
+  html body [vw] [vw-access-button].active {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   /* Esconde o botão padrão do UserWay ← adiciona isso */
