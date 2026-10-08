@@ -8,8 +8,7 @@ const AccessibilityMenu = () => {
   const [audioAtivo, setAudioAtivo] = useState(false);
 
   const abrirVLibras = () => {
-    const btn = document.querySelector("[vw-access-button]");
-    btn?.click();
+    window.VLibrasWidget?.initBtn?.click();
     setIsOpen(false);
   };
 
