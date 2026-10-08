@@ -14,6 +14,18 @@ const doctorSchema = new mongoose.Schema(
       default: "",
     },
 
+    crmUf: {
+      type: String,
+      uppercase: true,
+      trim: true,
+      default: "",
+    },
+
+    cfmVerifiedAt: {
+      type: Date,
+      default: null,
+    },
+
     specialty: {
       type: String,
       default: "",

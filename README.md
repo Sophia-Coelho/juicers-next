@@ -100,3 +100,31 @@ npm run dev
 ```
 
 A aplicação sobe em `http://localhost:5173` por padrão.
+
+---
+
+## Verificação do CRM no cadastro médico
+
+O cadastro de médicos consulta o Web Service oficial do Conselho Federal de Medicina. O backend confirma que a inscrição está **Regular** e valida que CRM, UF, CPF e data de nascimento correspondem ao mesmo médico. CPF e data de nascimento são encaminhados ao CFM durante a verificação e não são persistidos pela aplicação. O perfil médico e suas rotas protegidas só são liberados após a confirmação.
+
+Contas médicas criadas antes dessa integração podem ser preservadas: ao tentar entrar, o médico é encaminhado para uma etapa de revalidação. Após a conferência pelo CFM, o sistema atualiza o registro médico existente e mantém a mesma conta, senha, pacientes e dados já cadastrados.
+
+### Modo local de apresentação sem licença CFM
+
+Para uma apresentação local enquanto o acesso ao CFM não foi contratado, é possível liberar **somente contas médicas já existentes** no banco que também tenham um perfil em `doctors`. No `.env` do backend, use `NODE_ENV=development` e `ALLOW_LEGACY_DOCTOR_DEMO=true`. Esse modo não verifica nem afirma que o CRM está ativo; o painel exibe um aviso de demonstração. Ele não funciona em produção e não permite criar novas contas médicas sem a verificação oficial.
+
+Para habilitar a integração, configure no ambiente do backend:
+
+```env
+MONGO_URI=mongodb://...
+JWT_SECRET=seu-segredo-jwt
+CFM_ACCESS_KEY=chave-fornecida-pelo-cfm
+```
+
+Copie `backend/.env.example` para `backend/.env` e preencha os valores antes de iniciar o servidor na pasta `backend`.
+
+Sem `CFM_ACCESS_KEY`, o cadastro de médico falha de forma fechada; cadastros de pacientes continuam disponíveis. A chave deve permanecer somente no servidor e nunca ser incluída no frontend.
+
+O CFM exige que a própria pessoa jurídica usuária solicite acesso ao Web Service, assine o termo aplicável e receba uma chave válida. Consulte as regras, finalidade de uso e valores vigentes diretamente no [CFM](https://sistemas.cfm.org.br/listamedicos/informacoes). Não use a chave de outra organização nem publique os dados consultados.
+
+Referências oficiais: [Web Service de consulta de médicos](https://sistemas.cfm.org.br/listamedicos/informacoes), [especificação técnica SOAP](https://sistemas.cfm.org.br/listamedicos/arquivos/manualwebservices.pdf) e [Resolução CFM nº 2.309/2022](https://sistemas.cfm.org.br/normas/arquivos/resolucoes/BR/2022/2309_2022.pdf).

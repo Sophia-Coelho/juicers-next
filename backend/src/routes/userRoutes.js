@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createUser,
   loginUser,
+  reverifyDoctor,
   updateUserProfile,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
 
 router.post("/", createUser);
 router.post("/login", loginUser);
+router.post("/verify-doctor", reverifyDoctor);
 
 router.get("/profile", authMiddleware, (req, res) => {
   res.json({

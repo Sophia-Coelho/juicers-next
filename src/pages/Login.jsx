@@ -3,7 +3,7 @@ import '../style/login.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import logoIcon from '../assets/juicers.png'
 import OnboardingForm from '../components/OnboardingForm'
-import { acceptDoctorInvite, loginUser, registerUser } from '../services/api'
+import { acceptDoctorInvite, loginUser, registerUser, reverifyDoctorAccount } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
@@ -15,6 +15,7 @@ export default function Login() {
 
     const [role, setRole] = useState('atleta')
     const [modoCadastro, setModoCadastro] = useState(false)
+    const [modoReverificacao, setModoReverificacao] = useState(false)
     const [mostrarOnboarding, setMostrarOnboarding] = useState(false)
     const [carregando, setCarregando] = useState(false)
     const [erroLogin, setErroLogin] = useState(false)
@@ -23,6 +24,10 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [confirmarSenha, setConfirmarSenha] = useState('')
+    const [crm, setCrm] = useState('')
+    const [ufCrm, setUfCrm] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [dataNascimento, setDataNascimento] = useState('')
 
     const destinoMock = role === 'medico' ? '/medico' : '/perfil'
 
@@ -39,17 +44,23 @@ export default function Login() {
         setEmail('')
         setSenha('')
         setConfirmarSenha('')
+        setCrm('')
+        setUfCrm('')
+        setCpf('')
+        setDataNascimento('')
         setErroLogin(false)
     }
 
     function abrirCadastro() {
         limparCampos()
+        setModoReverificacao(false)
         setModoCadastro(true)
         setMostrarOnboarding(false)
     }
 
     function abrirLogin() {
         limparCampos()
+        setModoReverificacao(false)
         setModoCadastro(false)
         setMostrarOnboarding(false)
     }
@@ -117,6 +128,12 @@ export default function Login() {
         const online = await backendOnline()
 
         if (!online) {
+            if (role === 'medico') {
+                alert('Não é possível validar seu CRM enquanto o serviço de autenticação está indisponível. Tente novamente mais tarde.')
+                setCarregando(false)
+                return
+            }
+
             const fakeUser = {
                 id: Date.now(),
                 name: nomeCadastro,
@@ -146,6 +163,9 @@ export default function Login() {
                 email,
                 password: senha,
                 role: getRoleApi(),
+                doctorVerification: role === 'medico'
+                    ? { crm, uf: ufCrm, cpf, birthDate: dataNascimento }
+                    : undefined,
             })
 
             const loginResponse = await loginUser({
@@ -168,6 +188,35 @@ export default function Login() {
 
             setMostrarOnboarding(true)
             setModoCadastro(false)
+        } catch (error) {
+            alert(error.message)
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    async function fazerReverificacaoMedico() {
+        if (!email || !senha || !crm || !ufCrm || !cpf || !dataNascimento) {
+            alert('Preencha suas credenciais e todos os dados para validar o CRM.')
+            return
+        }
+
+        setCarregando(true)
+        try {
+            const data = await reverifyDoctorAccount({
+                email,
+                password: senha,
+                doctorVerification: {
+                    crm,
+                    uf: ufCrm,
+                    cpf,
+                    birthDate: dataNascimento,
+                },
+            })
+
+            salvarSessao(data.token, data.user)
+            loginComToken(data.token, data.user, 'medico')
+            navigate('/medico')
         } catch (error) {
             alert(error.message)
         } finally {
@@ -227,7 +276,13 @@ export default function Login() {
 
             redirecionarPorTipo(data.user)
         } catch (error) {
-            alert(error.message)
+            if (error.code === 'DOCTOR_VERIFICATION_REQUIRED') {
+                setRole('medico')
+                setModoReverificacao(true)
+                setModoCadastro(true)
+            } else {
+                alert(error.message)
+            }
         } finally {
             setCarregando(false)
         }
@@ -270,7 +325,7 @@ export default function Login() {
 
             <div className="login_right">
                 <div className="login_card">
-                    <div className="login_role_toggle">
+                    {!modoReverificacao && <div className="login_role_toggle">
                         <button
                             type="button"
                             className={`login_role_btn${role === 'atleta' ? ' login_role_btn--active login_role_btn--atleta' : ''}`}
@@ -303,7 +358,7 @@ export default function Login() {
                                 Médico
                             </button>
                         )}
-                    </div>
+                    </div>}
 
                     {erroLogin && (
                         <div className="login_offline_banner">
@@ -376,23 +431,27 @@ export default function Login() {
                         </>
                     ) : (
                         <>
-                            <p className="login_card_title">Criar conta</p>
+                            <p className="login_card_title">
+                                {modoReverificacao ? 'Validar conta médica' : 'Criar conta'}
+                            </p>
                             <p className="login_card_sub">
-                                {conviteToken
+                                {modoReverificacao
+                                    ? 'Sua conta já existe. Confirme seus dados no CFM para liberar novamente o acesso médico.'
+                                    : conviteToken
                                     ? 'Crie sua conta para aceitar o convite do médico.'
                                     : role === 'medico'
                                         ? 'Crie sua conta para gerenciar seus atletas.'
                                         : 'Preencha seus dados para começar.'}
                             </p>
 
-                            <div className="login_selected_role">
+                            {!modoReverificacao && <div className="login_selected_role">
                                 Tipo de conta:{' '}
                                 <strong>
                                     {role === 'medico' ? 'Médico' : 'Atleta'}
                                 </strong>
-                            </div>
+                            </div>}
 
-                            <div className="field">
+                            {!modoReverificacao && <div className="field">
                                 <label>Nome</label>
                                 <input
                                     type="text"
@@ -400,7 +459,7 @@ export default function Login() {
                                     value={nomeCadastro}
                                     onChange={e => setNomeCadastro(e.target.value)}
                                 />
-                            </div>
+                            </div>}
 
                             <div className="field">
                                 <label>E-mail</label>
@@ -422,7 +481,7 @@ export default function Login() {
                                 />
                             </div>
 
-                            <div className="field">
+                            {!modoReverificacao && <div className="field">
                                 <label>Confirmar senha</label>
                                 <input
                                     type="password"
@@ -430,16 +489,68 @@ export default function Login() {
                                     value={confirmarSenha}
                                     onChange={e => setConfirmarSenha(e.target.value)}
                                 />
-                            </div>
+                            </div>}
+
+                            {(role === 'medico' || modoReverificacao) && (
+                                <>
+                                    <p className="login_card_sub">
+                                        O CFM confirmará que o CRM está regular e que os dados de identidade correspondem. CPF e data de nascimento são encaminhados ao CFM para validação e não são salvos no banco do Juicers.
+                                    </p>
+                                    <div className="field">
+                                        <label>CRM</label>
+                                        <input
+                                            type="text"
+                                            inputMode="numeric"
+                                            placeholder="Somente números, sem a UF"
+                                            value={crm}
+                                            onChange={e => setCrm(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="field">
+                                        <label>Estado do CRM</label>
+                                        <select value={ufCrm} onChange={e => setUfCrm(e.target.value)} required>
+                                            <option value="">Selecione a UF</option>
+                                            {['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'].map(uf => (
+                                                <option key={uf} value={uf}>{uf}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className="field">
+                                        <label>CPF</label>
+                                        <input
+                                            type="text"
+                                            inputMode="numeric"
+                                            autoComplete="off"
+                                            placeholder="Somente números"
+                                            value={cpf}
+                                            onChange={e => setCpf(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="field">
+                                        <label>Data de nascimento</label>
+                                        <input
+                                            type="date"
+                                            autoComplete="bday"
+                                            value={dataNascimento}
+                                            onChange={e => setDataNascimento(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                </>
+                            )}
 
                             <button
                                 className={`btn_entrar btn_entrar--${role}`}
-                                onClick={fazerCadastro}
+                                onClick={modoReverificacao ? fazerReverificacaoMedico : fazerCadastro}
                                 disabled={carregando}
                             >
                                 {carregando
                                     ? 'Aguarde...'
-                                    : role === 'medico'
+                                    : modoReverificacao
+                                        ? 'Validar CRM e acessar'
+                                        : role === 'medico'
                                         ? 'Criar conta e acessar'
                                         : 'Criar conta'}
                             </button>
@@ -451,12 +562,12 @@ export default function Login() {
                                 className="btn_voltar"
                                 onClick={abrirLogin}
                             >
-                                ← Já tenho conta
+                                {modoReverificacao ? '← Voltar para entrar' : '← Já tenho conta'}
                             </button>
 
-                            <p className="login_card_footer">
+                            {!modoReverificacao && <p className="login_card_footer">
                                 Ao cadastrar, você concorda com os <a href="#">Termos de Uso</a>.
-                            </p>
+                            </p>}
                         </>
                     )}
                 </div>

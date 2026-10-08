@@ -8,7 +8,9 @@ async function handleResponse(response, defaultMessage) {
     const data = await response.json().catch(() => ({}))
 
     if (!response.ok) {
-        throw new Error(data.message || defaultMessage)
+        const error = new Error(data.message || defaultMessage)
+        error.code = data.code
+        throw error
     }
 
     return data
@@ -31,13 +33,13 @@ function jsonAuthHeaders() {
     }
 }
 
-export async function registerUser({ name, email, password, role = 'patient' }) {
+export async function registerUser({ name, email, password, role = 'patient', doctorVerification }) {
     const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password, role, doctorVerification }),
     })
 
     return handleResponse(response, 'Erro ao cadastrar usuário.')
@@ -260,4 +262,16 @@ export async function deleteDoctorPatientNote(noteId) {
     })
 
     return handleResponse(response, 'Erro ao excluir anotação.')
+}
+
+export async function reverifyDoctorAccount({ email, password, doctorVerification }) {
+    const response = await fetch(`${API_URL}/users/verify-doctor`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, doctorVerification }),
+    })
+
+    return handleResponse(response, 'Erro ao verificar o CRM do médico.')
 }
