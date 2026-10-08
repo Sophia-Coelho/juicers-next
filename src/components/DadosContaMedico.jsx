@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { getMyDoctorProfile, updateUserProfile } from '../services/api'
+import { changePassword, getMyDoctorProfile, updateUserProfile } from '../services/api'
 import '../style/dadosContaMedico.css'
 
 const INITIAL = {
@@ -22,7 +22,7 @@ function separarNome(nomeCompleto = '') {
 
 function Toast({ msg, show, warn }) {
     return (
-        <div className={`dcm-toast${show ? ' dcm-toast--show' : ''}`}>
+        <div className={`dcm-toast${show ? ' dcm-toast--show' : ''}${warn ? ' dcm-toast--warn' : ''}`} role={warn ? 'alert' : 'status'} aria-live={warn ? 'assertive' : 'polite'}>
             <div className={`dcm-toast-dot${warn ? ' dcm-toast-dot--warn' : ''}`} />
             {msg}
         </div>
@@ -99,26 +99,20 @@ export default function DadosContaMedico() {
 
     const handleSave = async () => {
         const nomeCompleto = `${form.nome} ${form.sobrenome}`.trim()
-        const email = form.email.trim().toLowerCase()
 
         if (!form.nome.trim() || !form.sobrenome.trim()) {
             showToast('Preencha nome e sobrenome.', true)
             return
         }
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showToast('Informe um e-mail válido.', true)
-            return
-        }
-
         try {
             setSaving(true)
-            const response = await updateUserProfile({ name: nomeCompleto, email })
+            const response = await updateUserProfile({ name: nomeCompleto })
             const usuarioAtualizado = response.user
             const dadosAtualizados = {
                 ...form,
                 ...separarNome(usuarioAtualizado.name),
-                email: usuarioAtualizado.email,
+                email: usuarioAtualizado.email || form.email,
             }
 
             setForm(dadosAtualizados)
@@ -161,13 +155,21 @@ export default function DadosContaMedico() {
             return
         }
 
-        setSalvandoSenha(true)
-        await new Promise(r => setTimeout(r, 900))
-        setSalvandoSenha(false)
-        setSenhaAtual('')
-        setNovaSenha('')
-        setConfirmarSenha('')
-        showToast('Senha redefinida com sucesso')
+        try {
+            setSalvandoSenha(true)
+            await changePassword({
+                currentPassword: senhaAtual,
+                newPassword: novaSenha,
+            })
+            setSenhaAtual('')
+            setNovaSenha('')
+            setConfirmarSenha('')
+            showToast('Senha alterada com sucesso')
+        } catch (error) {
+            showToast(error.message || 'Não foi possível alterar a senha.', true)
+        } finally {
+            setSalvandoSenha(false)
+        }
     }
 
     const nomeCompleto = `${form.nome || 'Médico'} ${form.sobrenome || ''}`.trim()
@@ -242,10 +244,10 @@ export default function DadosContaMedico() {
                                 />
                             </div>
 
-                            <div className="dcm-field dcm-field--full dcm-field--editable">
+                            <div className="dcm-field dcm-field--full">
                                 <div className="dcm-field-label-row">
                                     <label htmlFor="doctor-email">E-mail</label>
-                                    <span className="dcm-editable-badge">Editável</span>
+                                    <span className="dcm-readonly-badge">Somente leitura</span>
                                 </div>
                                 <input
                                     id="doctor-email"
@@ -253,7 +255,8 @@ export default function DadosContaMedico() {
                                     value={form.email}
                                     placeholder="seu@email.com"
                                     autoComplete="email"
-                                    onChange={e => update('email', e.target.value)}
+                                    readOnly
+                                    aria-readonly="true"
                                 />
                             </div>
 
@@ -338,7 +341,7 @@ export default function DadosContaMedico() {
                 </div>
 
                 <div className="dcm-save-bar">
-                    <div className="dcm-save-info">Salve para aplicar alterações no nome, sobrenome ou e-mail.</div>
+                    <div className="dcm-save-info">Salve para aplicar alterações no nome e sobrenome.</div>
                     <div className="dcm-save-actions">
                         {dirty && (
                             <button className="dcm-btn-discard" onClick={handleDiscard}>

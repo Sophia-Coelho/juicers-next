@@ -86,6 +86,16 @@ export async function updateUserProfile(userData) {
     return handleResponse(response, 'Erro ao atualizar usuário.')
 }
 
+export async function changePassword({ currentPassword, newPassword }) {
+    const response = await fetch(`${API_URL}/users/password`, {
+        method: 'PUT',
+        headers: jsonAuthHeaders(),
+        body: JSON.stringify({ currentPassword, newPassword }),
+    })
+
+    return handleResponse(response, 'Erro ao alterar senha.')
+}
+
 export async function getMyExams() {
     const response = await fetch(`${API_URL}/exams`, {
         method: 'GET',

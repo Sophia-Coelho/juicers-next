@@ -3,6 +3,7 @@ import {
   createUser,
   loginUser,
   reverifyDoctor,
+  changePassword,
   updateUserProfile,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
@@ -27,5 +28,6 @@ router.get("/profile", authMiddleware, (req, res) => {
 });
 
 router.put("/profile", authMiddleware, updateUserProfile);
+router.put("/password", authMiddleware, changePassword);
 
 export default router;

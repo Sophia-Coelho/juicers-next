@@ -111,7 +111,7 @@ Contas médicas criadas antes dessa integração podem ser preservadas: ao tenta
 
 ### Modo local de apresentação sem licença CFM
 
-Para uma apresentação local enquanto o acesso ao CFM não foi contratado, é possível liberar **somente contas médicas já existentes** no banco que também tenham um perfil em `doctors`. No `.env` do backend, use `NODE_ENV=development` e `ALLOW_LEGACY_DOCTOR_DEMO=true`. Esse modo não verifica nem afirma que o CRM está ativo; o painel exibe um aviso de demonstração. Ele não funciona em produção e não permite criar novas contas médicas sem a verificação oficial.
+Para apresentações sem integração ao CFM, é possível liberar **somente contas médicas já existentes** no banco que também tenham um perfil em `doctors`. Localmente, no `.env` do backend, use `NODE_ENV=development` e `ALLOW_LEGACY_DOCTOR_DEMO=true`. Em uma implantação de demonstração, configure `LEGACY_DOCTOR_DEMO_EMAILS` com os e-mails exatos autorizados, separados por vírgula. A lista só afeta contas existentes com perfil médico e sem verificação CFM; não permite criar novas contas médicas sem verificação. Esse modo não verifica nem afirma que o CRM está ativo; o painel exibe um aviso de demonstração.
 
 Para habilitar a integração, configure no ambiente do backend:
 

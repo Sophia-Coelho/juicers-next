@@ -6,13 +6,7 @@ import {
   CfmVerificationError,
   verifyDoctorWithCfm,
 } from "../services/cfmService.js";
-
-function isLegacyDoctorDemoEnabled() {
-  return (
-    process.env.NODE_ENV === "development" &&
-    process.env.ALLOW_LEGACY_DOCTOR_DEMO === "true"
-  );
-}
+import { isLegacyDoctorDemoEnabled } from "../utils/legacyDoctorDemo.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -109,7 +103,9 @@ export const loginUser = async (req, res) => {
       const doctorProfile = await Doctor.findOne({ userId: user._id });
       const verifiedDoctor = Boolean(doctorProfile?.cfmVerifiedAt);
       legacyDemoLogin =
-        !verifiedDoctor && Boolean(doctorProfile) && isLegacyDoctorDemoEnabled();
+        !verifiedDoctor &&
+        Boolean(doctorProfile) &&
+        isLegacyDoctorDemoEnabled(user.email);
 
       if (!verifiedDoctor && !legacyDemoLogin) {
         return res.status(403).json({
@@ -277,5 +273,44 @@ export const updateUserProfile = async (req, res) => {
     return res.status(500).json({
       message: error.message,
     });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        message: "Informe a senha atual e a nova senha",
+      });
+    }
+
+    if (typeof newPassword !== "string" || newPassword.length < 6) {
+      return res.status(400).json({
+        message: "A nova senha deve ter pelo menos 6 caracteres",
+      });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    const currentPasswordMatches = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+    if (!currentPasswordMatches) {
+      return res.status(401).json({ message: "A senha atual está incorreta" });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    return res.status(200).json({ message: "Senha alterada com sucesso" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };

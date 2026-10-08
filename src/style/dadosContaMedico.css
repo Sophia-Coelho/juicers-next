@@ -107,6 +107,12 @@
     font-weight: 600;
 }
 
+.dcm-readonly-badge {
+    color: #646464;
+    font-size: 0.68rem;
+    font-weight: 500;
+}
+
 .dcm-field--editable input {
     border-color: #b8c9c6;
     background: #fff;
@@ -199,25 +205,32 @@
 .dcm-toast {
     position: fixed;
     bottom: 28px;
-    right: 28px;
+    left: 28px;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 18px;
-    background: #f0f0f0;
-    border: 1px solid #e1e1e1;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    color: #262121;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    max-width: min(440px, calc(100vw - 40px));
+    padding: 15px 20px;
+    background: #142b28;
+    border: 2px solid #2fd6be;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 10px 32px rgba(0,0,0,0.32);
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.2s, transform 0.2s;
     pointer-events: none;
-    z-index: 999;
+    z-index: 100000;
 }
 
 .dcm-toast--show { opacity: 1; transform: translateY(0); }
+.dcm-toast--warn {
+    background: #fff4cc;
+    border-color: #e6a817;
+    color: #493600;
+}
 
 .dcm-toast-dot {
     width: 7px; height: 7px;
@@ -226,10 +239,11 @@
     flex-shrink: 0;
 }
 
-.dcm-toast-dot--warn { background: #E6A817; }
+.dcm-toast-dot--warn { background: #d49300; }
 
 /* responsive */
 @media (max-width: 600px) {
     .dcm-page { padding: 20px 16px; }
     .dcm-row2 { grid-template-columns: 1fr; }
+    .dcm-toast { left: 12px; bottom: 12px; max-width: calc(100vw - 24px); }
 }

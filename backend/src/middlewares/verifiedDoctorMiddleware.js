@@ -1,4 +1,6 @@
 import Doctor from "../models/Doctor.js";
+import User from "../models/User.js";
+import { isLegacyDoctorDemoEnabled } from "../utils/legacyDoctorDemo.js";
 
 export const verifiedDoctorMiddleware = async (req, res, next) => {
   if (req.user?.role !== "doctor") {
@@ -10,9 +12,12 @@ export const verifiedDoctorMiddleware = async (req, res, next) => {
   try {
     const doctor = await Doctor.findOne({ userId: req.user.id });
     const verifiedByCfm = Boolean(doctor?.cfmVerifiedAt);
+    const user =
+      !verifiedByCfm && doctor
+        ? await User.findById(req.user.id).select("email role")
+        : null;
     const legacyDemoEnabled =
-      process.env.NODE_ENV === "development" &&
-      process.env.ALLOW_LEGACY_DOCTOR_DEMO === "true";
+      user?.role === "doctor" && isLegacyDoctorDemoEnabled(user.email);
 
     if (!verifiedByCfm && !(doctor && legacyDemoEnabled)) {
       return res.status(403).json({
