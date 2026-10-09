@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import {
-    getMyDoctorProfile,
-    updateMyDoctorProfile,
-} from '../services/api'
+import { changePassword, getMyDoctorProfile, updateUserProfile } from '../services/api'
 import '../style/dadosContaMedico.css'
 
 const INITIAL = {
@@ -12,7 +9,6 @@ const INITIAL = {
     email: '',
     crm: '',
     specialty: '',
-    ultimaAtualizacao: '',
 }
 
 function separarNome(nomeCompleto = '') {
@@ -26,7 +22,7 @@ function separarNome(nomeCompleto = '') {
 
 function Toast({ msg, show, warn }) {
     return (
-        <div className={`dcm-toast${show ? ' dcm-toast--show' : ''}`}>
+        <div className={`dcm-toast${show ? ' dcm-toast--show' : ''}${warn ? ' dcm-toast--warn' : ''}`} role={warn ? 'alert' : 'status'} aria-live={warn ? 'assertive' : 'polite'}>
             <div className={`dcm-toast-dot${warn ? ' dcm-toast-dot--warn' : ''}`} />
             {msg}
         </div>
@@ -34,13 +30,13 @@ function Toast({ msg, show, warn }) {
 }
 
 export default function DadosContaMedico() {
-    const { usuario } = useAuth()
+    const { usuario, atualizarUsuario } = useAuth()
 
     const [form, setForm] = useState(INITIAL)
     const [saved, setSaved] = useState(INITIAL)
     const [toast, setToast] = useState({ show: false, msg: '', warn: false })
-    const [saving, setSaving] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [saving, setSaving] = useState(false)
 
     const [senhaAtual, setSenhaAtual] = useState('')
     const [novaSenha, setNovaSenha] = useState('')
@@ -50,10 +46,7 @@ export default function DadosContaMedico() {
     const dirty = JSON.stringify(form) !== JSON.stringify(saved)
 
     const update = (key, val) => {
-        setForm(prev => ({
-            ...prev,
-            [key]: val,
-        }))
+        setForm(prev => ({ ...prev, [key]: val }))
     }
 
     const showToast = (msg, warn = false) => {
@@ -78,13 +71,6 @@ export default function DadosContaMedico() {
                     email: user?.email || usuario?.email || '',
                     crm: doctor.crm || '',
                     specialty: doctor.specialty || '',
-                    ultimaAtualizacao: doctor.updatedAt
-                        ? new Date(doctor.updatedAt).toLocaleDateString('pt-BR', {
-                            day: '2-digit',
-                            month: 'long',
-                            year: 'numeric',
-                        })
-                        : '',
                 }
 
                 setForm(dados)
@@ -112,39 +98,29 @@ export default function DadosContaMedico() {
     }, [usuario])
 
     const handleSave = async () => {
-        if (!form.nome.trim()) {
-            showToast('Preencha o nome.', true)
+        const nomeCompleto = `${form.nome} ${form.sobrenome}`.trim()
+
+        if (!form.nome.trim() || !form.sobrenome.trim()) {
+            showToast('Preencha nome e sobrenome.', true)
             return
         }
 
         try {
             setSaving(true)
-
-            const response = await updateMyDoctorProfile({
-                crm: form.crm,
-                specialty: form.specialty,
-            })
-
-            const doctor = response.doctor
-            const user = doctor.userId
-
-            const nomeSeparado = separarNome(user?.name || `${form.nome} ${form.sobrenome}`)
-
-            const atualizado = {
-                nome: nomeSeparado.nome || form.nome,
-                sobrenome: nomeSeparado.sobrenome || form.sobrenome,
-                email: user?.email || form.email,
-                crm: doctor.crm || '',
-                specialty: doctor.specialty || '',
-                ultimaAtualizacao: new Date().toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                }),
+            const response = await updateUserProfile({ name: nomeCompleto })
+            const usuarioAtualizado = response.user
+            const dadosAtualizados = {
+                ...form,
+                ...separarNome(usuarioAtualizado.name),
+                email: usuarioAtualizado.email || form.email,
             }
 
-            setForm(atualizado)
-            setSaved(atualizado)
+            setForm(dadosAtualizados)
+            setSaved(dadosAtualizados)
+            atualizarUsuario({
+                name: usuarioAtualizado.name,
+                email: usuarioAtualizado.email,
+            })
             showToast('Dados atualizados com sucesso')
         } catch (error) {
             showToast(error.message || 'Erro ao salvar dados.', true)
@@ -179,17 +155,24 @@ export default function DadosContaMedico() {
             return
         }
 
-        setSalvandoSenha(true)
-        await new Promise(r => setTimeout(r, 900))
-        setSalvandoSenha(false)
-        setSenhaAtual('')
-        setNovaSenha('')
-        setConfirmarSenha('')
-        showToast('Senha redefinida com sucesso')
+        try {
+            setSalvandoSenha(true)
+            await changePassword({
+                currentPassword: senhaAtual,
+                newPassword: novaSenha,
+            })
+            setSenhaAtual('')
+            setNovaSenha('')
+            setConfirmarSenha('')
+            showToast('Senha alterada com sucesso')
+        } catch (error) {
+            showToast(error.message || 'Não foi possível alterar a senha.', true)
+        } finally {
+            setSalvandoSenha(false)
+        }
     }
 
     const nomeCompleto = `${form.nome || 'Médico'} ${form.sobrenome || ''}`.trim()
-
     const saveBtnClass = [
         'dcm-btn-save',
         dirty ? 'dcm-btn-save--active' : '',
@@ -231,36 +214,49 @@ export default function DadosContaMedico() {
                         </div>
 
                         <div className="dcm-row2">
-                            <div className="dcm-field">
-                                <label>Nome</label>
+                            <div className="dcm-field dcm-field--editable">
+                                <div className="dcm-field-label-row">
+                                    <label htmlFor="doctor-first-name">Nome</label>
+                                    <span className="dcm-editable-badge">Editável</span>
+                                </div>
                                 <input
+                                    id="doctor-first-name"
                                     type="text"
                                     value={form.nome}
                                     placeholder="Seu nome"
-                                    disabled
+                                    autoComplete="given-name"
                                     onChange={e => update('nome', e.target.value)}
                                 />
                             </div>
 
-                            <div className="dcm-field">
-                                <label>Sobrenome</label>
+                            <div className="dcm-field dcm-field--editable">
+                                <div className="dcm-field-label-row">
+                                    <label htmlFor="doctor-last-name">Sobrenome</label>
+                                    <span className="dcm-editable-badge">Editável</span>
+                                </div>
                                 <input
+                                    id="doctor-last-name"
                                     type="text"
                                     value={form.sobrenome}
                                     placeholder="Sobrenome"
-                                    disabled
+                                    autoComplete="family-name"
                                     onChange={e => update('sobrenome', e.target.value)}
                                 />
                             </div>
 
                             <div className="dcm-field dcm-field--full">
-                                <label>E-mail</label>
+                                <div className="dcm-field-label-row">
+                                    <label htmlFor="doctor-email">E-mail</label>
+                                    <span className="dcm-readonly-badge">Somente leitura</span>
+                                </div>
                                 <input
+                                    id="doctor-email"
                                     type="email"
                                     value={form.email}
                                     placeholder="seu@email.com"
-                                    disabled
-                                    onChange={e => update('email', e.target.value)}
+                                    autoComplete="email"
+                                    readOnly
+                                    aria-readonly="true"
                                 />
                             </div>
 
@@ -270,7 +266,8 @@ export default function DadosContaMedico() {
                                     type="text"
                                     value={form.crm}
                                     placeholder="CRM-SP 123456"
-                                    onChange={e => update('crm', e.target.value)}
+                                    readOnly
+                                    aria-readonly="true"
                                 />
                             </div>
 
@@ -280,10 +277,15 @@ export default function DadosContaMedico() {
                                     type="text"
                                     value={form.specialty}
                                     placeholder="Endocrinologia"
-                                    onChange={e => update('specialty', e.target.value)}
+                                    readOnly
+                                    aria-readonly="true"
                                 />
                             </div>
                         </div>
+
+                        <p className="dcm-profile-note">
+                            CRM e especialidade são informados no cadastro e não podem ser alterados nesta tela.
+                        </p>
                     </div>
 
                     <div className="dcm-section dcm-section--senha">
@@ -336,27 +338,23 @@ export default function DadosContaMedico() {
                         </button>
                     </div>
 
-                    <div className="dcm-save-bar dcm-full">
-                        <div className="dcm-save-info">
-                            Última atualização:{' '}
-                            <span>{form.ultimaAtualizacao || 'Ainda não atualizado'}</span>
-                        </div>
+                </div>
 
-                        <div className="dcm-save-actions">
-                            {dirty && (
-                                <button className="dcm-btn-discard" onClick={handleDiscard}>
-                                    Descartar
-                                </button>
-                            )}
-
-                            <button
-                                className={saveBtnClass}
-                                onClick={handleSave}
-                                disabled={!dirty || saving}
-                            >
-                                {saving ? 'Salvando…' : 'Salvar alterações'}
+                <div className="dcm-save-bar">
+                    <div className="dcm-save-info">Salve para aplicar alterações no nome e sobrenome.</div>
+                    <div className="dcm-save-actions">
+                        {dirty && (
+                            <button className="dcm-btn-discard" onClick={handleDiscard}>
+                                Descartar
                             </button>
-                        </div>
+                        )}
+                        <button
+                            className={saveBtnClass}
+                            onClick={handleSave}
+                            disabled={!dirty || saving}
+                        >
+                            {saving ? 'Salvando…' : 'Salvar alterações'}
+                        </button>
                     </div>
                 </div>
             </div>

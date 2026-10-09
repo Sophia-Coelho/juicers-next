@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/index?path=health" },
+    { "source": "/api/users/:path*", "destination": "/api/index?path=users/:path*" },
+    { "source": "/api/patients/:path*", "destination": "/api/index?path=patients/:path*" },
+    { "source": "/api/exams/:path*", "destination": "/api/index?path=exams/:path*" },
+    { "source": "/api/doctors/:path*", "destination": "/api/index?path=doctors/:path*" },
+    { "source": "/api", "destination": "/api/index?path=health" },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -2,6 +2,9 @@ import { Router } from "express";
 import {
   createUser,
   loginUser,
+  loginWithGoogle,
+  reverifyDoctor,
+  changePassword,
   updateUserProfile,
 } from "../controllers/userController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
@@ -16,6 +19,8 @@ router.get("/", (req, res) => {
 
 router.post("/", createUser);
 router.post("/login", loginUser);
+router.post("/google", loginWithGoogle);
+router.post("/verify-doctor", reverifyDoctor);
 
 router.get("/profile", authMiddleware, (req, res) => {
   res.json({
@@ -25,5 +30,6 @@ router.get("/profile", authMiddleware, (req, res) => {
 });
 
 router.put("/profile", authMiddleware, updateUserProfile);
+router.put("/password", authMiddleware, changePassword);
 
 export default router;

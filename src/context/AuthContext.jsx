@@ -55,6 +55,14 @@ export function AuthProvider({ children }) {
         return { ok: true }
     }
 
+    const atualizarUsuario = (dadosAtualizados) => {
+        const usuarioAtualizado = { ...usuario, ...dadosAtualizados }
+        const { token, ...usuarioPersistido } = usuarioAtualizado
+
+        localStorage.setItem('usuarioLogadoJuicers', JSON.stringify(usuarioPersistido))
+        setUsuario(usuarioAtualizado)
+    }
+
     const logout = () => {
         localStorage.removeItem('tokenJuicers')
         localStorage.removeItem('usuarioLogadoJuicers')
@@ -63,7 +71,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario, loginComToken, loginMock, logout }}>
+        <AuthContext.Provider value={{ usuario, loginComToken, loginMock, atualizarUsuario, logout }}>
             {children}
         </AuthContext.Provider>
     )

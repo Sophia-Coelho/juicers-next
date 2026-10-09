@@ -20,8 +20,8 @@
     pointer-events: auto !important;
   }
 
-  /* Esconde o botão padrão do VLibras */
-  [vw-access-button] {
+  /* O menu próprio controla o VLibras; esconde o botão flutuante do widget. */
+  html body #vlibras-access-wrapper {
     display: none !important;
   }
 
@@ -35,13 +35,7 @@
 </style>
 
     <div id="root"></div>
-    <!-- VLibras: mantém o plugin mas sem o botão visível -->
-    <div vw class="enabled">
-      <div vw-access-button></div>
-      <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-      </div>
-    </div>
+    <!-- O VLibras cria o widget automaticamente; o atalho próprio fica no menu de acessibilidade. -->
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
       new window.VLibras.Widget('https://vlibras.gov.br/app');

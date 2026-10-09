@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+const API_URL = import.meta.env.DEV ? '/api' : `${window.location.origin}/api`
 
 function getToken() {
     return localStorage.getItem('tokenJuicers')
@@ -8,7 +8,11 @@ async function handleResponse(response, defaultMessage) {
     const data = await response.json().catch(() => ({}))
 
     if (!response.ok) {
-        throw new Error(data.message || defaultMessage)
+        const error = new Error(data.message || defaultMessage)
+        error.code = data.code
+        error.status = response.status
+        error.data = data
+        throw error
     }
 
     return data
@@ -31,13 +35,13 @@ function jsonAuthHeaders() {
     }
 }
 
-export async function registerUser({ name, email, password, role = 'patient' }) {
+export async function registerUser({ name, email, password, role = 'patient', doctorVerification }) {
     const response = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password, role, doctorVerification }),
     })
 
     return handleResponse(response, 'Erro ao cadastrar usuário.')
@@ -53,6 +57,18 @@ export async function loginUser({ email, password }) {
     })
 
     return handleResponse(response, 'Erro ao fazer login.')
+}
+
+export async function loginWithGoogle({ credential, inviteToken }) {
+    const response = await fetch(`${API_URL}/users/google`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ credential, inviteToken }),
+    })
+
+    return handleResponse(response, 'Erro ao entrar com o Google.')
 }
 
 export async function savePatientProfile(patientData) {
@@ -82,6 +98,16 @@ export async function updateUserProfile(userData) {
     })
 
     return handleResponse(response, 'Erro ao atualizar usuário.')
+}
+
+export async function changePassword({ currentPassword, newPassword }) {
+    const response = await fetch(`${API_URL}/users/password`, {
+        method: 'PUT',
+        headers: jsonAuthHeaders(),
+        body: JSON.stringify({ currentPassword, newPassword }),
+    })
+
+    return handleResponse(response, 'Erro ao alterar senha.')
 }
 
 export async function getMyExams() {
@@ -233,16 +259,6 @@ export async function getMyDoctorProfile() {
     return handleResponse(response, 'Erro ao buscar perfil médico.')
 }
 
-export async function updateMyDoctorProfile({ crm, specialty }) {
-    const response = await fetch(`${API_URL}/doctors/me`, {
-        method: 'PUT',
-        headers: jsonAuthHeaders(),
-        body: JSON.stringify({ crm, specialty }),
-    })
-
-    return handleResponse(response, 'Erro ao atualizar perfil médico.')
-}
-
 export async function updateDoctorPatientNote(noteId, text) {
     const response = await fetch(`${API_URL}/doctors/notes/${noteId}`, {
         method: 'PUT',
@@ -260,4 +276,16 @@ export async function deleteDoctorPatientNote(noteId) {
     })
 
     return handleResponse(response, 'Erro ao excluir anotação.')
+}
+
+export async function reverifyDoctorAccount({ email, password, doctorVerification }) {
+    const response = await fetch(`${API_URL}/users/verify-doctor`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, doctorVerification }),
+    })
+
+    return handleResponse(response, 'Erro ao verificar o CRM do médico.')
 }
