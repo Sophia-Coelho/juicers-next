@@ -383,7 +383,7 @@ export default function Login() {
                 />
 
                 <a className="logo" href="/">
-                    <img src={logoIcon} alt="Logo" className="logo-icon" />
+                    <img src={logoIcon} alt="Juicers" className="logo-icon" />
                 </a>
 
                 <div className="login_left_middle">
@@ -407,6 +407,9 @@ export default function Login() {
 
             <div className="login_right">
                 <div className="login_card">
+                    <Link to="/" className="login_mobile_logo" aria-label="Juicers — página inicial">
+                        <img src={logoIcon} alt="Juicers" />
+                    </Link>
                     {!modoReverificacao && <div className="login_role_toggle">
                         <button
                             type="button"
@@ -491,7 +494,7 @@ export default function Login() {
                                         className="field_senha_toggle"
                                         onClick={() => setMostrarSenha(v => !v)}
                                         aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
-                                        tabIndex={-1}
+                                        aria-pressed={mostrarSenha}
                                     >
                                         {mostrarSenha ? (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -525,7 +528,7 @@ export default function Login() {
                                     <GoogleLoginButton
                                         onCredential={fazerLoginComGoogle}
                                         onError={setErroGoogle}
-                                        disabled={carregando}
+                                        disabled={carregando || conviteCarregando || Boolean(conviteErro)}
                                     />
                                     {erroGoogle && <div role="alert" className="login_offline_banner">{erroGoogle}</div>}
                                 </>
@@ -542,7 +545,7 @@ export default function Login() {
                                     className="link_button"
                                     onClick={abrirCadastro}
                                 >
-                                    Cadastre-se
+                                    Crie sua conta
                                 </button>
                             </p>
                         </>
@@ -682,7 +685,7 @@ export default function Login() {
                                     <GoogleLoginButton
                                         onCredential={fazerLoginComGoogle}
                                         onError={setErroGoogle}
-                                        disabled={carregando}
+                                        disabled={carregando || conviteCarregando || Boolean(conviteErro)}
                                     />
                                     {erroGoogle && <div role="alert" className="login_offline_banner">{erroGoogle}</div>}
                                 </>
