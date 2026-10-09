@@ -1,12 +1,22 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/User.js";
 import Doctor from "../models/Doctor.js";
+import Patient from "../models/Patient.js";
+import DoctorInvite from "../models/DoctorInvite.js";
 import {
   CfmVerificationError,
   verifyDoctorWithCfm,
 } from "../services/cfmService.js";
 import { isLegacyDoctorDemoEnabled } from "../utils/legacyDoctorDemo.js";
+
+const googleAuthClient = new OAuth2Client();
+
+function findUserByEmailCaseInsensitive(email) {
+  const escapedEmail = email.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return User.findOne({ email: new RegExp(`^${escapedEmail}$`, "i") });
+}
 
 export const createUser = async (req, res) => {
   try {
@@ -90,6 +100,12 @@ export const loginUser = async (req, res) => {
       });
     }
 
+    if (!user.password) {
+      return res.status(401).json({
+        message: "E-mail ou senha inválidos",
+      });
+    }
+
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
@@ -139,6 +155,147 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: error.message,
+    });
+  }
+};
+
+export const loginWithGoogle = async (req, res) => {
+  const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
+  const credential = typeof req.body?.credential === "string"
+    ? req.body.credential.trim()
+    : "";
+  const inviteToken = typeof req.body?.inviteToken === "string"
+    ? req.body.inviteToken.trim().toUpperCase()
+    : "";
+
+  if (!clientId) {
+    return res.status(503).json({
+      message: "O login com Google ainda não está configurado.",
+    });
+  }
+
+  if (!credential || credential.length > 8192) {
+    return res.status(400).json({
+      message: "A credencial do Google está ausente ou inválida.",
+    });
+  }
+
+  let googleProfile;
+  try {
+    const ticket = await googleAuthClient.verifyIdToken({
+      idToken: credential,
+      audience: clientId,
+    });
+    googleProfile = ticket.getPayload();
+  } catch {
+    return res.status(401).json({
+      message: "Não foi possível validar sua conta do Google. Tente novamente.",
+    });
+  }
+
+  const googleId = googleProfile?.sub;
+  const email = googleProfile?.email?.trim().toLowerCase();
+  if (!googleId || !email || googleProfile.email_verified !== true) {
+    return res.status(401).json({
+      message: "A conta do Google precisa ter um e-mail verificado.",
+    });
+  }
+
+  try {
+    if (inviteToken) {
+      const invite = await DoctorInvite.findOne({ token: inviteToken });
+      if (!invite || invite.status !== "pending" || invite.expiresAt < new Date()) {
+        return res.status(404).json({
+          message: "Este convite não está mais disponível.",
+        });
+      }
+
+      if (invite.patientEmail.trim().toLowerCase() !== email) {
+        return res.status(403).json({
+          message: "Entre com a conta Google do e-mail que recebeu o convite.",
+        });
+      }
+    }
+
+    let user = await User.findOne({ googleId });
+
+    if (!user) {
+      user = await findUserByEmailCaseInsensitive(email);
+
+      if (user) {
+        if (user.role !== "patient") {
+          return res.status(403).json({
+            message: "O login com Google está disponível somente para pacientes.",
+          });
+        }
+
+        if (user.googleId && user.googleId !== googleId) {
+          return res.status(409).json({
+            message: "Este e-mail já está vinculado a outra conta Google.",
+          });
+        }
+
+        const googleControlsEmail =
+          email.endsWith("@gmail.com") || Boolean(googleProfile.hd);
+        if (!googleControlsEmail) {
+          return res.status(409).json({
+            message: "Entre com sua senha para vincular esta conta ao Google.",
+          });
+        }
+
+        user.googleId = googleId;
+        await user.save();
+      } else {
+        const name =
+          googleProfile.name?.trim() ||
+          [googleProfile.given_name, googleProfile.family_name]
+            .filter(Boolean)
+            .join(" ") ||
+          email.split("@")[0];
+
+        user = await User.create({
+          name,
+          email,
+          password: null,
+          googleId,
+          role: "patient",
+        });
+      }
+    }
+
+    if (user.role !== "patient") {
+      return res.status(403).json({
+        message: "O login com Google está disponível somente para pacientes.",
+      });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+    const patientProfileExists = await Patient.exists({ userId: user._id });
+
+    return res.status(200).json({
+      message: "Login com Google realizado com sucesso.",
+      token,
+      needsOnboarding: !patientProfileExists,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({
+        message: "Esta conta já está vinculada a outro usuário.",
+      });
+    }
+
+    return res.status(500).json({
+      message: "Não foi possível entrar com o Google. Tente novamente.",
     });
   }
 };
@@ -292,6 +449,12 @@ export const changePassword = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    if (!user.password) {
+      return res.status(409).json({
+        message: "Esta conta usa o login do Google e não possui uma senha local.",
+      });
     }
 
     const currentPasswordMatches = await bcrypt.compare(

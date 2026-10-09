@@ -3,10 +3,12 @@ import '../style/login.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import logoIcon from '../assets/juicers.png'
 import OnboardingForm from '../components/OnboardingForm'
-import { acceptDoctorInvite, getInviteByToken, loginUser, registerUser, reverifyDoctorAccount } from '../services/api'
+import { acceptDoctorInvite, getInviteByToken, loginUser, loginWithGoogle, registerUser, reverifyDoctorAccount } from '../services/api'
 import { useAuth } from '../context/AuthContext'
+import GoogleLoginButton from '../components/GoogleLoginButton'
 
 const API_URL = import.meta.env.DEV ? '/api' : `${window.location.origin}/api`
+const GOOGLE_LOGIN_ENABLED = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID)
 
 export default function Login() {
     const navigate = useNavigate()
@@ -19,6 +21,7 @@ export default function Login() {
     const [mostrarOnboarding, setMostrarOnboarding] = useState(false)
     const [carregando, setCarregando] = useState(false)
     const [erroLogin, setErroLogin] = useState(false)
+    const [erroGoogle, setErroGoogle] = useState('')
     const [conviteCarregando, setConviteCarregando] = useState(false)
     const [conviteErro, setConviteErro] = useState('')
 
@@ -69,6 +72,7 @@ export default function Login() {
         setCpf('')
         setDataNascimento('')
         setErroLogin(false)
+        setErroGoogle('')
     }
 
     function abrirCadastro() {
@@ -248,6 +252,36 @@ export default function Login() {
             navigate('/medico')
         } catch (error) {
             alert(error.message)
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    async function fazerLoginComGoogle(credential) {
+        setCarregando(true)
+        setErroGoogle('')
+
+        try {
+            const data = await loginWithGoogle({
+                credential,
+                inviteToken: conviteToken,
+            })
+
+            salvarSessao(data.token, data.user)
+            loginComToken(data.token, data.user, 'atleta')
+            setNomeCadastro(data.user.name || '')
+            setEmail(data.user.email || '')
+
+            if (data.needsOnboarding) {
+                setModoCadastro(false)
+                setMostrarOnboarding(true)
+                return
+            }
+
+            if (conviteToken) await acceptDoctorInvite(conviteToken)
+            navigate('/perfil')
+        } catch (error) {
+            setErroGoogle(error.message || 'Não foi possível entrar com o Google.')
         } finally {
             setCarregando(false)
         }
@@ -448,7 +482,17 @@ export default function Login() {
                                 {carregando ? 'Entrando...' : 'Entrar'}
                             </button>
 
-                            <div className="divider"><span>ou</span></div>
+                            {GOOGLE_LOGIN_ENABLED && role === 'atleta' && !modoReverificacao ? (
+                                <>
+                                    <div className="divider"><span>ou</span></div>
+                                    <GoogleLoginButton
+                                        onCredential={fazerLoginComGoogle}
+                                        onError={setErroGoogle}
+                                        disabled={carregando}
+                                    />
+                                    {erroGoogle && <div role="alert" className="login_offline_banner">{erroGoogle}</div>}
+                                </>
+                            ) : <div className="divider"><span>ou</span></div>}
 
                             <Link to="/" className="btn_voltar">
                                 ← Voltar para o site
@@ -595,7 +639,17 @@ export default function Login() {
                                         : 'Criar conta'}
                             </button>
 
-                            <div className="divider"><span>ou</span></div>
+                            {GOOGLE_LOGIN_ENABLED && role === 'atleta' && !modoReverificacao ? (
+                                <>
+                                    <div className="divider"><span>ou</span></div>
+                                    <GoogleLoginButton
+                                        onCredential={fazerLoginComGoogle}
+                                        onError={setErroGoogle}
+                                        disabled={carregando}
+                                    />
+                                    {erroGoogle && <div role="alert" className="login_offline_banner">{erroGoogle}</div>}
+                                </>
+                            ) : <div className="divider"><span>ou</span></div>}
 
                             <button
                                 type="button"

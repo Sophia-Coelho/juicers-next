@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createUser,
   loginUser,
+  loginWithGoogle,
   reverifyDoctor,
   changePassword,
   updateUserProfile,
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
 
 router.post("/", createUser);
 router.post("/login", loginUser);
+router.post("/google", loginWithGoogle);
 router.post("/verify-doctor", reverifyDoctor);
 
 router.get("/profile", authMiddleware, (req, res) => {

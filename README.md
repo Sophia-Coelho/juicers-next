@@ -123,6 +123,8 @@ CFM_ACCESS_KEY=chave-fornecida-pelo-cfm
 
 Copie `backend/.env.example` para `backend/.env` e preencha os valores antes de iniciar o servidor local na pasta `backend`.
 
+O login Google para pacientes usa um ID de cliente OAuth do tipo **Aplicativo da Web**. No `.env` da raiz, configure `VITE_GOOGLE_CLIENT_ID`; em `backend/.env`, configure `GOOGLE_CLIENT_ID` com o mesmo ID. No Console do Google Cloud, autorize as origens JavaScript `http://localhost:5173` e `https://juicers-next.vercel.app`. Se a tela de consentimento estiver em modo de teste, adicione os e-mails que farão a apresentação como usuários de teste. O backend valida o ID token do Google e só vincula contas existentes com e-mail Google verificado e confiável; contas médicas continuam usando o login atual.
+
 ### Deploy da API junto com o site na Vercel
 
 O frontend chama a API pelo mesmo domínio (`/api`). A Vercel publica o Express como uma função a partir de `api/index.js`, então a API não precisa de um domínio separado. No projeto `juicers-next`, configure nas variáveis de ambiente da Vercel:
@@ -131,9 +133,11 @@ O frontend chama a API pelo mesmo domínio (`/api`). A Vercel publica o Express 
 MONGO_URI=mongodb+srv://...
 JWT_SECRET=um-segredo-longo-e-aleatorio
 FRONTEND_URL=https://juicers-next.vercel.app
+GOOGLE_CLIENT_ID=seu-id-de-cliente-oauth
+VITE_GOOGLE_CLIENT_ID=seu-id-de-cliente-oauth
 ```
 
-Para cadastrar médicos, configure também `CFM_ACCESS_KEY`. Para habilitar a exceção temporária de médicos legados, configure `ALLOW_LEGACY_DOCTOR_DEMO=true` e `LEGACY_DOCTOR_DEMO_EMAILS` com os e-mails autorizados. Para enviar convites por e-mail, configure `GMAIL_USER` com uma conta `@gmail.com` remetente e `GMAIL_APP_PASSWORD` com uma senha de app do Google. Não use a senha normal do Gmail. Depois de adicionar ou alterar variáveis, faça um novo deploy na Vercel.
+Para cadastrar médicos, configure também `CFM_ACCESS_KEY`. Para habilitar a exceção temporária de médicos legados, configure `ALLOW_LEGACY_DOCTOR_DEMO=true` e `LEGACY_DOCTOR_DEMO_EMAILS` com os e-mails autorizados. Para enviar convites por e-mail, configure `GMAIL_USER` com uma conta `@gmail.com` remetente e `GMAIL_APP_PASSWORD` com uma senha de app do Google. Não use a senha normal do Gmail. O ID OAuth não é segredo, mas mantenha o Client ID do backend e o `VITE_` iguais. Depois de adicionar ou alterar variáveis, faça um novo deploy na Vercel.
 
 Os links de convite expiram em 7 dias. Se o SMTP não estiver configurado ou o envio falhar, o convite ainda é criado e a tela informa que o link precisa ser compartilhado manualmente.
 

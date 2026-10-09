@@ -59,6 +59,18 @@ export async function loginUser({ email, password }) {
     return handleResponse(response, 'Erro ao fazer login.')
 }
 
+export async function loginWithGoogle({ credential, inviteToken }) {
+    const response = await fetch(`${API_URL}/users/google`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ credential, inviteToken }),
+    })
+
+    return handleResponse(response, 'Erro ao entrar com o Google.')
+}
+
 export async function savePatientProfile(patientData) {
     const response = await fetch(`${API_URL}/patients`, {
         method: 'POST',
