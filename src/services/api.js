@@ -10,6 +10,8 @@ async function handleResponse(response, defaultMessage) {
     if (!response.ok) {
         const error = new Error(data.message || defaultMessage)
         error.code = data.code
+        error.status = response.status
+        error.data = data
         throw error
     }
 

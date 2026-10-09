@@ -7,6 +7,8 @@ import DoctorInvite from "../models/DoctorInvite.js";
 import { parseExamPdfText } from "../utils/examPdfParser.js";
 import ClinicalNote from "../models/ClinicalNote.js";
 import RequestedExam from "../models/RequestedExam.js";
+import User from "../models/User.js";
+import { sendDoctorInviteEmail } from "../services/doctorInviteEmailService.js";
 
 const require = createRequire(import.meta.url);
 const pdfParseModule = require("pdf-parse");
@@ -26,7 +28,12 @@ export const createDoctorInvite = async (req, res) => {
       });
     }
 
-    const { patientName, patientEmail } = req.body;
+    const patientName =
+      typeof req.body.patientName === "string" ? req.body.patientName.trim() : "";
+    const patientEmail =
+      typeof req.body.patientEmail === "string"
+        ? req.body.patientEmail.trim().toLowerCase()
+        : "";
 
     if (!patientName || !patientEmail) {
       return res.status(400).json({
@@ -34,7 +41,13 @@ export const createDoctorInvite = async (req, res) => {
       });
     }
 
-    const doctor = await Doctor.findOne({ userId });
+    if (!/^[^\s@]+@gmail\.com$/i.test(patientEmail)) {
+      return res.status(400).json({
+        message: "O convite só pode ser enviado para um endereço @gmail.com",
+      });
+    }
+
+    const doctor = await Doctor.findOne({ userId }).populate("userId", "name");
 
     if (!doctor) {
       return res.status(404).json({
@@ -42,10 +55,23 @@ export const createDoctorInvite = async (req, res) => {
       });
     }
 
-    const token = crypto.randomBytes(4).toString("hex").toUpperCase();
+    let frontendUrl;
+    try {
+      const configuredOrigin =
+        process.env.FRONTEND_URL || req.get("origin") || "http://localhost:5173";
+      const parsedOrigin = new URL(configuredOrigin);
+      if (!["http:", "https:"].includes(parsedOrigin.protocol)) {
+        throw new Error("FRONTEND_URL precisa usar HTTP ou HTTPS.");
+      }
+      frontendUrl = parsedOrigin.origin;
+    } catch {
+      return res.status(500).json({
+        message: "Não foi possível determinar o endereço público do site. Configure FRONTEND_URL.",
+      });
+    }
 
-    const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + 7);
+    const token = crypto.randomBytes(16).toString("hex").toUpperCase();
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     const invite = await DoctorInvite.create({
       doctorId: doctor._id,
@@ -55,10 +81,26 @@ export const createDoctorInvite = async (req, res) => {
       expiresAt,
     });
 
-    const inviteLink = `${process.env.FRONTEND_URL || "http://localhost:5173"}/cadastro/${token}`;
+    const inviteLink = `${frontendUrl}/cadastro/${token}`;
+    let emailSent = false;
+
+    try {
+      await sendDoctorInviteEmail({
+        patientEmail,
+        patientName,
+        doctorName: doctor.userId?.name || "Seu médico",
+        inviteLink,
+      });
+      emailSent = true;
+    } catch (emailError) {
+      console.error("Falha ao enviar e-mail de convite:", emailError.message);
+    }
 
     return res.status(201).json({
-      message: "Convite criado com sucesso",
+      message: emailSent
+        ? "Convite criado e enviado por e-mail."
+        : "Convite criado, mas o e-mail não foi enviado. Compartilhe o link manualmente.",
+      emailSent,
       invite: {
         id: invite._id,
         patientName: invite.patientName,
@@ -349,6 +391,16 @@ export const acceptInvite = async (req, res) => {
 
       return res.status(400).json({
         message: "Convite expirado",
+      });
+    }
+
+    const patientUser = await User.findById(userId).select("email");
+    if (
+      !patientUser ||
+      patientUser.email?.trim().toLowerCase() !== invite.patientEmail.trim().toLowerCase()
+    ) {
+      return res.status(403).json({
+        message: "Este convite foi enviado para outro endereço de e-mail.",
       });
     }
 

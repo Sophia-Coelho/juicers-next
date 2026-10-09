@@ -3,7 +3,7 @@ import '../style/login.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import logoIcon from '../assets/juicers.png'
 import OnboardingForm from '../components/OnboardingForm'
-import { acceptDoctorInvite, loginUser, registerUser, reverifyDoctorAccount } from '../services/api'
+import { acceptDoctorInvite, getInviteByToken, loginUser, registerUser, reverifyDoctorAccount } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
@@ -19,6 +19,8 @@ export default function Login() {
     const [mostrarOnboarding, setMostrarOnboarding] = useState(false)
     const [carregando, setCarregando] = useState(false)
     const [erroLogin, setErroLogin] = useState(false)
+    const [conviteCarregando, setConviteCarregando] = useState(false)
+    const [conviteErro, setConviteErro] = useState('')
 
     const [nomeCadastro, setNomeCadastro] = useState('')
     const [email, setEmail] = useState('')
@@ -32,11 +34,29 @@ export default function Login() {
     const destinoMock = role === 'medico' ? '/medico' : '/perfil'
 
     useEffect(() => {
-        if (conviteToken) {
-            setRole('atleta')
-            setModoCadastro(true)
-            setMostrarOnboarding(false)
-        }
+        if (!conviteToken) return undefined
+
+        let mounted = true
+        setRole('atleta')
+        setModoCadastro(true)
+        setMostrarOnboarding(false)
+        setConviteCarregando(true)
+        setConviteErro('')
+
+        getInviteByToken(conviteToken)
+            .then(({ invite }) => {
+                if (!mounted) return
+                setNomeCadastro(invite.patientName || '')
+                setEmail(invite.patientEmail || '')
+            })
+            .catch(error => {
+                if (mounted) setConviteErro(error.message || 'Este convite não está disponível.')
+            })
+            .finally(() => {
+                if (mounted) setConviteCarregando(false)
+            })
+
+        return () => { mounted = false }
     }, [conviteToken])
 
     function limparCampos() {
@@ -112,6 +132,11 @@ export default function Login() {
     }
 
     async function fazerCadastro() {
+        if (conviteToken && (conviteCarregando || conviteErro || !email)) {
+            alert(conviteErro || 'Aguarde a validação do convite.')
+            return
+        }
+
         if (!nomeCadastro || !email || !senha || !confirmarSenha) {
             alert('Preencha todos os campos.')
             return
@@ -128,6 +153,12 @@ export default function Login() {
         const online = await backendOnline()
 
         if (!online) {
+            if (conviteToken) {
+                alert('Não foi possível validar o convite. Verifique sua conexão e tente novamente.')
+                setCarregando(false)
+                return
+            }
+
             if (role === 'medico') {
                 alert('Não é possível validar seu CRM enquanto o serviço de autenticação está indisponível. Tente novamente mais tarde.')
                 setCarregando(false)
@@ -267,9 +298,13 @@ export default function Login() {
                     await acceptDoctorInvite(conviteToken)
                     navigate('/perfil')
                     return
-                } catch {
-                    setMostrarOnboarding(true)
-                    setModoCadastro(false)
+                } catch (error) {
+                    if (error.status === 404 && error.message.includes('Perfil de paciente não encontrado')) {
+                        setMostrarOnboarding(true)
+                        setModoCadastro(false)
+                    } else {
+                        alert(error.message || 'Não foi possível aceitar o convite.')
+                    }
                     return
                 }
             }
@@ -359,6 +394,9 @@ export default function Login() {
                             </button>
                         )}
                     </div>}
+
+                    {conviteCarregando && <p role='status' className='login_card_sub'>Validando o convite...</p>}
+                    {conviteErro && <div role='alert' className='login_offline_banner'>{conviteErro}</div>}
 
                     {erroLogin && (
                         <div className="login_offline_banner">
@@ -468,6 +506,8 @@ export default function Login() {
                                     placeholder="seu@email.com"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
+                                    disabled={Boolean(conviteToken)}
+                                    autoComplete='email'
                                 />
                             </div>
 
@@ -544,9 +584,11 @@ export default function Login() {
                             <button
                                 className={`btn_entrar btn_entrar--${role}`}
                                 onClick={modoReverificacao ? fazerReverificacaoMedico : fazerCadastro}
-                                disabled={carregando}
+                                disabled={carregando || conviteCarregando || Boolean(conviteErro)}
                             >
-                                {carregando
+                                {conviteCarregando
+                                    ? 'Validando convite...'
+                                    : carregando
                                     ? 'Aguarde...'
                                     : modoReverificacao
                                         ? 'Validar CRM e acessar'
