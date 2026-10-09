@@ -3,6 +3,7 @@ import '../style/login.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import logoIcon from '../assets/juicers.png'
 import OnboardingForm from '../components/OnboardingForm'
+import LoginPreview, { LoginFeatures, LoginPrivacyFooter } from '../components/LoginPreview'
 import { acceptDoctorInvite, loginUser, registerUser } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 
@@ -23,6 +24,7 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [confirmarSenha, setConfirmarSenha] = useState('')
+    const [mostrarSenha, setMostrarSenha] = useState(false)
 
     const destinoMock = role === 'medico' ? '/medico' : '/perfil'
 
@@ -251,6 +253,13 @@ export default function Login() {
     return (
         <div className="login_wrap">
             <div className="login_left">
+                <img
+                    src="/images/juicers-digital-athlete.webp"
+                    alt=""
+                    aria-hidden="true"
+                    className="login_athlete"
+                />
+
                 <a className="logo" href="/">
                     <img src={logoIcon} alt="Logo" className="logo-icon" />
                 </a>
@@ -263,9 +272,15 @@ export default function Login() {
                     <p className="login_left_sub">
                         Acompanhe exames, identifique riscos reais e entenda como os anabolizantes afetam sua saúde.
                     </p>
+
+                    <LoginPreview />
+
+                    <LoginFeatures />
                 </div>
 
-                <div className="login_left_stats"></div>
+                <div className="login_left_stats">
+                    <LoginPrivacyFooter />
+                </div>
             </div>
 
             <div className="login_right">
@@ -336,15 +351,37 @@ export default function Login() {
 
                             <div className="field">
                                 <label>Senha</label>
-                                <input
-                                    type="password"
-                                    placeholder="••••••••"
-                                    value={senha}
-                                    onChange={e => {
-                                        setSenha(e.target.value)
-                                        setErroLogin(false)
-                                    }}
-                                />
+                                <div className="field_senha_wrap">
+                                    <input
+                                        type={mostrarSenha ? 'text' : 'password'}
+                                        placeholder="••••••••"
+                                        value={senha}
+                                        onChange={e => {
+                                            setSenha(e.target.value)
+                                            setErroLogin(false)
+                                        }}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="field_senha_toggle"
+                                        onClick={() => setMostrarSenha(v => !v)}
+                                        aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
+                                        tabIndex={-1}
+                                    >
+                                        {mostrarSenha ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 3l18 18" />
+                                                <path d="M10.58 10.58a2 2 0 002.83 2.83" />
+                                                <path d="M9.88 5.09A10.94 10.94 0 0112 5c6 0 10 7 10 7a17.6 17.6 0 01-3.22 3.95M6.1 6.1A17.9 17.9 0 002 12s4 7 10 7a10.5 10.5 0 004.24-.88" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
                             </div>
 
                             <a href="#" className="forgot">Esqueci minha senha</a>

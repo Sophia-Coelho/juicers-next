@@ -2,15 +2,70 @@
     min-height: 100vh;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 65fr 35fr;
+}
+
+@media (max-width: 1150px) {
+    .login_wrap {
+        grid-template-columns: 58fr 42fr;
+    }
 }
 
 .login_left {
+    position: relative;
     background: #f5f5f5;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: clamp(2rem, 5vw, 4rem);
+    overflow: hidden;
+}
+
+.login_left > .login_left_stats {
+    margin-top: 2.75rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Atleta digital — fica atrás dos cards (z-index 0), nunca sobre o
+   formulário: position:absolute é contido por overflow:hidden do
+   .login_left, que termina onde .login_right começa. A máscara radial
+   desvanece as bordas da imagem no cinza-claro da plataforma em vez de
+   terminar num retângulo duro. */
+.login_athlete {
+    position: absolute;
+    top: -6%;
+    right: -4%;
+    height: 122%;
+    width: auto;
+    max-width: 92%;
+    object-fit: contain;
+    object-position: top right;
+    opacity: 0.92;
+    z-index: 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 80% 86% at 60% 40%, #000 56%, transparent 90%);
+    mask-image: radial-gradient(ellipse 80% 86% at 60% 40%, #000 56%, transparent 90%);
+}
+
+.login_left > .logo,
+.login_left > .login_left_middle,
+.login_left > .login_left_stats {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1150px) {
+    .login_athlete {
+        max-width: 70%;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 900px) {
+    .login_athlete {
+        max-width: 55%;
+        opacity: 0.55;
+    }
 }
 
 .logo-icon {
@@ -20,10 +75,10 @@
 }
 
 .login_left_headline {
-    font-size: clamp(22px, 3vw, 34px);
-    font-weight: 600;
+    font-size: clamp(30px, 3.6vw, 50px);
+    font-weight: 700;
     color: #000;
-    line-height: 1.2;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
 }
@@ -34,10 +89,397 @@
 }
 
 .login_left_sub {
-    font-size: 14px;
+    font-size: 15.5px;
     color: #646464;
     line-height: 1.65;
-    max-width: 320px;
+    max-width: 460px;
+    margin-bottom: 1.75rem;
+}
+
+.login_left_middle {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- LoginPreview — ilustração do painel ---------- */
+
+.lp-wrap {
+    position: relative;
+    max-width: 760px;
+    margin: 2.5rem 0 3rem;
+}
+
+.lp-badge {
+    position: absolute;
+    top: -38px;
+    left: 10px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 11px;
+    line-height: 1.35;
+    color: #646464;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.lp-badge strong {
+    font-size: 13px;
+    color: #111;
+}
+
+.lp-badge-icon {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(47, 214, 190, 0.14);
+    color: #1a8f80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lp-card {
+    position: relative;
+    display: flex;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px -20px rgba(20, 30, 40, 0.18);
+    padding-top: 18px;
+    overflow: visible;
+}
+
+.lp-side {
+    flex: none;
+    width: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-right: 1px solid #ededed;
+}
+
+.lp-side-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b7b7b7;
+    background: transparent;
+}
+
+.lp-side-icon--on {
+    background: #2fd6be;
+    color: #04201c;
+}
+
+.lp-main {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lp-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.lp-eyebrow {
+    display: block;
+    font-size: 10px;
+    color: #9a9a9a;
+    text-transform: lowercase;
+}
+
+.lp-name {
+    display: block;
+    font-size: 14px;
+    color: #111;
+    margin-top: 1px;
+}
+
+.lp-periods {
+    display: flex;
+    gap: 4px;
+    background: #f2f2f2;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.lp-periods span {
+    font-size: 10px;
+    font-weight: 600;
+    color: #8a8a8a;
+    padding: 3px 7px;
+    border-radius: 6px;
+}
+
+.lp-periods span.is-on {
+    background: #2fd6be;
+    color: #04201c;
+}
+
+.lp-chart-card {
+    background: #fafafa;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    padding: 10px 12px 4px;
+}
+
+.lp-chart-title {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.lp-chart {
+    width: 100%;
+    height: 56px;
+    display: block;
+}
+
+.lp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.lp-mini {
+    background: #fafafa;
+    border: 1px solid #ededed;
+    border-radius: 10px;
+    padding: 8px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.lp-mini-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.lp-mini-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lp-mini-badge {
+    flex: none;
+    font-size: 8px;
+    font-weight: 700;
+    color: #8a6d1f;
+    background: rgba(224, 168, 46, 0.16);
+    border-radius: 10px;
+    padding: 2px 6px;
+    white-space: nowrap;
+}
+
+.lp-mini-value {
+    font-size: 13px;
+    color: #111;
+}
+
+.lp-spark {
+    width: 100%;
+    height: 18px;
+    display: block;
+}
+
+.lp-chip-testo {
+    position: absolute;
+    top: 76px;
+    right: -26px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 10px 14px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+.lp-ring {
+    flex: none;
+    width: 36px;
+    height: 36px;
+}
+
+.lp-ring svg {
+    width: 100%;
+    height: 100%;
+}
+
+.lp-testo-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #646464;
+}
+
+.lp-pill-ok {
+    font-size: 9px;
+    font-weight: 700;
+    color: #1f8a3c;
+    background: rgba(63, 185, 80, 0.14);
+    border-radius: 10px;
+    padding: 1px 7px;
+}
+
+.lp-testo-value {
+    font-size: 15px;
+    color: #111;
+}
+
+.lp-testo-value strong {
+    font-size: 17px;
+}
+
+.lp-testo-ref {
+    font-size: 9.5px;
+    color: #9a9a9a;
+}
+
+.lp-alert {
+    position: absolute;
+    left: -28px;
+    bottom: -48px;
+    z-index: 2;
+    display: flex;
+    gap: 9px;
+    max-width: 230px;
+    background: #fff;
+    border: 1px solid #f0d9b5;
+    border-left: 3px solid #e0a82e;
+    border-radius: 12px;
+    padding: 11px 13px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+.lp-alert-icon {
+    flex: none;
+    color: #e0a82e;
+    margin-top: 2px;
+}
+
+.lp-alert strong {
+    display: block;
+    font-size: 11.5px;
+    color: #111;
+    margin-bottom: 2px;
+}
+
+.lp-alert p {
+    margin: 0;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #777;
+}
+
+/* ---------- Features row ---------- */
+
+.lp-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 780px;
+    margin-top: 2.5rem;
+}
+
+.lp-feature {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lp-feature-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(47, 214, 190, 0.12);
+    color: #1a8f80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lp-feature strong {
+    display: block;
+    font-size: 13.5px;
+    color: #111;
+    margin-bottom: 3px;
+}
+
+.lp-feature p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+}
+
+/* ---------- Privacy footer ---------- */
+
+.lp-privacy-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.lp-privacy-icon {
+    flex: none;
+    color: #1a8f80;
+    margin-top: 2px;
+}
+
+.lp-privacy-row strong {
+    display: block;
+    font-size: 13px;
+    color: #111;
+}
+
+.lp-privacy-row p {
+    margin: 2px 0 0;
+    font-size: 11.5px;
+    color: #777;
+}
+
+.lp-privacy-links {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #9a9a9a;
+}
+
+@media (max-width: 900px) {
+    .lp-features {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+    }
 }
 
 .login_right {
@@ -116,6 +558,33 @@
         calc(100% - 14px) 21px;
     background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
+}
+
+.field_senha_wrap {
+    position: relative;
+}
+
+.field_senha_wrap input {
+    padding-right: 46px;
+}
+
+.field_senha_toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    color: #9a9a9a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field_senha_toggle:hover {
+    color: #555;
 }
 
 .forgot {
@@ -363,12 +832,9 @@ button.btn_voltar {
     color: #146458;
 }
 
-/* Botão entrar herda a cor do perfil selecionado */
-.btn_entrar--atleta {
-    background: #E6A817 !important;
-    color: #0a0a0a !important;
-}
-
+/* Botão entrar sempre no turquesa da marca, independente do perfil
+   selecionado — padronizado conforme a referência visual da tela de login. */
+.btn_entrar--atleta,
 .btn_entrar--medico {
     background: #2FD6BE !important;
     color: #04201c !important;

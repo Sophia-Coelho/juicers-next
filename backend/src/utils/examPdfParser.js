@@ -11,10 +11,25 @@ function normalizeText(text = "") {
 function toNumber(value) {
   if (value == null) return null;
 
-  const normalized = String(value)
-    .replace(/\./g, "")
-    .replace(",", ".")
-    .replace(/[^\d.]/g, "");
+  const raw = String(value).trim().replace(/\s/g, "");
+  const cleaned = raw.replace(/[^\d.,-]/g, "");
+
+  if (!cleaned) return null;
+
+  let normalized = cleaned;
+
+  if (cleaned.includes(",") && cleaned.includes(".")) {
+    // "1.234,5" -> ponto é milhar, vírgula é decimal
+    normalized = cleaned.replace(/\./g, "").replace(",", ".");
+  } else if (cleaned.includes(",")) {
+    normalized = cleaned.replace(",", ".");
+  } else if (/^-?\d{1,3}(\.\d{3})+$/.test(cleaned)) {
+    // "1.234" / "1.234.567" -> ponto é separador de milhar
+    normalized = cleaned.replace(/\./g, "");
+  }
+  // Qualquer outro caso com ponto é decimal: "0.86" precisa continuar 0.86.
+  // A versão anterior fazia replace(/\./g, "") sempre, o que virava 86 —
+  // e 1.31 virava 131 — em qualquer laudo com ponto decimal.
 
   const number = Number(normalized);
   return Number.isFinite(number) ? number : null;
@@ -141,6 +156,119 @@ function getRiskAndAlerts(markers) {
   return { riskLevel, alerts };
 }
 
+/* ------------------------------------------------------------------------
+ * Extração genérica por nome do marcador.
+ *
+ * Os matchers acima identificam cada exame pelo TEXTO DA FAIXA DE REFERÊNCIA
+ * de um laboratório específico ("HOMENS : 0,72 A 1,25 MG/DL", "CALCULO DE
+ * MARTIN/HOPKINS", "ESPACO ENTRE OS MEMOS"). Isso funciona muito bem para
+ * aquele laudo e falha inteiro em qualquer outro — todos os marcadores voltam
+ * nulos e o exame é recusado.
+ *
+ * Esta passagem genérica roda DEPOIS e só preenche o que ficou faltando:
+ * procura o nome do marcador no início de uma linha e lê o primeiro número.
+ *
+ * Três regras evitam os erros clássicos de laudo:
+ *   1. nomes mais longos primeiro — "HEMOGLOBINA GLICADA" antes de
+ *      "HEMOGLOBINA", senão o valor da glicada vira o da hemoglobina;
+ *   2. cada linha é consumida uma única vez;
+ *   3. o valor passa por uma faixa de plausibilidade — hematócrito 5,6 é
+ *      descartado em vez de salvo.
+ * ---------------------------------------------------------------------- */
+
+const GENERIC_MARKERS = [
+  ["hba1c", ["HEMOGLOBINA GLICADA", "HEMOGLOBINA GLICOSILADA", "HBA1C", "HB A1C"], [3, 18]],
+  ["nonHdl", ["COLESTEROL NAO-HDL", "COLESTEROL NAO HDL", "NAO-HDL", "NAO HDL"], [20, 500]],
+  ["vitaminB12", ["VITAMINA B12", "CIANOCOBALAMINA", "VITAMINA B 12"], [50, 3000]],
+  ["vitaminD", ["25-HIDROXIVITAMINA D", "25 HIDROXIVITAMINA D", "VITAMINA D"], [3, 200]],
+  ["triglycerides", ["TRIGLICERIDEOS", "TRIGLICERIDES"], [20, 1500]],
+  ["erythrocytes", ["ERITROCITOS", "HEMACIAS"], [2, 9]],
+  ["hematocrit", ["HEMATOCRITO"], [15, 70]],
+  ["hemoglobin", ["HEMOGLOBINA"], [5, 25]],
+  ["leukocytes", ["LEUCOCITOS"], [1, 60]],
+  ["creatinine", ["CREATININA"], [0.2, 15]],
+  ["platelets", ["PLAQUETAS"], [20, 1200]],
+  ["ferritin", ["FERRITINA"], [1, 3000]],
+  ["glucose", ["GLICEMIA DE JEJUM", "GLICEMIA", "GLICOSE"], [30, 600]],
+  ["hdl", ["COLESTEROL HDL", "HDL"], [10, 150]],
+  ["ldl", ["COLESTEROL LDL", "LDL"], [20, 400]],
+  ["vldl", ["COLESTEROL VLDL", "VLDL"], [2, 120]],
+  ["iron", ["FERRO SERICO", "FERRO"], [10, 500]],
+];
+
+function firstNumberAfter(rest) {
+  // Ignora pontuação/pontilhado entre o rótulo e o valor.
+  const match = rest.replace(/^[\s.:·|=-]+/, "").match(/^(\d{1,3}(?:\.\d{3})*|\d+)(?:[.,](\d+))?/);
+
+  if (!match) return null;
+
+  const inteiro = match[1].replace(/\./g, "");
+  return toNumber(match[2] ? `${inteiro}.${match[2]}` : inteiro);
+}
+
+export function extractByMarkerName(text) {
+  const lines = text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  const alvos = GENERIC_MARKERS
+    .flatMap(([key, nomes, faixa]) => nomes.map(nome => ({ key, nome, faixa })))
+    .sort((a, b) => b.nome.length - a.nome.length);
+
+  const encontrados = {};
+  const usadas = new Set();
+
+  for (const alvo of alvos) {
+    if (encontrados[alvo.key] !== undefined) continue;
+
+    for (let i = 0; i < lines.length; i++) {
+      if (usadas.has(i) || !lines[i].startsWith(alvo.nome)) continue;
+
+      // O caractere seguinte não pode ser letra: evita "FERRO" casar "FERRITINA"
+      const seguinte = lines[i][alvo.nome.length];
+      if (seguinte && /[A-Z]/.test(seguinte)) continue;
+
+      const valor = firstNumberAfter(lines[i].slice(alvo.nome.length));
+      if (valor === null) continue;
+
+      const [min, max] = alvo.faixa;
+      if (valor < min || valor > max) continue;
+
+      encontrados[alvo.key] = valor;
+      usadas.add(i);
+      break;
+    }
+  }
+
+  return encontrados;
+}
+
+function findAnyDate(text) {
+  const padroes = [
+    /COLETADO EM:\s*(\d{2})\/(\d{2})\/(\d{4})/i,
+    /DATA DA COLETA\s*:?\s*(\d{2})\/(\d{2})\/(\d{4})/i,
+    /DATA DE COLETA\s*:?\s*(\d{2})\/(\d{2})\/(\d{4})/i,
+    /COLETA\s*:?\s*(\d{2})\/(\d{2})\/(\d{4})/i,
+  ];
+
+  for (const padrao of padroes) {
+    const match = text.match(padrao);
+    if (match) return `${match[3]}-${match[2]}-${match[1]}`;
+  }
+
+  // Última tentativa: a data mais antiga em formato dd/mm/aaaa no documento
+  const todas = [...text.matchAll(/\b(\d{2})\/(\d{2})\/(\d{4})\b/g)]
+    .map(m => `${m[3]}-${m[2]}-${m[1]}`)
+    .filter(iso => {
+      const d = new Date(iso);
+      return !Number.isNaN(d.getTime()) && d.getFullYear() > 2000;
+    })
+    .sort();
+
+  return todas[0] || new Date().toISOString().slice(0, 10);
+}
+
 export function parseExamPdfText(rawText = "") {
   const text = normalizeText(rawText);
   const hemogramMarkers = extractHemogram(text);
@@ -233,10 +361,20 @@ export function parseExamPdfText(rawText = "") {
     ...hemogramMarkers,
   });
 
+  // Preenche o que os matchers do laboratório específico não acharam.
+  // Só adiciona chaves ausentes — nunca sobrescreve o que já veio.
+  const genericos = extractByMarkerName(text);
+
+  for (const [chave, valor] of Object.entries(genericos)) {
+    if (markers[chave] === undefined || markers[chave] === null) {
+      markers[chave] = valor;
+    }
+  }
+
   const { riskLevel, alerts } = getRiskAndAlerts(markers);
 
   return {
-    examDate: findDate(text),
+    examDate: findAnyDate(text),
     markers,
     riskLevel,
     alerts,

@@ -1,0 +1,590 @@
+/* EvolutionPanel — cartão off-white do gráfico de evolução, na mesma
+   paleta dos outros cards do dashboard (fundo #ebebeb, texto escuro).
+   Only the pieces plain inline styles can't express (hover, focus-visible,
+   the responsive sidebar->chips collapse) live here; color/value-driven
+   bits stay inline in the component. */
+
+.ep-card {
+  background: #ebebeb;
+  border: 1px solid #d5d5d5;
+  border-radius: 16px;
+  padding: 26px 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #0f0f0f;
+}
+
+.ep-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ep-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0f0f0f;
+}
+
+.ep-sub {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: #656565;
+}
+
+.ep-periods {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ep-pill {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #656565;
+  background: transparent;
+  border: 1px solid #d5d5d5;
+  border-radius: 20px;
+  padding: 6px 13px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.ep-pill:hover {
+  border-color: #b5b5b5;
+  color: #0f0f0f;
+}
+
+.ep-pill:focus-visible {
+  outline: 2px solid #2fd6be;
+  outline-offset: 2px;
+}
+
+.ep-pill.is-on {
+  background: #2fd6be;
+  border-color: #2fd6be;
+  color: #06201c;
+}
+
+.ep-expand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 2px;
+  color: #656565;
+  background: transparent;
+  border: 1px solid #d5d5d5;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.ep-expand:hover {
+  border-color: #b5b5b5;
+  color: #0f0f0f;
+}
+
+.ep-expand:focus-visible {
+  outline: 2px solid #2fd6be;
+  outline-offset: 2px;
+}
+
+.ep-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ep-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-content: flex-start;
+}
+
+.ep-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+
+.ep-group-title {
+  width: 100%;
+  margin: 2px 0 1px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.ep-item {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #656565;
+  background: #f4f4f4;
+  border: 1px solid #d5d5d5;
+  border-radius: 20px;
+  padding: 7px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 1;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.ep-item:hover {
+  border-color: #b5b5b5;
+  color: #0f0f0f;
+}
+
+.ep-item:focus-visible {
+  outline: 2px solid #2fd6be;
+  outline-offset: 2px;
+}
+
+.ep-item.is-on {
+  background: rgba(47, 214, 190, 0.14);
+  border-color: #2fd6be;
+  color: #0f0f0f;
+}
+
+.ep-item-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ep-item-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.ep-item-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888888;
+}
+
+.ep-item-value em {
+  font-style: normal;
+  font-weight: 500;
+}
+
+.ep-item.is-on .ep-item-value {
+  color: #656565;
+}
+
+.ep-chart-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ep-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ep-hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.ep-hero-value {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ep-hero-value em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 600;
+  color: #888888;
+}
+
+.ep-variacao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+.ep-delta {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ep-delta-txt {
+  font-size: 11.5px;
+  color: #656565;
+}
+
+.ep-primeira {
+  font-size: 11.5px;
+  font-style: italic;
+  color: #888888;
+}
+
+.ep-ref {
+  font-size: 11px;
+  color: #888888;
+  margin-top: 2px;
+}
+
+.ep-chart-wrap {
+  background: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  padding: 14px 10px 4px;
+  flex: 1;
+  min-height: 260px;
+  display: flex;
+}
+
+.ep-aviso {
+  margin: 0;
+  font-size: 12px;
+  color: #8a6d1f;
+  background: rgba(224, 168, 46, 0.12);
+  border: 1px solid rgba(224, 168, 46, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.ep-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: #888888;
+}
+
+.ep-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ep-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ep-dot--ok {
+  background: #3fb950;
+}
+
+.ep-dot--atencao {
+  background: #e0a82e;
+}
+
+.ep-dot--risco {
+  background: #f04747;
+}
+
+/* IndicatorStats — leitura estatística do marcador selecionado, ao lado do
+   gráfico. Fica logo depois de .ep-chart-col no mesmo .ep-body, então em
+   telas estreitas (sem a media query abaixo) ela só empilha, cheia largura. */
+.ep-stats {
+  background: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ep-stats-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ep-stats-icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(47, 214, 190, 0.14);
+  color: #1a8f80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ep-stats-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f0f0f;
+  letter-spacing: -0.005em;
+}
+
+.ep-stats-sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #888888;
+}
+
+.ep-stats-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.ep-stats-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ep-stats-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.ep-stats-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.ep-stats-pill--sm {
+  font-size: 10.5px;
+  padding: 3px 8px;
+}
+
+.ep-stats-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ep-stats-value em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 600;
+  color: #888888;
+}
+
+.ep-stats-bar-wrap {
+  margin-top: 6px;
+}
+
+.ep-stats-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 20px;
+}
+
+.ep-stats-bar-dot {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #0f0f0f;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%);
+}
+
+.ep-stats-bar-labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 10.5px;
+  color: #888888;
+  font-weight: 600;
+}
+
+.ep-stats-bar-caption {
+  font-weight: 500;
+  color: #a3a3a3;
+}
+
+.ep-stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.ep-stats-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #0f0f0f;
+}
+
+.ep-stats-row-icon {
+  flex: none;
+  width: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+}
+
+.ep-stats-row-label {
+  flex: 1;
+  min-width: 0;
+  color: #525252;
+}
+
+.ep-stats-row-value {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ep-stats-insight {
+  display: flex;
+  gap: 10px;
+  background: rgba(47, 214, 190, 0.1);
+  border: 1px solid rgba(47, 214, 190, 0.3);
+  border-radius: 10px;
+  padding: 12px 13px;
+}
+
+.ep-stats-insight-icon {
+  flex: none;
+  color: #1a8f80;
+  margin-top: 1px;
+}
+
+.ep-stats-insight strong {
+  display: block;
+  font-size: 12px;
+  color: #0f0f0f;
+  margin-bottom: 3px;
+}
+
+.ep-stats-insight p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #4b4b4b;
+}
+
+/* A partir daqui, cabe o layout de duas colunas: barra de marcadores fixa à
+   esquerda, coluna do gráfico à direita. Abaixo disso o nav vira chips que
+   quebram linha — testado sem rolagem horizontal até 390px. */
+@media (min-width: 760px) {
+  .ep-body {
+    flex-direction: row;
+    align-items: stretch;
+    height: min(72vh, 700px);
+  }
+
+  .ep-nav {
+    flex: none;
+    width: 212px;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
+  }
+
+  .ep-nav::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .ep-nav::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 6px;
+  }
+
+  .ep-group {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .ep-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 10px;
+  }
+
+  .ep-chart-col {
+    height: 100%;
+    flex: 1 1 0%;
+  }
+
+  .ep-stats {
+    flex: none;
+    width: 320px;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c7c7c7 transparent;
+  }
+
+  .ep-stats::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .ep-stats::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 6px;
+  }
+}

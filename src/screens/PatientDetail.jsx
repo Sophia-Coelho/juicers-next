@@ -285,6 +285,7 @@ export default function PatientDetail({
             alerts={data.alerts}
             categories={data.categories}
             examDates={data.examDates}
+            unknownKeys={data.unknownKeys}
             onSelect={onSelectMarker}
           />
         </div>
