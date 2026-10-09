@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { lookup } from "node:dns/promises";
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (character) => {
@@ -30,9 +31,15 @@ export async function sendDoctorInviteEmail({
     throw new Error("GMAIL_USER precisa ser um endereço @gmail.com.");
   }
 
+  const smtpHost = "smtp.gmail.com";
+  const { address: smtpAddress } = await lookup(smtpHost, { family: 4 });
+
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: smtpAddress,
+    port: 465,
+    secure: true,
     auth: { user: gmailUser, pass: gmailAppPassword },
+    tls: { servername: smtpHost },
   });
 
   const safePatientName = escapeHtml(patientName);
