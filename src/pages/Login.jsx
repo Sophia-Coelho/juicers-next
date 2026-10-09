@@ -6,7 +6,11 @@ import OnboardingForm from '../components/OnboardingForm'
 import { acceptDoctorInvite, getInviteByToken, loginUser, registerUser, reverifyDoctorAccount } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+const API_URL = import.meta.env.VITE_API_URL || (
+    import.meta.env.DEV
+        ? 'http://localhost:3000/api'
+        : `${window.location.origin}/api`
+)
 
 export default function Login() {
     const navigate = useNavigate()
@@ -93,9 +97,7 @@ export default function Login() {
                 controller.abort()
             }, 4000)
 
-            const baseUrl = API_URL.replace('/api', '')
-
-            const res = await fetch(baseUrl, {
+            const res = await fetch(`${API_URL}/health`, {
                 method: 'GET',
                 signal: controller.signal,
             })
