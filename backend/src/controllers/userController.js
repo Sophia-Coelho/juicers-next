@@ -134,9 +134,6 @@ export const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        ...(user.role === "doctor"
-          ? { doctorVerificationMode: legacyDemoLogin ? "legacy-demo" : "cfm" }
-          : {}),
       },
     });
   } catch (error) {
@@ -191,7 +188,6 @@ export const reverifyDoctor = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        doctorVerificationMode: "cfm",
       },
     });
   } catch (error) {
