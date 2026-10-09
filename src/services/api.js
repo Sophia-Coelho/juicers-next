@@ -1,8 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || (
-    import.meta.env.DEV
-        ? 'http://localhost:3000/api'
-        : `${window.location.origin}/api`
-)
+const API_URL = import.meta.env.DEV ? '/api' : `${window.location.origin}/api`
 
 function getToken() {
     return localStorage.getItem('tokenJuicers')
