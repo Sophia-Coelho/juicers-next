@@ -10,6 +10,8 @@ export default function PatientsList({
   onSearch,
   onOpenPatient,
   onInvite,
+  onRemovePatient,
+  removingId,
 }) {
   const q = search.trim().toLowerCase()
 
@@ -160,12 +162,25 @@ export default function PatientsList({
                 </span>
               </div>
 
-              <button
-                onClick={() => onOpenPatient(p)}
-                className="jc-btn-soft-teal"
-              >
-                Ver dashboard
-              </button>
+              <div className="jc-patient-actions">
+                <button
+                  type="button"
+                  onClick={() => onOpenPatient(p)}
+                  className="jc-btn-soft-teal"
+                  disabled={removingId === p.id}
+                >
+                  Ver dashboard
+                </button>
+                {onRemovePatient && <button
+                  type="button"
+                  onClick={() => onRemovePatient(p)}
+                  className="jc-btn-remove-patient"
+                  disabled={Boolean(removingId)}
+                  aria-label={`Excluir ${p.name} da lista de atletas`}
+                >
+                  {removingId === p.id ? 'Removendo...' : 'Excluir da lista'}
+                </button>}
+              </div>
             </div>
           )
         })}

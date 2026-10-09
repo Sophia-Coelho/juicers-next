@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { isValidObjectId } from "mongoose";
 import { createRequire } from "module";
 import Doctor from "../models/Doctor.js";
 import Patient from "../models/Patient.js";
@@ -147,6 +148,40 @@ export const getMyDoctorPatients = async (req, res) => {
     return res.status(500).json({
       message: error.message,
     });
+  }
+};
+
+export const removeDoctorPatient = async (req, res) => {
+  try {
+    if (req.user.role !== "doctor") {
+      return res.status(403).json({ message: "Apenas médicos podem remover atletas da lista." });
+    }
+
+    const { id } = req.params;
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: "Identificador do atleta inválido." });
+    }
+
+    const doctor = await Doctor.findOne({ userId: req.user.id });
+    if (!doctor) {
+      return res.status(404).json({ message: "Perfil de médico não encontrado." });
+    }
+
+    // O filtro de vínculo também participa da atualização, evitando remover
+    // um atleta que tenha mudado de médico entre a consulta e a gravação.
+    const patient = await Patient.findOneAndUpdate(
+      { _id: id, doctorId: doctor._id },
+      { $set: { doctorId: null } },
+      { returnDocument: "after", runValidators: true }
+    );
+
+    if (!patient) {
+      return res.status(404).json({ message: "Atleta não encontrado ou não vinculado a este médico." });
+    }
+
+    return res.status(200).json({ message: "Atleta removido da sua lista.", patientId: patient._id });
+  } catch {
+    return res.status(500).json({ message: "Não foi possível remover o atleta. Tente novamente." });
   }
 };
 

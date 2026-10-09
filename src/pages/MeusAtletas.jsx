@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import PatientsList from '../screens/PatientsList.jsx'
 import InviteModal from '../components/perfilDoUsuario/InviteModal.jsx'
 import Toast from '../components/perfilDoUsuario/Toast.jsx'
-import { getDoctorPatients, getDoctorPatientExams } from '../services/api'
+import { getDoctorPatients, getDoctorPatientExams, removeDoctorPatient } from '../services/api'
 import { useAuth } from '../context/AuthContext.jsx'
 import '../style/meusAtletas.css'
 
@@ -266,6 +266,8 @@ export default function MeusAtletas() {
   const [invite, setInvite] = useState(false)
   const [toast, setToast] = useState(null)
   const [carregando, setCarregando] = useState(true)
+  const [removingId, setRemovingId] = useState(null)
+  const [removeError, setRemoveError] = useState('')
 
   const showToast = (msg) => {
     setToast(msg)
@@ -302,6 +304,26 @@ export default function MeusAtletas() {
     carregarPacientes()
   }, [])
 
+  async function removerAtleta(patient) {
+    if (removingId) return
+    const confirmed = window.confirm(
+      `Excluir ${patient.name} da sua lista de atletas?\n\nVocê encerrará o vínculo e deixará de acessar os dados desse atleta. A conta e os exames dele serão preservados.`
+    )
+    if (!confirmed) return
+
+    setRemovingId(patient.id)
+    setRemoveError('')
+    try {
+      await removeDoctorPatient(patient.id)
+      setPatients(current => current.filter(item => item.id !== patient.id))
+      showToast('Atleta removido da sua lista.')
+    } catch (error) {
+      setRemoveError(error.message || 'Não foi possível remover o atleta. Tente novamente.')
+    } finally {
+      setRemovingId(null)
+    }
+  }
+
   if (carregando) {
     return (
       <div className="ma-loading">
@@ -312,6 +334,7 @@ export default function MeusAtletas() {
 
   return (
     <>
+      {removeError && <p role="alert" className="ma-remove-error">{removeError}</p>}
       <PatientsList
         greeting={`Olá, ${usuario?.name || 'Doutor(a)'}`}
         patients={patients}
@@ -319,6 +342,8 @@ export default function MeusAtletas() {
         onSearch={(e) => setSearch(e.target.value)}
         onOpenPatient={(p) => navigate(`/medico/atleta/${p.id}`)}
         onInvite={() => setInvite(true)}
+        onRemovePatient={removerAtleta}
+        removingId={removingId}
       />
 
       {invite && (

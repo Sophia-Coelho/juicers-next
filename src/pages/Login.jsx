@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import logoIcon from '../assets/juicers.png'
 import OnboardingForm from '../components/OnboardingForm'
 import LoginPreview, { LoginFeatures, LoginPrivacyFooter } from '../components/LoginPreview'
-import { acceptDoctorInvite, loginUser, registerUser } from '../services/api'
 import { acceptDoctorInvite, getInviteByToken, loginUser, loginWithGoogle, registerUser, reverifyDoctorAccount } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 import GoogleLoginButton from '../components/GoogleLoginButton'
@@ -31,14 +30,11 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [confirmarSenha, setConfirmarSenha] = useState('')
-<<<<<<< HEAD
     const [mostrarSenha, setMostrarSenha] = useState(false)
-=======
     const [crm, setCrm] = useState('')
     const [ufCrm, setUfCrm] = useState('')
     const [cpf, setCpf] = useState('')
     const [dataNascimento, setDataNascimento] = useState('')
->>>>>>> 80e6de163c68aaac3b5d90ab741a5c7e4ef7c2ac
 
     const destinoMock = role === 'medico' ? '/medico' : '/perfil'
 

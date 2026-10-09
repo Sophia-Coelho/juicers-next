@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createDoctorInvite,
   getMyDoctorPatients,
+  removeDoctorPatient,
   getMyDoctorPatientById,
   getMyDoctorPatientExams,
   uploadPatientExamPdf,
@@ -26,6 +27,7 @@ router.get("/me", authMiddleware, verifiedDoctorMiddleware, getMyDoctorProfile);
 router.post("/invites", authMiddleware, verifiedDoctorMiddleware, createDoctorInvite);
 
 router.get("/patients", authMiddleware, verifiedDoctorMiddleware, getMyDoctorPatients);
+router.delete("/patients/:id", authMiddleware, verifiedDoctorMiddleware, removeDoctorPatient);
 router.get("/patients/:id", authMiddleware, verifiedDoctorMiddleware, getMyDoctorPatientById);
 router.get("/patients/:id/exams", authMiddleware, verifiedDoctorMiddleware, getMyDoctorPatientExams);
 

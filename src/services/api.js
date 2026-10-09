@@ -166,6 +166,15 @@ export async function getDoctorPatientById(id) {
     return handleResponse(response, 'Erro ao buscar paciente.')
 }
 
+export async function removeDoctorPatient(id) {
+    const response = await fetch(`${API_URL}/doctors/patients/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+    })
+
+    return handleResponse(response, 'Erro ao remover atleta da lista.')
+}
+
 export async function getDoctorPatientExams(id) {
     const response = await fetch(`${API_URL}/doctors/patients/${id}/exams`, {
         method: 'GET',
